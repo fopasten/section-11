@@ -317,11 +317,11 @@ This work is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/
 
 ## Roadmap
 
-- [x] Section 11 A/B Protocol
+- [ ] Section 11 A/B Protocol
 - [x] Dossier Template
 - [ ] CustomGPT implementation
 - [ ] Intervals.icu OAuth integration guide
-- [ ] JSON sync automation scripts
+- [x] JSON sync automation scripts
 - [ ] Forum guides and tutorials
 
 ---
