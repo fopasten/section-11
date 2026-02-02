@@ -55,23 +55,12 @@ Copy this file to your workspace as `HEARTBEAT.md` and fill in the bracketed val
 ## Weekly Checks
 
 ### Background Analysis
-- Run once per week between training weeks (suggested: Saturday 14:00 – Sunday 10:00)
+- Run once per week between training weeks (suggested: Sunday 20:00 – Monday 10:00)
 - Compare current week vs previous weeks, current month vs previous months
 - Track consistency patterns (sessions per week, missed days)
 - Note long-term CTL trends (building, plateauing, declining)
 - Identify recurring patterns (e.g., always tired on Mondays)
 - Ask athlete about changes in sleep, travel, stress, or illness when you see unexplained shifts
-
-### Sports Science
-- Check for new research relevant to athlete's training or Section 11 protocol
-- Sources to check: PubMed, Google Scholar, SportRxiv
-- Trusted venues: MSSE, SJMSS, JAP, J Physiol, BJSM, EJAP, IJSPP, Frontiers in Physiology, Endure IQ, Mysportscience
-- **Do NOT auto-apply findings** — surface papers for athlete review only
-- Only treat ideas as guidance if athlete later adds them to SECTION_11.md
-- Max 3 papers per week, each with:
-  - 1-2 sentence summary
-  - Why it might matter
-  - Source/venue + link
 
 ---
 
