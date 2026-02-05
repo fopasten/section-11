@@ -39,7 +39,7 @@ This protocol builds on concepts from the endurance coaching community:
 |------|-------------|
 | [SECTION_11.md](SECTION_11.md) | Complete protocol: AI Coach Guidance (11 A), Training Plan Protocol (11 B), Validation Protocol (11 C) |
 | [DOSSIER_TEMPLATE.md](DOSSIER_TEMPLATE.md) | Blank athlete dossier template — fill in your own data |
-| [examples/](examples/) | JSON sync setup guides (auto and manual) |
+| [examples/](examples/) | JSON sync setup, report templates, example files |
 | [LICENSE](LICENSE) | CC BY-NC 4.0 — free for personal use, attribution required |
 
 ---
@@ -304,6 +304,25 @@ The protocol is designed to work with [Intervals.icu](https://intervals.icu) as 
 - Zone distributions
 - Planned workouts
 
+### Derived Metrics
+
+The sync script pre-calculates Section 11-compliant metrics so AI doesn't need to compute them:
+
+| Metric | Description |
+|--------|-------------|
+| ACWR | Acute:Chronic Workload Ratio (0.8–1.3 optimal) |
+| Recovery Index | HRV/RHR composite (>1.0 = good recovery) |
+| Monotony / Strain | Training variability (Foster) |
+| Grey Zone % | Z3 time — minimize in polarized training |
+| Quality Intensity % | Z4+ time — target ~20% |
+| Polarisation Index | Easy time ratio — target ~0.80 |
+| Benchmark Index | 8-week FTP progression (indoor/outdoor) |
+| Phase Detected | Auto-detected training phase |
+
+### FTP History Tracking
+
+The script maintains `ftp_history.json` to track indoor and outdoor FTP changes over time, enabling Benchmark Index calculation for long-term progression analysis.
+
 ### Other Platforms
 
 Also compatible with:
@@ -391,6 +410,9 @@ This work is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/
 - [x] Section 11 A/B/C Protocol
 - [x] Dossier Template
 - [x] JSON sync automation scripts
+- [x] Report templates (pre/post workout)
+- [ ] CustomGPT implementation
+- [ ] MCP Server integration
 
 ---
 
@@ -398,6 +420,8 @@ This work is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/
 
 - **Protocol:** [SECTION_11.md](SECTION_11.md)
 - **Template:** [DOSSIER_TEMPLATE.md](DOSSIER_TEMPLATE.md)
+- **Examples:** [examples/](examples/)
+- **Report Templates:** [examples/reports/](examples/reports/)
 - **Intervals.icu:** [intervals.icu](https://intervals.icu)
 - **Discussion:** [Intervals.icu Forum](https://forum.intervals.icu)
 
