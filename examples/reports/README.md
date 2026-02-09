@@ -22,7 +22,26 @@ See templates and examples below for annotated reference.
 - Weekly running totals (polarization, CTL, ATL, TSB, ACWR, hours, TSS)
 - Overall coach note (2-4 sentences: compliance, key quality observations, load context, recovery note)
 
-See `POST_WORKOUT_TEMPLATE.md` for field reference and rounding conventions.
+**Weekly Reports must include:**
+- Session breakdown with compliance status (✅/⚠️/❌)
+- Quality session detail (top 2-3 intensity sessions: target vs actual, decoupling, VI)
+- Polarization with Grey Zone and Quality tracking
+- Fitness deltas (CTL, ATL, TSB start → end with Δ)
+- ACWR with acute/chronic components shown
+- Wellness trends with directional arrows and threshold labels
+- Section 11 flags (surfaced immediately, not deferred to block)
+
+**Block Reports must include:**
+- Week-by-week volume progression with CTL trajectory
+- Compliance with reasons for misses/modifications
+- Key performance markers with target comparison
+- Polarization by week (catches grey zone creep)
+- Wellness block-over-block comparison with assessment labels
+- Phase Progression Check (criteria met Y/N, recommendation, rationale)
+- Next block plan with specific targets
+
+See `POST_WORKOUT_TEMPLATE.md` for field reference and rounding conventions.  
+See `REPORT_HIERARCHY.md` for how data flows between report levels.
 
 ---
 
@@ -30,16 +49,21 @@ See `POST_WORKOUT_TEMPLATE.md` for field reference and rounding conventions.
 
 | File | Description |
 |------|-------------|
+| [REPORT_HIERARCHY.md](REPORT_HIERARCHY.md) | Overview of all report types, length norms, and data flow |
 | [PRE_WORKOUT_TEMPLATE.md](PRE_WORKOUT_TEMPLATE.md) | Template structure for pre-workout briefings (no data) |
 | [PRE_WORKOUT_REPORT_EXAMPLES.md](PRE_WORKOUT_REPORT_EXAMPLES.md) | 4 anonymized example pre-workout reports |
 | [POST_WORKOUT_TEMPLATE.md](POST_WORKOUT_TEMPLATE.md) | Template structure for post-workout analysis (no data) |
 | [POST_WORKOUT_REPORT_EXAMPLES.md](POST_WORKOUT_REPORT_EXAMPLES.md) | 4 anonymized example post-workout reports |
+| [WEEKLY_REPORT_TEMPLATE.md](WEEKLY_REPORT_TEMPLATE.md) | Template structure for weekly summaries (no data) |
+| [WEEKLY_REPORT_EXAMPLES.md](WEEKLY_REPORT_EXAMPLES.md) | 2 anonymized example weekly reports |
+| [BLOCK_REPORT_TEMPLATE.md](BLOCK_REPORT_TEMPLATE.md) | Template structure for block reports (no data) |
+| [BLOCK_REPORT_EXAMPLES.md](BLOCK_REPORT_EXAMPLES.md) | 2 anonymized example block reports |
 
 ---
 
 ## Report Types
 
-### Pre-Workout Briefing
+### Pre-Workout Briefing (~15-20 lines)
 Generated **before** a planned session. Includes:
 - Weather and coach note (optional, if location known)
 - Current readiness (HRV, RHR, Sleep vs baselines)
@@ -47,13 +71,33 @@ Generated **before** a planned session. Includes:
 - Planned workout summary (target power/HR, duration, TSS)
 - Go/Modify/Skip recommendation with rationale
 
-### Post-Workout Analysis
+### Post-Workout Analysis (~25-30 lines)
 Generated **after** a completed session. Includes:
 - Execution summary (actual vs planned)
 - Key metrics (power, HR, decoupling, VI, carbs)
 - Zone distribution (Grey Zone and Quality tracking)
 - Load impact (updated CTL, ATL, TSB, weekly totals)
 - Coaching interpretation
+
+### Weekly Summary (~35-45 lines)
+Generated **end of training week** (Saturday or Sunday morning). Includes:
+- Session breakdown with compliance status for every day
+- Quality session detail for top 2-3 intensity sessions
+- Polarization (Z1+Z2, Grey Zone, Quality)
+- Fitness deltas with ramp rate and ACWR breakdown
+- Wellness trends with week-over-week comparison and directional labels
+- Section 11 flags triggered during the week
+- Next week preview with any planned modifications
+
+### Block Report (~45-60 lines)
+Generated **end of each 3-5 week block**. Includes:
+- Week-by-week volume and CTL progression
+- Compliance summary with reasons for modifications
+- Performance marker tracking (sweetspot, VO2max, decoupling trends)
+- Polarization by week to catch grey zone creep
+- Wellness block-over-block comparison with assessment labels
+- Phase Progression Check with explicit criteria evaluation
+- Next block plan with targets and key changes
 
 ---
 
@@ -74,6 +118,7 @@ Some fields appear only when relevant:
 - **Monotony:** Include only if > 2.3; omit entirely when normal
 - **Load/Recovery tolerance note:** Include only when within 0.2 of threshold
 - **Coach notes** (brief contextual tips) are encouraged to humanize recommendations
+- **Quality Session Detail (weekly):** Cap at 2-3 key sessions; if 4+ hard days, prioritize most notable
 
 ---
 
@@ -81,3 +126,5 @@ Some fields appear only when relevant:
 
 - All examples use anonymized/placeholder data — replace with actual values from your JSON feed
 - Zone percentages round to nearest whole number (see rounding convention in POST_WORKOUT_TEMPLATE.md)
+- Data flows upward between reports: post-workout → weekly → block (see REPORT_HIERARCHY.md)
+- Section 11 flags surface at the weekly level and are summarized with resolution in block reports
