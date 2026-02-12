@@ -36,7 +36,8 @@ Both methods use the same `sync.py` script and produce these files:
 
 | File | Purpose | Auto-created |
 |------|---------|--------------|
-| `latest.json` | Training data for AI consumption | Yes |
+| `latest.json` | Current 7-day training data for AI consumption | Yes |
+| `history.json` | Longitudinal data — daily (90d), weekly (180d), monthly (3y) | Yes |
 | `ftp_history.json` | FTP tracking for Benchmark Index | Yes |
 | `archive/` | Timestamped snapshots (auto-sync only) | Yes |
 
@@ -63,6 +64,7 @@ All methods produce the same JSON structure compatible with Section 11 protocol:
 latest.json
 ├── READ_THIS_FIRST      → AI instructions + quick stats
 ├── metadata             → Timestamps, version
+├── alerts               → Graduated severity flags (info → alarm)
 ├── summary              → Activity breakdown by type
 ├── current_status
 │   ├── fitness          → CTL, ATL, TSB, ramp_rate
@@ -73,6 +75,15 @@ latest.json
 ├── wellness_data        → Daily HRV, RHR, sleep, fatigue
 ├── planned_workouts     → Upcoming scheduled sessions
 └── weekly_summary       → Aggregated totals
+
+history.json
+├── data_range           → Earliest/latest dates, total months
+├── ftp_timeline         → Indoor/outdoor FTP change history
+├── data_gaps            → Detected gaps in training data
+├── summaries            → Period aggregates (90d, 180d, 1y, 2y, 3y)
+├── daily_90d            → Day-by-day detail (last 90 days)
+├── weekly_180d          → Week-by-week (last 180 days)
+└── monthly_1y/2y/3y     → Month-by-month (up to 3 years)
 ```
 
 ### Derived Metrics
