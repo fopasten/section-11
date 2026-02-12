@@ -1947,9 +1947,8 @@ class IntervalsSync:
         body += "### Changes:\n"
         for change in changes:
             body += f"- {change}\n"
-        body += f"\n### Download:\n"
-        body += f"- Repository: https://github.com/{self.UPSTREAM_REPO}\n"
-        body += f"- Releases: https://github.com/{self.UPSTREAM_REPO}/releases\n"
+        body += f"\n### Repository:\n"
+        body += f"https://github.com/{self.UPSTREAM_REPO}\n"
         body += f"\n*This issue was auto-created by sync.py v{self.VERSION}*"
         
         try:
