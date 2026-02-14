@@ -37,7 +37,7 @@ Save both values securely.
 
 1. Go to [github.com/new](https://github.com/new)
 2. Name it something like `training-data` or `t1-data`
-3. Set to **Public** (required for AI access) or Private (requires token sharing)
+3. Set to **Private** (recommended) or Public (required for basic AI chat access without agent integration)
 4. Check **Add a README file**
 5. Click **Create repository**
 
@@ -187,8 +187,8 @@ Provide both URLs to your AI coach — `latest.json` has the current 7-day snaps
 
 ### 404 error on JSON URL
 - Ensure `latest.json` exists in repo root
-- Check repo is public
-- Verify URL format (use `main` not `master`)
+- If using a private repo, normal AI chats cannot access these URLs — use an agent platform or upload files manually (see "Using Private Repos with AI Agents" above)
+- If using a public repo, verify URL format (use `main` not `master`)
 
 ---
 
@@ -222,7 +222,23 @@ By default, the script anonymizes your data:
 
 Indoor/virtual ride names are preserved for workout identification.
 
-For additional privacy, use a separate GitHub account for your data repository.
+For additional privacy, use a **private repository** and a separate GitHub account for your data repository.
+
+---
+
+## Using Private Repos with AI Agents
+
+Normal AI chats (ChatGPT Projects, Claude Projects, Gemini Gems, etc.) cannot access private GitHub repos — they need public URLs or manual file uploads. Agent platforms can access private repos through their own GitHub integrations:
+
+**OpenClaw** — Install the GitHub skill and authenticate with `gh auth login`. Once authenticated, OpenClaw can read files from any private repo your token has access to. For limited access, use a [fine-grained personal access token](https://github.com/settings/tokens?type=beta) scoped to your data repo only.
+
+**Claude Cowork** — Clone your private repo locally and grant Cowork access to that folder. Alternatively, use the GitHub MCP connector in Cowork settings to access repos directly via a personal access token.
+
+**OpenAI Codex** — Connect your GitHub account via the ChatGPT GitHub connector at [chatgpt.com/codex](https://chatgpt.com/codex) and authorize access to your private repo during setup. The Codex CLI works locally with your existing filesystem and Git setup.
+
+**Claude Code** — Install the Claude GitHub App at [github.com/apps/claude](https://github.com/apps/claude/installations/select_target) and grant access to your private data repo. Or simply clone the repo locally and work with local files.
+
+Section 11 itself does not handle GitHub authentication — it reads files from whatever locations your environment can already access.
 
 ---
 
