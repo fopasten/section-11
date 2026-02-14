@@ -10,11 +10,9 @@ An open protocol for deterministic, auditable AI-powered endurance coaching. Bui
 
 **Section 11** is a structured framework that enables AI systems (ChatGPT, Claude, Gemini, etc.) to provide evidence-based endurance training advice with full auditability and deterministic reasoning.
 
-Most AI coaching today is inconsistent — the same question gets different answers, recommendations aren't grounded in your actual data, and there's no way to verify the reasoning. This protocol fixes that.
-
 ### Core Principles
 
-- **Deterministic** — Same inputs produce same outputs, every time
+- **Deterministic** — Same inputs produce same outputs
 - **Auditable** — Every recommendation cites specific data and frameworks
 - **Evidence-based** — Grounded in 15+ peer-reviewed endurance science models
 - **Athlete-controlled** — Your data, your thresholds, your goals
@@ -33,6 +31,12 @@ Most AI coaching today is inconsistent — the same question gets different answ
 
 ---
 
+## Privacy & Security
+
+Your data stays on your machine or in repos you control. Section 11 does not run a backend, does not store your data, and does not send your training data, API keys, or chat history anywhere.
+
+---
+
 ## Quick Start
 
 ### 1. Create Your Dossier
@@ -46,7 +50,7 @@ Copy `DOSSIER_TEMPLATE.md` and fill in your:
 
 ### 2. Set Up Your Data Mirror (Optional but Recommended)
 
-For best results, create a JSON endpoint with your current Intervals.icu data:
+For best results, create a JSON endpoint with your current Intervals.icu data. Use a private repository for your training data, or public if you need direct access from AI platforms like ChatGPT, Claude, or Gemini without agent integration.
 
 ```
 https://raw.githubusercontent.com/[USERNAME]/[REPO]/main/latest.json
@@ -161,7 +165,13 @@ Upload these files to your AI platform's knowledge base:
 3. Upload dossier or paste contents
 
 ### OpenClaw (formerly ClawdBot/MoltBot)
-Section 11 works well with [OpenClaw](https://github.com/openclaw/openclaw). The combination of OpenClaw's persistent memory + autonomous execution + Section 11's structured validation makes for a capable coaching setup.
+Section 11 works well with [OpenClaw](https://github.com/openclaw/openclaw). The combination of OpenClaw's persistent memory + autonomous execution + Section 11's structured validation makes for a capable coaching setup. Install the GitHub skill (`npx skills add https://github.com/openclaw/openclaw --skill github`) and authenticate with `gh auth login` to access private repos.
+
+### Claude Cowork
+Cowork runs on your local machine and can read files directly from your filesystem. Clone your private data repo locally and grant Cowork access to that folder — no extra GitHub integration needed. Alternatively, use the GitHub MCP connector to access private repos directly.
+
+### OpenAI Codex
+Connect your GitHub account via the ChatGPT GitHub connector at [chatgpt.com/codex](https://chatgpt.com/codex). During setup, authorize access to your private training data repo. Codex clones the repo into an isolated container and can read `latest.json` and `history.json` directly. The Codex CLI works locally with your existing filesystem and Git setup.
 
 ---
 
@@ -202,6 +212,10 @@ After configuration, test with:
 - Check GitHub Actions ran successfully
 - Verify Intervals.icu API key is valid
 - See [examples/json-auto-sync/SETUP.md](examples/json-auto-sync/SETUP.md)
+
+### 404 error on private repo URLs
+- Normal AI chats (ChatGPT, Claude, Gemini) cannot access private GitHub repos
+- Either use a public repo, upload files manually to your AI Project/Space, or use an agent platform (OpenClaw, Cowork, Codex) that has GitHub access configured
 
 ---
 
@@ -346,7 +360,7 @@ Includes period summaries, FTP timeline, and data gap detection. Provide both `l
 
 ### Update Notifications
 
-The sync script automatically checks for upstream protocol updates. When a new version of Section 11 is released, a GitHub Issue is created in your data repo with a summary of changes.
+The sync script automatically checks for upstream protocol updates. When a new version of Section 11 is released, a GitHub Issue is created in your data repo.
 
 ### Other Platforms
 
