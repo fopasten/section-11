@@ -44,13 +44,14 @@ Polarization (block average):
   Z1+Z2: [XX.X]%
   Z3 (Grey Zone): [X.X]% (target <5%)
   Z4+ (Quality): [X.X]% (target ~20% of intensity sessions)
+  Classification: [Classification] (PI: [X.XX])
   Hard days/week avg: [X.X]
 
 Polarization by Week:
-  Wk 1: Z1+Z2 [XX]%, Z3 [X]%, Z4+ [X]%
-  Wk 2: Z1+Z2 [XX]%, Z3 [X]%, Z4+ [X]%
-  Wk 3: Z1+Z2 [XX]%, Z3 [X]%, Z4+ [X]%
-  [Wk 4: Z1+Z2 [XX]%, Z3 [X]%, Z4+ [X]%]
+  Wk 1: Z1+Z2 [XX]%, Z3 [X]%, Z4+ [X]% — [Classification] (PI: [X.XX])
+  Wk 2: Z1+Z2 [XX]%, Z3 [X]%, Z4+ [X]% — [Classification] (PI: [X.XX])
+  Wk 3: Z1+Z2 [XX]%, Z3 [X]%, Z4+ [X]% — [Classification] (PI: [X.XX])
+  Wk 4: Z1+Z2 [XX]%, Z3 [X]%, Z4+ [X]% — [Classification] (PI: [X.XX])
 
 Wellness (block avg vs previous block):
   HRV: [XX] ms (prev block: [XX] ms) [↑/↓/→] [assessment]
