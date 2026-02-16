@@ -32,6 +32,11 @@ Pre-Workout → Post-Workout → Weekly → Block
 - **Weekly** fitness deltas (CTL, ATL, TSB) appear week-by-week in **Block** Volume Progression
 - **Section 11 Flags** surface at the **Weekly** level and are summarized with resolution in **Block** reports
 - **Wellness trends** use week-over-week at Weekly level, block-over-block at Block level
+- **Capability metrics** (durability, TID drift) appear as one-liners in Pre/Post, get full treatment in Weekly/Block:
+  - **Pre-Workout:** Durability 7d mean + trend (one line). TID drift only if not "consistent"
+  - **Post-Workout:** Durability 7d/28d + trend in weekly totals. TID 28d classification + drift
+  - **Weekly:** Durability subsection with qualifying session counts + high-drift count. TID 7d vs 28d comparison
+  - **Block:** Durability by Week (trajectory across block). TID 28d as block-scale classification
 
 ---
 
@@ -44,7 +49,8 @@ All report types share these formatting principles:
 3. **Assessment labels in parentheses** — (good), (optimal), (flag) after metrics
 4. **Directional arrows** — ↑/↓/→ for trends with threshold-based labels
 5. **Section 11 flags surface immediately** — never deferred to a later report
-6. **Coach note at the end** — 2-5 sentences of coaching interpretation
+6. **Capability metrics scale with report scope** — one-liner in pre/post, subsection in weekly, by-week breakdown in block
+7. **Coach note at the end** — 2-5 sentences of coaching interpretation
 
 ---
 
