@@ -43,6 +43,7 @@ Polarization (block average):
   Z1+Z2: 84.6%
   Z3 (Grey Zone): 3.4% (target <5%)
   Z4+ (Quality): 12.0% (target ~20% of intensity sessions)
+  TID 28d (block-scale): Polarized (PI: 3.05)
   Hard days/week avg: 2.0
 
 Polarization by Week:
@@ -50,6 +51,13 @@ Polarization by Week:
   Wk 2: Z1+Z2 83%, Z3 3.1%, Z4+ 13.5%
   Wk 3: Z1+Z2 82%, Z3 4.2%, Z4+ 13.8%
   Wk 4: Z1+Z2 92%, Z3 2.1%, Z4+ 5.9%
+
+Durability by Week:
+  Wk 1: mean dec 3.2%, 3 qualifying, 0 high-drift
+  Wk 2: mean dec 2.8%, 3 qualifying, 0 high-drift
+  Wk 3: mean dec 2.1%, 4 qualifying, 0 high-drift
+  Wk 4: mean dec 1.8%, 2 qualifying, 0 high-drift
+  Block trend: improving
 
 Wellness (block avg vs previous block):
   HRV: 53 ms (prev block: 51 ms) ↑ improving
@@ -79,10 +87,12 @@ Textbook threshold block. CTL rose 8.9 points at a sustainable 1.12/week
 ramp — well within the <1.5 guideline. Both key performance markers hit
 targets, with VO2max power exceeding by 7W. The standout metric is long
 ride decoupling dropping from 4.8% to 2.1% — the aerobic engine is
-building nicely. Grey zone stayed well controlled throughout, with only a
-minor creep in week 3 (4.2%) during peak load. One flag triggered in week
-3 but was handled correctly with a session modification. Deload week
-brought TSB back to +28, athlete enters next block fresh.
+building nicely, confirmed by the aggregate durability trend improving
+steadily across all four weeks (3.2% → 1.8%). Grey zone stayed well
+controlled throughout, with only a minor creep in week 3 (4.2%) during
+peak load. TID held Polarized at block scale (PI 3.05). One flag
+triggered in week 3 but was handled correctly with a session modification.
+Deload week brought TSB back to +28, athlete enters next block fresh.
 
 Next Block Plan:
   Phase: Peak / Race Specificity
@@ -141,6 +151,7 @@ Polarization (block average):
   Z1+Z2: 89.1%
   Z3 (Grey Zone): 5.2% (target <5%) ⚠️
   Z4+ (Quality): 5.7%
+  TID 28d (block-scale): Pyramidal (PI: 1.90) ⚠️
   Hard days/week avg: 1.4
 
 Polarization by Week:
@@ -149,6 +160,14 @@ Polarization by Week:
   Wk 3: Z1+Z2 91%, Z3 6.8%, Z4+ 2.2%
   Wk 4: Z1+Z2 96%, Z3 3.1%, Z4+ 0.9%
   Wk 5: Z1+Z2 88%, Z3 5.8%, Z4+ 6.2%
+
+Durability by Week:
+  Wk 1: mean dec 2.5%, 3 qualifying, 0 high-drift
+  Wk 2: mean dec 2.8%, 3 qualifying, 0 high-drift
+  Wk 3: mean dec 5.1%, 2 qualifying, 1 high-drift ⚠️
+  Wk 4: mean dec N/A, 0 qualifying (illness)
+  Wk 5: mean dec 3.8%, 2 qualifying, 0 high-drift
+  Block trend: declining (illness-driven)
 
 Wellness (block avg vs previous block):
   HRV: 47 ms (prev block: 53 ms) ↓ declining — flag
@@ -159,9 +178,11 @@ Wellness (block avg vs previous block):
 Section 11 Flags During Block:
   Wk 3 Thu: HRV >15% below baseline → rest day inserted
   Wk 3: Grey Zone >5% → pacing review (fatigue-related drift)
+  Wk 3: Durability declining — 5.1% mean dec vs 2.5% wk 1 → fatigue impact on aerobic efficiency
   Wk 4: 3 consecutive missed sessions → illness protocol activated
   Wk 4: CTL drop >3 points in 1 week → load management flag
   Wk 5: Return-to-training protocol → reduced intensity for 5 days
+  Block: TID shifted from Polarized (wk 1-2) to Pyramidal at block scale (PI 1.90) → illness reduced quality volume
 
 Phase Progression Check:
   Block objective: Continue aerobic base development, maintain CTL ~82
@@ -171,22 +192,29 @@ Phase Progression Check:
     - Illness disrupted weeks 3-4
     - Sweetspot power regressed
     - HRV has not returned to pre-block baseline
+    - Durability regressed (wk 3 mean 5.1% vs wk 1-2 avg 2.65%)
+    - Block-scale TID dropped to Pyramidal (PI 1.90)
   Phase recommendation: Extend Base phase — do NOT progress to Build
   Rationale: Illness cost ~2 weeks of productive training and fitness
   markers have not recovered to pre-block levels. Progressing to higher
-  intensity with suppressed HRV and reduced CTL risks further setback.
-  Next block should rebuild to block entry CTL before advancing.
+  intensity with suppressed HRV, reduced CTL, and regressed durability
+  risks further setback. Next block should rebuild to block entry CTL
+  and restore aerobic efficiency before advancing.
 
 Assessment:
 A disrupted block. Weeks 1-2 were tracking well — strong compliance,
-good polarization, CTL rising on target. The mid-block illness (week 3-4)
-cost approximately 2 weeks of productive training and 5 CTL points at
-the nadir. Return-to-training in week 5 was handled conservatively, which
-was the right call — wellness markers are still below baseline. The grey
-zone creep in weeks 3 and 5 reflects fatigue-impaired pacing rather than
-training design issues. Key concern: HRV has dropped 11% block-over-block
+good polarization, CTL rising on target, durability solid at 2.5-2.8%.
+The mid-block illness (week 3-4) cost approximately 2 weeks of productive
+training and 5 CTL points at the nadir. Durability spiked to 5.1% in
+week 3 as fatigue set in before the illness fully manifested — the
+aggregate decoupling trend caught the problem before wellness metrics
+crashed in week 4. Return-to-training in week 5 was handled
+conservatively, which was the right call — durability partially recovered
+(3.8%) but hasn't returned to pre-illness levels. The block-scale TID
+shifting to Pyramidal (PI 1.90) reflects the loss of quality volume
+during weeks 3-5. Key concern: HRV has dropped 11% block-over-block
 and hasn't recovered, suggesting the body is still processing the illness.
-FTP test postponed until wellness stabilizes.
+FTP test postponed until wellness and durability stabilize.
 
 Next Block Plan:
   Phase: Aerobic Base (rebuild)
@@ -197,8 +225,8 @@ Next Block Plan:
     restored), prioritize sleep hygiene, reduce weekly hours by ~10%
     vs pre-illness levels, gradually reintroduce long ride duration
   Targets: CTL >80 by end of block, HRV avg >50ms (pre-illness
-    baseline), RHR <50 bpm, long ride decoupling back to <3%.
-    Reassess phase progression at block end.
+    baseline), RHR <50 bpm, long ride decoupling back to <3%,
+    durability 7d mean <3%. Reassess phase progression at block end.
 ```
 
 ---
@@ -208,6 +236,7 @@ Next Block Plan:
 - **Example 1** shows a clean, successful block — all criteria met, clear progression
 - **Example 2** shows how the template handles real-world disruption — illness, regression, and the protocol's decision to NOT progress
 - **Polarization by Week** caught the grey zone creep in Example 2 that the block average partially masked
+- **Durability by Week** caught the aerobic efficiency regression in Example 2 before wellness metrics crashed — the aggregate trend is a leading indicator of fatigue
 - **Week-by-week CTL** in Volume Progression tells the trajectory story — Example 2's dip-and-partial-recovery is immediately visible
 - **Phase Progression Check** is the most important section — it makes the coaching decision transparent and auditable
 - **Wellness labels** ("declining — flag" vs "declining — monitor") give actionable context, not just arrows
