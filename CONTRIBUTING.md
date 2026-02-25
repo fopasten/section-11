@@ -17,7 +17,8 @@ Thanks for wanting to help. This project is an open, evidence‑based protocol f
 ## Ground rules
 - Stay deterministic and explainable: recommendations must be traceable to data and rules
 - No hidden data flows or external services without clear docs
+- New session templates must include YAML metadata (`id`, `domain`, `is_hard_session`, `work_minutes`, `est_total_minutes`) and the 6 standard prose fields used in `examples/workout-library/WORKOUT_REFERENCE.md` (zones, structure, duration, coaching notes, select when, and optionally position note)
 - Be respectful and evidence‑based in discussions
 
 ## License
-Contributions fall under the project's [CC BY-NC 4.0](LICENSE) license.
+Contributions fall under the project's [MIT](LICENSE) license.
