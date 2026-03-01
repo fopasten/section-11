@@ -14,12 +14,12 @@ Phase: Build
 
 Compliance: 6/6 sessions completed
 Planned TSS: 520 | Actual TSS: 537 (103%)
-Hours: 14.2h (prev week: 13.8h)
+Hours: 14h12m (prev week: 13h48m)
 
 Session Breakdown:
   Mon: Recovery spin — 32 TSS ✅
   Tue: Sweetspot 2x20 — 89 TSS ✅
-  Wed: Endurance 2.5h — 78 TSS ✅
+  Wed: Endurance 2h30m — 78 TSS ✅
   Thu: VO2max 5x4min — 95 TSS ✅
   Fri: Endurance 3h + SkiErg — 112 TSS ✅
   Sat: Rest — 0 TSS ✅
@@ -64,7 +64,7 @@ Fitness:
 Wellness Trends:
   HRV: 48–62 ms (avg 54, prev week 56) →
   RHR: 47–52 bpm (avg 49, prev week 48) →
-  Sleep: 7.2h avg, quality 2.2/4 avg →
+  Sleep: 7h12m avg, quality 2.2/4 avg →
 
 Section 11 Flags: None
 
@@ -77,7 +77,7 @@ TSB drifting slightly negative but manageable heading into week 3.
 
 Next Week Preview:
 Week 3 is peak load before deload. Tuesday sweetspot extends to 2x25,
-Thursday VO2max adds a 6th interval. Sunday long ride targets 4.5h.
+Thursday VO2max adds a 6th interval. Sunday long ride targets 4h30m.
 Monitor HRV early in the week — if it drops below 45ms, consider
 modifying Thursday's session.
 ```
@@ -93,7 +93,7 @@ Phase: Base
 
 Compliance: 5/7 sessions completed (1 modified, 1 missed)
 Planned TSS: 480 | Actual TSS: 392 (82%)
-Hours: 12.1h (prev week: 14.8h)
+Hours: 12h6m (prev week: 14h48m)
 
 Session Breakdown:
   Mon: Recovery spin — 28 TSS ✅
@@ -102,7 +102,7 @@ Session Breakdown:
   Thu: Rest (unplanned) — 0 TSS ❌ (poor sleep, HRV drop)
   Fri: Endurance 3h — 98 TSS ✅
   Sat: Yoga/mobility — 0 TSS ✅
-  Sun: Long ride 3.5h — 128 TSS ✅
+  Sun: Long ride 3h30m — 128 TSS ✅
 
 Quality Session Detail:
   Tempo 3x15 (modified to 2x15):
@@ -138,7 +138,7 @@ Fitness:
 Wellness Trends:
   HRV: 39–51 ms (avg 44, prev week 52) ↓ declining — monitor
   RHR: 50–56 bpm (avg 53, prev week 49) ↑ elevated — monitor
-  Sleep: 6.1h avg, quality 3.2/4 avg ↓ declining — monitor
+  Sleep: 6h6m avg, quality 3.2/4 avg ↓ declining — monitor
 
 Section 11 Flags:
   - HRV below 7-day baseline by >15% on Thu → triggered rest day
