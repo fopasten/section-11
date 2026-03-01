@@ -10,11 +10,11 @@
 ```
 Data (last_updated UTC: 2026-01-15T14:22:08)
 
-Completed 2.5h endurance ride and rowing as scheduled. Clean aerobic execution throughout.
+Completed 2h30m endurance ride and rowing as scheduled. Clean aerobic execution throughout.
 
 Completed workout: VirtualRide Endurance - Wednesday
 Start time: 09:30:15
-Duration: 2.50 hours (planned 2.5h)
+Duration: 2h30m (planned 2h30m)
 Distance: 76.4 km
 Power: 155 W avg / 156 W NP
 Power zones: 12% Zone 1, 88% Zone 2
@@ -33,7 +33,7 @@ TSS: 82 (planned 78)
 
 Completed workout: VirtualRowing Recovery Session
 Start time: 12:45:00
-Duration: 0.25 hours (15 min)
+Duration: 15m
 HR: 125 avg / 141 max
 HR zones: 68% Zone 1, 32% Zone 2
 Calories: 165 kcal
@@ -50,11 +50,11 @@ ATL: 76.05
 Ramp rate: 0.52
 ACWR: 1.07 (optimal)
 Recovery Index: 0.92
-Hours: 12.40
+Hours: 12h24m
 TSS: 410
 
 Interpretation:
-Both sessions compliant with plan. Bike decoupling 2.14% over 2.5 hours shows solid aerobic control.
+Both sessions compliant with plan. Bike decoupling 2.14% over 2h30m shows solid aerobic control.
 Rowing stayed in Z1-Z2 as prescribed. Load tracking well — TSB manageable heading into Thursday.
 ```
 
@@ -69,7 +69,7 @@ Completed threshold intervals as scheduled. Power targets hit, HR response appro
 
 Completed workout: VirtualRide 3x12min Threshold - Friday
 Start time: 08:15:42
-Duration: 1.50 hours (planned 1.5h)
+Duration: 1h30m (planned 1h30m)
 Distance: 48.2 km
 Power: 178 W avg / 205 W NP
 Power zones: 28% Zone 1, 31% Zone 2
@@ -97,7 +97,7 @@ ATL: 84.20
 Ramp rate: 0.78
 ACWR: 1.16 (optimal)
 Recovery Index: 0.88
-Hours: 14.75
+Hours: 14h45m
 TSS: 485
 
 Interpretation:
@@ -113,11 +113,11 @@ acceptable. TSB at -11.40 reflects build week loading. Recovery spin tomorrow. �
 ```
 Data (last_updated UTC: 2026-01-20T12:48:55)
 
-Endurance ride cut short at 1.5h of planned 2.5h due to knee discomfort. SkiErg skipped.
+Endurance ride cut short at 1h30m of planned 2h30m due to knee discomfort. SkiErg skipped.
 
 Completed workout: VirtualRide Endurance - Monday (modified)
 Start time: 10:02:18
-Duration: 1.50 hours (planned 2.5h)
+Duration: 1h30m (planned 2h30m)
 Distance: 45.1 km
 Power: 148 W avg / 149 W NP
 Power zones: 19% Zone 1, 81% Zone 2
@@ -148,11 +148,11 @@ ATL: 68.15
 Ramp rate: -0.30
 ACWR: 0.97 (optimal)
 Recovery Index: 0.95
-Hours: 4.25
+Hours: 4h15m
 TSS: 132
 
 Interpretation:
-Session cut short — right call given the knee discomfort. Aerobic quality during the 1.5h
+Session cut short — right call given the knee discomfort. Aerobic quality during the 1h30m
 was excellent (decoupling 1.92%, VI 1.00). TSS 47 vs planned 78 means a lighter day than
 intended. Monitor knee before tomorrow's session. If persistent, consider swapping to
 upper-body only. 🩹
@@ -169,7 +169,7 @@ Rest day walk in the rain. Low intensity, full recovery zone.
 
 Completed workout: Walk Training Session
 Start time: 14:30:08
-Duration: 1.00 hours
+Duration: 1h
 Distance: 5.1 km
 HR: 78 avg / 96 max
 HR zones: 100% Zone 1
@@ -187,7 +187,7 @@ ATL: 72.25
 Ramp rate: -1.20
 ACWR: 0.82 (optimal)
 Recovery Index: 0.91
-Hours: 15.50
+Hours: 15h30m
 TSS: 498
 
 Interpretation:
