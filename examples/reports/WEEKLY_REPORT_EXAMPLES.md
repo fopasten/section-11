@@ -10,7 +10,8 @@
 ```
 Week 2 Summary (27 Jan – 02 Feb 2026)
 Block: Threshold Development — Week 2/4
-Phase: Build
+Phase: Build — week 4 (confidence: high)
+  Basis: Rising CTL, 2-3 hard days sustained
 
 Compliance: 6/6 sessions completed
 Planned TSS: 520 | Actual TSS: 537 (103%)
@@ -36,6 +37,7 @@ Quality Session Detail:
     Decoupling: 4.8% (good)
     VI: 1.03 (good)
     HR: 168 avg / 178 max
+    HRRc: 42 bpm
 
 Polarization:
   Z1+Z2: 83%
@@ -50,6 +52,10 @@ Durability (steady-state sessions, VI ≤ 1.05, ≥ 90min):
 
 Efficiency Factor (steady-state cycling, VI ≤ 1.05, ≥ 20min):
   7d mean(4): 1.47 | 28d mean(14): 1.44
+  Trend: stable
+
+HRRc:
+  7d mean(2): 38 bpm | 28d mean(6): 36 bpm
   Trend: stable
 
 Fitness:
@@ -125,6 +131,9 @@ Durability (steady-state sessions, VI ≤ 1.05, ≥ 90min):
 Efficiency Factor (steady-state cycling, VI ≤ 1.05, ≥ 20min):
   7d mean(3): 1.38 | 28d mean(11): 1.44
   Trend: declining
+
+HRRc:
+  22 bpm 28d mean(3) — 7d: no data
 
 Fitness:
   CTL: 72.4 → 71.1 (Δ -1.3)
