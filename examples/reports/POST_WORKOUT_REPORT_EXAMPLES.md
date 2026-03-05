@@ -43,6 +43,7 @@ Weekly totals:
 Polarization: Z1+Z2 97%, Z3 1%, Z4+ 3%
 Durability: 2.14% 7d mean(3) / 2.50% 28d mean(11) (stable)
 EF: 1.45 7d mean(4) / 1.42 28d mean(14) (stable)
+HRRc: 36 bpm 28d mean(5) — 7d: no data
 TID 28d: Polarized (PI: 3.18) — drift: consistent
 TSB: -4.85
 CTL: 71.20
@@ -81,6 +82,7 @@ HR zones: 32% Zone 1, 29% Zone 2, 14% Zone 3, 25% Zone 4
 Cadence: 85 avg
 Decoupling: 3.82% (good)
 EF: 1.49
+HRRc: 34 bpm
 Variability Index: 1.15
 Calories: 962 kcal
 Carbs used: 196 g
@@ -90,6 +92,7 @@ Weekly totals:
 Polarization: Z1+Z2 84%, Z3 2%, Z4+ 13%
 Durability: 2.95% 7d mean(3) / 2.50% 28d mean(11) (stable)
 EF: 1.46 7d mean(4) / 1.43 28d mean(14) (stable)
+HRRc: 34 bpm 7d mean(1) / 36 bpm 28d mean(5) (stable)
 TID 28d: Polarized (PI: 3.10) — drift: consistent
 TSB: -11.40
 CTL: 72.80
