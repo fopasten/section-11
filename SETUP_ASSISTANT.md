@@ -127,7 +127,15 @@ Walk them through:
 
 **Important:** The secret names must match exactly — `ATHLETE_ID` and `INTERVALS_KEY`. These are what the workflow expects.
 
-Confirm both secrets are added before continuing.
+**Optional:** If their training week starts on a day other than Monday, add one more secret:
+
+| Name | Value |
+|------|-------|
+| `WEEK_START` | Training week start day: `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, or `sun` |
+
+If not set, defaults to `mon` (ISO week). This controls phase detection windows — ensures deload/build classification aligns with the athlete's actual training week structure.
+
+Confirm both required secrets are added before continuing.
 
 ### Step 5: Enable workflow permissions
 
