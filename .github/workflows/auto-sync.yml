@@ -169,6 +169,8 @@ jobs:
           echo "✅ Sync completed successfully!"
           echo "📊 View data: https://raw.githubusercontent.com/${{ github.repository }}/main/latest.json"
 
+      - name: Prepare file for AI reading
+        run: cp latest.json latest.txt
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
