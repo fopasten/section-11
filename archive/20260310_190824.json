@@ -12,7 +12,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-03-10T19:08:22.771915",
+    "last_updated": "2026-03-10T18:00:18.108686",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.5.1"
@@ -66,10 +66,10 @@
   },
   "current_status": {
     "fitness": {
-      "ctl": 51.25,
-      "atl": 35.68,
-      "tsb": 15.57,
-      "ramp_rate": -2.84,
+      "ctl": 50.31,
+      "atl": 30.35,
+      "tsb": 19.96,
+      "ramp_rate": -3.78,
       "fitness_source": "From Intervals.icu API (reflects completed workouts)"
     },
     "thresholds": {
@@ -206,7 +206,7 @@
     },
     "phase_detected": "Recovery",
     "phase_triggers": [
-      "TSB 15.57 > +10"
+      "TSB 19.96 > +10"
     ],
     "seasonal_context": "Late Base / Build",
     "benchmark_indoor": {
@@ -229,13 +229,13 @@
     "p_max": 973,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-03-10T19:08:22.771101",
+    "calculation_timestamp": "2026-03-10T18:00:18.107869",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
       "activities_7d": 5,
       "activities_28d": 17,
-      "planned_workouts_7d": 2,
+      "planned_workouts_7d": 1,
       "ftp_history_days": {
         "indoor": 0,
         "outdoor": 0
@@ -557,33 +557,6 @@
       "type": "WORKOUT",
       "description": "# Tuesday AM: Fasted Aerobic Prime\n# Goal: Metabolic flexibility & structural recovery\n# Protocol: Section 11 - Pathway 3\n\n- 15m Z1 ramp to 135W 95-100rpm\n- 40m 155W 90rpm Z2\n- 5m 120W 100rpm Z1",
       "planned_tss": 39,
-      "duration_hours": 0.0
-    },
-    {
-      "id": "event_2",
-      "date": "2026-03-10T00:00:00",
-      "name": "Planned Workout",
-      "type": "WORKOUT",
-      "description": "# Tuesday PM: Double-Day Flush\n# Goal: Aerobic durability and joint mobility\n# Protocol: Section 11 - Re-Entry Phase\n\n- 10m Z1 ramp to 135W 95rpm\n- 45m 155W 90rpm Z2\n- 5m 120W 100rpm Z1",
-      "planned_tss": 40,
-      "duration_hours": 0.0
-    },
-    {
-      "id": "event_3",
-      "date": "2026-03-11T00:00:00",
-      "name": "Planned Workout",
-      "type": "WORKOUT",
-      "description": "# Wednesday: Farellones Base Build\n# Goal: Muscular endurance and threshold expansion\n# Protocol: Section 11 - Progression Pathway 2\n\n- 15m ramp 100-160W\n\n3x\n  - 10m 210W 85-95rpm \n  - 5m 130W\n- 10m 125W Z1 Cool down\n",
-      "planned_tss": 66,
-      "duration_hours": 0.0
-    },
-    {
-      "id": "event_4",
-      "date": "2026-03-13T00:00:00",
-      "name": "Planned Workout",
-      "type": "WORKOUT",
-      "description": "# Friday: Neuromuscular Activation\n# Goal: Priming for Valle Nevado elevation\n# Protocol: Section 11 - Opener Strategy\n\n- 20m Z2 155W 90rpm\n\n5x\n  - 30s 300W+ Z6 (High Cadence)\n  - 2m 130W Z1 Recovery\n\n- 60m Z2 90rpm\n- 5m Z1 Cool down",
-      "planned_tss": 74,
       "duration_hours": 0.0
     }
   ],
