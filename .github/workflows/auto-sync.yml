@@ -84,13 +84,6 @@ jobs:
           else
             echo "⚠️ latest.json not found - might be no changes detected"
           fi
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ # The directory where latest.json is saved
-          publish_branch: gh-pages
       
       - name: Archive latest.json with timestamp
         if: success()
@@ -175,7 +168,15 @@ jobs:
         run: |
           echo "✅ Sync completed successfully!"
           echo "📊 View data: https://raw.githubusercontent.com/${{ github.repository }}/main/latest.json"
-      
+
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./ # The directory where latest.json is saved
+          publish_branch: gh-pages
+
       - name: Notify on failure
         if: failure()
         run: |
