@@ -12,7 +12,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-03-19T11:07:03.632482",
+    "last_updated": "2026-03-19T10:24:05.753055",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.5.1"
@@ -54,18 +54,18 @@
       "ctl": 51.25,
       "atl": 41.48,
       "tsb": 9.77,
-      "ramp_rate": 1.9,
-      "fitness_source": "Decayed from yesterday (today's planned workouts not yet completed)"
+      "ramp_rate": -0.17,
+      "fitness_source": "From Intervals.icu API (reflects completed workouts)"
     },
     "thresholds": {
       "ftp_outdoor": 235,
       "ftp_indoor": null,
-      "eftp": 231.8,
+      "eftp": 231.6,
       "lthr": 176,
       "max_hr": 194,
-      "w_prime": 19542,
+      "w_prime": 19522,
       "w_prime_kj": 19.5,
-      "p_max": 969,
+      "p_max": 968,
       "vo2max": null
     },
     "current_metrics": {
@@ -176,14 +176,13 @@
         "note": "Compares 7d vs 28d Seiler TID to detect distribution shifts. pi_delta positive = more polarized acutely."
       }
     },
-    "consistency_index": 0.5,
+    "consistency_index": 1.0,
     "consistency_details": {
-      "planned_days": 2,
+      "planned_days": 1,
       "completed_days": 2,
       "matched_days": 1,
       "planned_dates": [
-        "2026-03-14",
-        "2026-03-19"
+        "2026-03-14"
       ],
       "completed_dates": [
         "2026-03-14",
@@ -210,19 +209,19 @@
       "benchmark_percentage": null,
       "seasonal_expected": null
     },
-    "eftp": 231.8,
-    "w_prime": 19542,
+    "eftp": 231.6,
+    "w_prime": 19522,
     "w_prime_kj": 19.5,
-    "p_max": 969,
+    "p_max": 968,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-03-19T11:07:03.631602",
+    "calculation_timestamp": "2026-03-19T10:24:05.752136",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
       "activities_7d": 3,
       "activities_28d": 18,
-      "planned_workouts_7d": 2,
+      "planned_workouts_7d": 1,
       "ftp_history_days": {
         "indoor": 0,
         "outdoor": 0
@@ -491,17 +490,7 @@
       "vo2max": null
     }
   ],
-  "planned_workouts": [
-    {
-      "id": "event_1",
-      "date": "2026-03-19T00:00:00",
-      "name": "Planned Workout",
-      "type": "WORKOUT",
-      "description": "- 75m 140w",
-      "planned_tss": 44,
-      "duration_hours": 0.0
-    }
-  ],
+  "planned_workouts": [],
   "weekly_summary": {
     "total_training_hours": 7.24,
     "total_tss": 363,
