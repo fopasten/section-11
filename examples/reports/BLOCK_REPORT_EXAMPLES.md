@@ -17,7 +17,7 @@ Volume Progression:
   Wk 2: 14.2h / 537 TSS | CTL 78.2
   Wk 3: 15.1h / 568 TSS | CTL 82.0
   Wk 4: deload — 8.6h / 285 TSS | CTL 80.1
-  Block total: 51.7h / 1888 TSS
+  Block total: 51h42m / 1888 TSS
 
 Compliance:
   Sessions: 25/26 completed (96%)
@@ -34,36 +34,46 @@ Fitness Progression:
 Key Performance Markers:
   Sweetspot power: 241W → 253W (target: 248W — hit ✅)
   VO2max power: 298W → 312W (target: 305W — hit ✅)
-  Long ride duration: 3.5h → 4.5h
+  Long ride duration: 3h30m → 4h30m
   Long ride decoupling trend: 4.8% → 2.1% ↑ improving
   Best 20-min power: 278W (week 3)
   Best 5-min power: 318W (week 3)
 
 Polarization (block average):
-  Z1+Z2: 84.6%
-  Z3 (Grey Zone): 3.4% (target <5%)
-  Z4+ (Quality): 12.0% (target ~20% of intensity sessions)
+  Z1+Z2: 85%
+  Z3 (Grey Zone): 3% (target <5%)
+  Z4+ (Quality): 12% (target ~20% of intensity sessions)
   TID 28d (block-scale): Polarized (PI: 3.05)
   Hard days/week avg: 2.0
 
 Polarization by Week:
-  Wk 1: Z1+Z2 86%, Z3 2.8%, Z4+ 11.2%
-  Wk 2: Z1+Z2 83%, Z3 3.1%, Z4+ 13.5%
-  Wk 3: Z1+Z2 82%, Z3 4.2%, Z4+ 13.8%
-  Wk 4: Z1+Z2 92%, Z3 2.1%, Z4+ 5.9%
+  Wk 1: Z1+Z2 86%, Z3 3%, Z4+ 11%
+  Wk 2: Z1+Z2 83%, Z3 3%, Z4+ 14%
+  Wk 3: Z1+Z2 82%, Z3 4%, Z4+ 14%
+  Wk 4: Z1+Z2 92%, Z3 2%, Z4+ 6%
 
 Durability by Week:
-  Wk 1: mean dec 3.2%, 3 qualifying, 0 high-drift
-  Wk 2: mean dec 2.8%, 3 qualifying, 0 high-drift
-  Wk 3: mean dec 2.1%, 4 qualifying, 0 high-drift
-  Wk 4: mean dec 1.8%, 2 qualifying, 0 high-drift
+  Wk 1: mean(3) dec 3.2%, 0 high-drift
+  Wk 2: mean(3) dec 2.8%, 0 high-drift
+  Wk 3: mean(4) dec 2.1%, 0 high-drift
+  Wk 4: mean(2) dec 1.8%, 0 high-drift
+  Block trend: improving
+
+Efficiency Factor by Week:
+  Wk 1: mean(3) EF 1.42
+  Wk 2: mean(4) EF 1.45
+  Wk 3: mean(4) EF 1.48
+  Wk 4: mean(2) EF 1.50
   Block trend: improving
 
 Wellness (block avg vs previous block):
   HRV: 53 ms (prev block: 51 ms) ↑ improving
   RHR: 49 bpm (prev block: 50 bpm) → stable — no concern
-  Sleep: 7.1h (prev block: 6.8h) ↑ improving
+  Sleep: 7h6m (prev block: 6h48m) ↑ improving
+  Avg Feel: 2.4/5 (18 sessions) (prev block: 2.6/5) → stable
+  Avg RPE: 4.5/10 (18 sessions) (prev block: 4.2/10) → stable
   Avg RI: 0.91 (prev block: 0.87)
+  Avg Monotony: 1.82 (normal)
 
 Section 11 Flags During Block:
   Wk 3 Thu: HRV 12% below baseline → modified VO2max session (removed
@@ -82,14 +92,15 @@ Phase Progression Check:
   suggests FTP test will confirm improvement. Aerobic base is solid
   (decoupling 2.1% over 4.5h). Athlete is ready for race-specific work.
 
-Assessment:
+Interpretation:
 Textbook threshold block. CTL rose 8.9 points at a sustainable 1.12/week
 ramp — well within the <1.5 guideline. Both key performance markers hit
 targets, with VO2max power exceeding by 7W. The standout metric is long
 ride decoupling dropping from 4.8% to 2.1% — the aerobic engine is
 building nicely, confirmed by the aggregate durability trend improving
-steadily across all four weeks (3.2% → 1.8%). Grey zone stayed well
-controlled throughout, with only a minor creep in week 3 (4.2%) during
+steadily across all four weeks (3.2% → 1.8%). Efficiency Factor tracked
+upward in parallel (1.42 → 1.50), reinforcing the aerobic fitness gains. Grey zone stayed well
+controlled throughout, with only a minor creep in week 3 (4%) during
 peak load. TID held Polarized at block scale (PI 3.05). One flag
 triggered in week 3 but was handled correctly with a session modification.
 Deload week brought TSB back to +28, athlete enters next block fresh.
@@ -119,7 +130,7 @@ Volume Progression:
   Wk 3: 12.1h / 392 TSS | CTL 79.8
   Wk 4: 9.2h / 298 TSS | CTL 76.3
   Wk 5: 13.5h / 468 TSS | CTL 77.1
-  Block total: 64.9h / 2210 TSS
+  Block total: 64h54m / 2210 TSS
 
 Compliance:
   Sessions: 28/35 completed (80%)
@@ -142,38 +153,49 @@ Fitness Progression:
 Key Performance Markers:
   Sweetspot power: 253W → 245W (target: 248W — below ❌)
   VO2max power: 312W → N/A (no VO2max sessions completed post-illness)
-  Long ride duration: 4.5h → 3.5h (reduced during recovery)
+  Long ride duration: 4h30m → 3h30m (reduced during recovery)
   Long ride decoupling trend: 2.1% → 3.8% → slightly regressed
   Best 20-min power: 272W (week 2)
   Best 5-min power: 308W (week 2)
 
 Polarization (block average):
-  Z1+Z2: 89.1%
-  Z3 (Grey Zone): 5.2% (target <5%) ⚠️
-  Z4+ (Quality): 5.7%
+  Z1+Z2: 89%
+  Z3 (Grey Zone): 5% (target <5%) ⚠️
+  Z4+ (Quality): 6%
   TID 28d (block-scale): Pyramidal (PI: 1.90) ⚠️
   Hard days/week avg: 1.4
 
 Polarization by Week:
-  Wk 1: Z1+Z2 84%, Z3 3.5%, Z4+ 12.5%
-  Wk 2: Z1+Z2 82%, Z3 4.1%, Z4+ 13.9%
-  Wk 3: Z1+Z2 91%, Z3 6.8%, Z4+ 2.2%
-  Wk 4: Z1+Z2 96%, Z3 3.1%, Z4+ 0.9%
-  Wk 5: Z1+Z2 88%, Z3 5.8%, Z4+ 6.2%
+  Wk 1: Z1+Z2 84%, Z3 4%, Z4+ 13% — Polarized (PI: 2.95)
+  Wk 2: Z1+Z2 82%, Z3 4%, Z4+ 14% — Polarized (PI: 2.88)
+  Wk 3: Z1+Z2 91%, Z3 7%, Z4+ 2%
+  Wk 4: Z1+Z2 96%, Z3 3%, Z4+ 1%
+  Wk 5: Z1+Z2 88%, Z3 6%, Z4+ 6%
 
 Durability by Week:
-  Wk 1: mean dec 2.5%, 3 qualifying, 0 high-drift
-  Wk 2: mean dec 2.8%, 3 qualifying, 0 high-drift
-  Wk 3: mean dec 5.1%, 2 qualifying, 1 high-drift ⚠️
-  Wk 4: mean dec N/A, 0 qualifying (illness)
-  Wk 5: mean dec 3.8%, 2 qualifying, 0 high-drift
+  Wk 1: mean(3) dec 2.5%, 0 high-drift
+  Wk 2: mean(3) dec 2.8%, 0 high-drift
+  Wk 3: mean(2) dec 5.1%, 1 high-drift ⚠️
+  Wk 4: mean(0) dec N/A (illness)
+  Wk 5: mean(2) dec 3.8%, 0 high-drift
+  Block trend: declining (illness-driven)
+
+Efficiency Factor by Week:
+  Wk 1: mean(3) EF 1.46
+  Wk 2: mean(4) EF 1.47
+  Wk 3: mean(2) EF 1.39 ⚠️
+  Wk 4: mean(0) EF N/A (illness)
+  Wk 5: mean(2) EF 1.41
   Block trend: declining (illness-driven)
 
 Wellness (block avg vs previous block):
   HRV: 47 ms (prev block: 53 ms) ↓ declining — flag
   RHR: 52 bpm (prev block: 49 bpm) ↑ elevated — monitor
-  Sleep: 6.4h (prev block: 7.1h) ↓ declining — monitor
+  Sleep: 6h24m (prev block: 7h6m) ↓ declining — monitor
+  Avg Feel: 3.8/5 (14 sessions) (prev block: 2.4/5) ↓ declining — flag
+  Avg RPE: 7.2/10 (14 sessions) (prev block: 4.5/10) ↑ elevated — flag
   Avg RI: 0.79 (prev block: 0.91)
+  Avg Monotony: 2.10 (elevated during illness recovery)
 
 Section 11 Flags During Block:
   Wk 3 Thu: HRV >15% below baseline → rest day inserted
@@ -201,7 +223,7 @@ Phase Progression Check:
   risks further setback. Next block should rebuild to block entry CTL
   and restore aerobic efficiency before advancing.
 
-Assessment:
+Interpretation:
 A disrupted block. Weeks 1-2 were tracking well — strong compliance,
 good polarization, CTL rising on target, durability solid at 2.5-2.8%.
 The mid-block illness (week 3-4) cost approximately 2 weeks of productive
