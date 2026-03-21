@@ -12,7 +12,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-03-21T15:01:12.770879",
+    "last_updated": "2026-03-21T15:40:17.519508",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.5.1"
@@ -60,18 +60,18 @@
       "ctl": 50.82,
       "atl": 39.88,
       "tsb": 10.94,
-      "ramp_rate": -0.28,
-      "fitness_source": "From Intervals.icu API (reflects completed workouts)"
+      "ramp_rate": 1.79,
+      "fitness_source": "Decayed from yesterday (today's planned workouts not yet completed)"
     },
     "thresholds": {
       "ftp_outdoor": 235,
       "ftp_indoor": null,
-      "eftp": 231.6,
+      "eftp": 231.8,
       "lthr": 176,
       "max_hr": 194,
-      "w_prime": 19522,
+      "w_prime": 19542,
       "w_prime_kj": 19.5,
-      "p_max": 968,
+      "p_max": 969,
       "vo2max": null
     },
     "current_metrics": {
@@ -182,13 +182,14 @@
         "note": "Compares 7d vs 28d Seiler TID to detect distribution shifts. pi_delta positive = more polarized acutely."
       }
     },
-    "consistency_index": 1.0,
+    "consistency_index": 0.5,
     "consistency_details": {
-      "planned_days": 1,
+      "planned_days": 2,
       "completed_days": 2,
       "matched_days": 1,
       "planned_dates": [
-        "2026-03-19"
+        "2026-03-19",
+        "2026-03-21"
       ],
       "completed_dates": [
         "2026-03-15",
@@ -214,19 +215,19 @@
       "benchmark_percentage": null,
       "seasonal_expected": null
     },
-    "eftp": 231.6,
-    "w_prime": 19522,
+    "eftp": 231.8,
+    "w_prime": 19542,
     "w_prime_kj": 19.5,
-    "p_max": 968,
+    "p_max": 969,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-03-21T15:01:12.769964",
+    "calculation_timestamp": "2026-03-21T15:40:17.518582",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
       "activities_7d": 4,
       "activities_28d": 20,
-      "planned_workouts_7d": 1,
+      "planned_workouts_7d": 2,
       "ftp_history_days": {
         "indoor": 0,
         "outdoor": 0
@@ -546,7 +547,17 @@
       "vo2max": null
     }
   ],
-  "planned_workouts": [],
+  "planned_workouts": [
+    {
+      "id": "event_1",
+      "date": "2026-03-21T00:00:00",
+      "name": "Planned Workout",
+      "type": "WORKOUT",
+      "description": "# Sweet Spot System Test\n# 2-3x 12m @ 210W (Seated)\n# Safety Fuse: Abort if HR > 165bpm or throat burns.\n\n- Warm up 20m 150W 85-95rpm\n\n3x\n  - 12m SS 85-90rpm\n  - 5m 130W recovery\n- 50m Z1-Z2 Cool Down",
+      "planned_tss": 108,
+      "duration_hours": 0.0
+    }
+  ],
   "weekly_summary": {
     "total_training_hours": 7.46,
     "total_tss": 362,
