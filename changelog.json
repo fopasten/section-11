@@ -1,11 +1,11 @@
 {
-  "notification_id": "2026-02-23",
+  "notification_id": "2026-03-17",
   "changes": [
-    "SECTION_11.md - FEATURE - 2026-02-23 - v11.6: Race-Week Protocol — day-by-day decision tree for D-7 to D-0 with event-type modifiers, go/no-go checklist, carb loading triggers, opener scheduling, taper tantrums guidance, and three-layer race awareness architecture",
-    "sync.py - FEATURE - 2026-02-23 - v3.5.0: Race calendar with 90-day lookahead, taper onset alerts (D-14 to D-8), race-week detection (RACE_A/RACE_B within 7 days), TSB projection for race day, event duration classification, daily load targets, race-specific alerts",
-    "DOSSIER_TEMPLATE.md - UPDATE - 2026-02-23: Added Priority column to Event-Specific Targets table and Intervals.icu race tagging instructions",
-    "SECTION_11.md - FIX - 2026-02-23 - PR by Paweł Gruszka (@mrpear): Sleep quality scale corrected to 1-4 inverted (1=Great, 4=Poor) matching Intervals.icu API. Decision logic updated to use sleep_quality instead of sleep_score. Feel scale labels added (1=Strong through 5=Weak)",
-    "examples/ - FIX - 2026-02-23 - PR by Paweł Gruszka (@mrpear): Pre-workout template/examples, weekly report template/examples updated from /5 to /4 sleep quality scale. README current_metrics field list corrected",
-    "LICENSE - CHANGE - 2026-02-23: License changed from CC BY-NC 4.0 to MIT"
+    "— sync.py v3.84 — Activity description and chat_notes on completed activities. Phase week off-by-one fix (2026-03-15) —",
+    "— sync.py v3.85 + SECTION_11.md v11.16 — Remaining wellness fields added (~20 new). wellness_field_scales legend. hrvSDNN case fix (2026-03-15) —",
+    "— sync.py v3.86 — planned_tss_delta filters to primary sport. sport_tss_breakdown on weekly rows (2026-03-15) —",
+    "— SECTION_11.md v11.17 — Phase context and tomorrow preview in pre/post-workout report templates (2026-03-17) —",
+    "— Documentation — JSON examples refreshed to v3.85 schema, moved to examples/json-examples/. Strava data stripping warning in README + SETUP_ASSISTANT (2026-03-15) —",
+    "Most files touched — recommend pulling a fresh copy."
   ]
 }
