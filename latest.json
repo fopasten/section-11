@@ -70,7 +70,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-03-24T10:34:13.067197",
+    "last_updated": "2026-03-24T11:31:24.520233",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.86"
@@ -422,7 +422,7 @@
     "p_max": 967,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-03-24T10:34:13.066290",
+    "calculation_timestamp": "2026-03-24T11:31:24.519279",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
@@ -462,7 +462,7 @@
       "carbs_used": 232,
       "carbs_ingested": 120,
       "variability_index": 1.1629629,
-      "decoupling": 15.966335,
+      "decoupling": -2.4176626,
       "efficiency_factor": 1.1716418,
       "hrrc": null,
       "elevation_m": 300.0,
