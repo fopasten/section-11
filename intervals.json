@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-26T00:03:53.154915",
+  "generated_at": "2026-03-26T03:26:55.413708",
   "version": "3.86",
   "scan_hours": 72,
   "retention_days": 8,
@@ -438,6 +438,58 @@
           "avg_cadence": 49.070488,
           "zone": 1,
           "training_load": 8.782109
+        }
+      ]
+    },
+    {
+      "activity_id": "i134827984",
+      "date": "2026-03-25",
+      "type": "VirtualRide",
+      "name": "Indoor trainer session",
+      "interval_summary": [
+        "1x 5m3s 115w",
+        "1x 51m38s 161w",
+        "1x 5m3s 103w"
+      ],
+      "intervals": [
+        {
+          "type": "WORK",
+          "label": "303s@115w91rpm",
+          "duration_secs": 303,
+          "avg_power": 115,
+          "max_power": 170,
+          "avg_hr": 111,
+          "max_hr": 123,
+          "avg_cadence": 91.42193,
+          "zone": 1,
+          "training_load": 1.93966,
+          "decoupling": 4.8401184
+        },
+        {
+          "type": "WORK",
+          "label": "3098s@161w92rpm",
+          "duration_secs": 3098,
+          "avg_power": 161,
+          "max_power": 195,
+          "avg_hr": 134,
+          "max_hr": 145,
+          "avg_cadence": 92.356,
+          "zone": 2,
+          "training_load": 39.140305,
+          "decoupling": 5.437823
+        },
+        {
+          "type": "WORK",
+          "label": "303s@103w92rpm",
+          "duration_secs": 303,
+          "avg_power": 103,
+          "max_power": 164,
+          "avg_hr": 123,
+          "max_hr": 137,
+          "avg_cadence": 92.02658,
+          "zone": 1,
+          "training_load": 1.7987933,
+          "decoupling": -2.7140422
         }
       ]
     }
