@@ -4,6 +4,13 @@ Intervals.icu → GitHub/Local JSON Export
 Exports training data for LLM access.
 Supports both automated GitHub sync and manual local export.
   
+Version 3.94 - Phase detection: live weekly rows from activities_28d. Replaces v3.89 single-week
+  overlay with full 4-week bucketing — all weekly rows (TSS, primary_sport_tss, hard_days) computed
+  fresh every run. CTL/ATL enriched from history.json as stable background. Eliminates the entire
+  class of stale-row bugs (previously, completed weeks snapshotted mid-progress stayed frozen until
+  history.json regeneration). recent_activities widened from 7d to 28d (activities_extended) so
+  latest.json always covers the full window between history.json regenerations.
+
 Version 3.93 - Route & Terrain Intelligence: GPX/TCX attachments on events parsed into routes.json.
   Climb/descent detection, course character, elevation_per_km. Cached by attachment ID.
   has_terrain flag on planned workouts and race calendar entries. GPX + TCX via stdlib
@@ -71,7 +78,7 @@ class IntervalsSync:
     HISTORY_FILE = "history.json"
     UPSTREAM_REPO = "CrankAddict/section-11"
     CHANGELOG_FILE = "changelog.json"
-    VERSION = "3.93"
+    VERSION = "3.94"
     INTERVALS_FILE = "intervals.json"
     ROUTES_FILE = "routes.json"
 
@@ -1455,7 +1462,7 @@ class IntervalsSync:
                 }
             },
             "derived_metrics": derived_metrics,
-            "recent_activities": self._format_activities(activities_display, anonymize, interval_activity_ids),
+            "recent_activities": self._format_activities(activities_extended, anonymize, interval_activity_ids),
             "wellness_data": self._format_wellness(wellness),
             "planned_workouts": formatted_planned_workouts,
             "workout_summary_stats": getattr(self, '_summary_stats', {}),
@@ -1738,81 +1745,96 @@ class IntervalsSync:
             activities_for_consistency, past_events
         )
         
-        # === HARD DAYS THIS WEEK ===
-        # Uses _classify_hard_day() for consistent power/HR evaluation.
-        # Power: 5-rung cumulative ladder (Seiler/Foster)
-        # HR fallback: 2-rung conservative ladder (above LT2 only)
-        hard_days_this_week = 0
-        activities_by_date_7d = {}
-        for a in activities_7d:
-            a_date = a.get("start_date_local", "")[:10]
-            if a_date not in activities_by_date_7d:
-                activities_by_date_7d[a_date] = []
-            activities_by_date_7d[a_date].append(a)
-        
-        for date_str, day_acts in activities_by_date_7d.items():
-            day_zones_by_basis = {}
-            for a in day_acts:
-                sf = self.SPORT_FAMILIES.get(a.get("type", ""), None)
-                zones, basis = self._get_activity_zones(a, sport_family=sf)
-                if zones and basis:
-                    if basis not in day_zones_by_basis:
-                        day_zones_by_basis[basis] = {}
-                    for zid, secs in zones.items():
-                        day_zones_by_basis[basis][zid] = day_zones_by_basis[basis].get(zid, 0) + secs
-            
-            is_hard, _basis = self._classify_hard_day(day_zones_by_basis)
-            if is_hard:
-                hard_days_this_week += 1
-        
         # === PHASE DETECTION v2 (dual-stream) ===
         today = datetime.now().strftime("%Y-%m-%d")
         
-        # Load weekly_180d lookback from history.json
-        weekly_rows = self._load_weekly_rows_for_phase()
-        
-        # === PATCH CURRENT WEEK IN WEEKLY ROWS (v3.89) ===
-        # history.json regenerates every 28 days, but the current week's row
-        # changes every ride. Overlay fresh values from this sync run so
-        # phase detection always sees up-to-date data. Runtime only —
-        # does NOT write back to history.json.
+        # === LIVE WEEKLY ROWS FROM activities_28d (v3.94) ===
+        # Replaces v3.89 single-week overlay. Computes all 4 weekly rows
+        # (TSS, primary_sport_tss, hard_days) live from activities_28d,
+        # eliminating the entire class of stale-row bugs. CTL/ATL enriched
+        # from history.json where available (stable background data).
         now_dt = datetime.now()
         days_since_ws = (now_dt.weekday() - self.week_start_day) % 7
-        current_ws = (now_dt - timedelta(days=days_since_ws)).strftime("%Y-%m-%d")
+        current_ws_dt = now_dt - timedelta(days=days_since_ws)
         
-        # Compute current calendar-week TSS from activities_7d
-        cw_tss = 0
-        cw_primary_tss = 0
-        for a in activities_7d:
-            a_date = a.get("start_date_local", "")[:10]
-            if a_date >= current_ws:
-                a_tss = a.get("icu_training_load", 0) or 0
-                cw_tss += a_tss
-                sf = self.SPORT_FAMILIES.get(a.get("type", ""), None)
-                if sf == primary_sport:
-                    cw_primary_tss += a_tss
+        # Build 4 week boundaries (newest first, then reversed to chronological)
+        week_boundaries = []
+        for i in range(4):
+            ws_dt = current_ws_dt - timedelta(weeks=i)
+            we_dt = ws_dt + timedelta(days=6)
+            week_boundaries.append((ws_dt.strftime("%Y-%m-%d"), we_dt.strftime("%Y-%m-%d")))
+        week_boundaries.reverse()  # chronological: oldest first
         
-        fresh_row = {
-            "week_start": current_ws,
-            "total_tss": round(cw_tss, 0),
-            "primary_sport_tss": round(cw_primary_tss, 0),
-            "primary_sport": primary_sport,
-            "hard_days": hard_days_this_week,
-            "ctl_end": round(current_ctl, 1) if current_ctl else None,
-            "atl_end": round(current_atl, 1) if current_atl else None,
-            "acwr": acwr,
-            "monotony": monotony,
-        }
+        # Bucket activities_28d by week and compute TSS + hard_days per week
+        weekly_rows = []
+        for ws, we in week_boundaries:
+            week_acts = [a for a in activities_28d
+                         if ws <= (a.get("start_date_local", "")[:10]) <= we]
+            
+            w_tss = sum((a.get("icu_training_load", 0) or 0) for a in week_acts)
+            w_primary_tss = sum(
+                (a.get("icu_training_load", 0) or 0) for a in week_acts
+                if self.SPORT_FAMILIES.get(a.get("type", ""), None) == primary_sport
+            )
+            
+            # Hard days: group by date, classify each day
+            acts_by_date = {}
+            for a in week_acts:
+                a_date = a.get("start_date_local", "")[:10]
+                if a_date not in acts_by_date:
+                    acts_by_date[a_date] = []
+                acts_by_date[a_date].append(a)
+            
+            w_hard_days = 0
+            for date_str, day_acts in acts_by_date.items():
+                day_zones_by_basis = {}
+                for a in day_acts:
+                    sf = self.SPORT_FAMILIES.get(a.get("type", ""), None)
+                    zones, basis = self._get_activity_zones(a, sport_family=sf)
+                    if zones and basis:
+                        if basis not in day_zones_by_basis:
+                            day_zones_by_basis[basis] = {}
+                        for zid, secs in zones.items():
+                            day_zones_by_basis[basis][zid] = day_zones_by_basis[basis].get(zid, 0) + secs
+                is_hard, _basis = self._classify_hard_day(day_zones_by_basis)
+                if is_hard:
+                    w_hard_days += 1
+            
+            weekly_rows.append({
+                "week_start": ws,
+                "total_tss": round(w_tss, 0),
+                "primary_sport_tss": round(w_primary_tss, 0),
+                "primary_sport": primary_sport,
+                "hard_days": w_hard_days,
+            })
         
-        if weekly_rows and weekly_rows[-1].get("week_start") == current_ws:
-            # Overlay: same week exists in history — patch it
-            weekly_rows[-1].update(fresh_row)
-        else:
-            # Append: current week not in history yet (generated before this week)
-            weekly_rows.append(fresh_row)
+        # Current week gets live CTL/ATL/ACWR/monotony (already computed this run)
+        weekly_rows[-1]["ctl_end"] = round(current_ctl, 1) if current_ctl else None
+        weekly_rows[-1]["atl_end"] = round(current_atl, 1) if current_atl else None
+        weekly_rows[-1]["acwr"] = acwr
+        weekly_rows[-1]["monotony"] = monotony
         
-        # In both cases, [-1] is now the current week (being classified).
-        # previous_phase must come from [-2] (last completed week).
+        # Enrich older weeks with CTL/ATL from history.json (stable background)
+        history_rows = self._load_weekly_rows_for_phase()
+        history_by_ws = {r.get("week_start"): r for r in history_rows}
+        for row in weekly_rows[:-1]:  # skip current week (already enriched)
+            hist = history_by_ws.get(row["week_start"])
+            if hist:
+                for field in ("ctl_end", "atl_end", "acwr", "monotony"):
+                    if field not in row or row[field] is None:
+                        row[field] = hist.get(field)
+        
+        # hard_days_this_week: current week's value (used in return dict)
+        hard_days_this_week = weekly_rows[-1]["hard_days"]
+        
+        # previous_phase from [-2] (last completed week).
+        # History rows may have phase_detected; fresh rows won't.
+        # Enrich completed rows with phase_detected from history where available.
+        for row in weekly_rows[:-1]:
+            hist = history_by_ws.get(row["week_start"])
+            if hist and "phase_detected" in hist:
+                row["phase_detected"] = hist["phase_detected"]
+        
         previous_phase = None
         if len(weekly_rows) >= 2:
             previous_phase = weekly_rows[-2].get("phase_detected")
@@ -7786,11 +7808,11 @@ def main():
         
         # === SAVE ROUTES.JSON (local mode) ===
         routes_data = getattr(sync, '_routes_data', None)
-        if routes_data and routes_data.get("events"):
+        if routes_data is not None:
             routes_path = sync.data_dir / sync.ROUTES_FILE
             with open(routes_path, 'w') as f:
                 json.dump(routes_data, f, indent=2, default=str)
-            print(f"   🗺️  routes.json saved ({len(routes_data['events'])} event(s))")
+            print(f"   🗺️  routes.json saved ({len(routes_data.get('events', []))} event(s))")
         
         # === AUTO HISTORY GENERATION (local mode) ===
         if sync.should_generate_history():
@@ -7831,7 +7853,7 @@ def main():
         
         # === PUBLISH ROUTES.JSON (GitHub mode) ===
         routes_data = getattr(sync, '_routes_data', None)
-        if routes_data and routes_data.get("events"):
+        if routes_data is not None:
             # Save locally for cache on next run
             routes_path = sync.data_dir / sync.ROUTES_FILE
             with open(routes_path, 'w') as f:
@@ -7839,7 +7861,7 @@ def main():
             try:
                 sync.publish_to_github(routes_data, filepath="routes.json",
                                        commit_message=f"Update routes.json - {datetime.now().strftime('%Y-%m-%d')}")
-                print(f"   🗺️  routes.json pushed ({len(routes_data['events'])} event(s))")
+                print(f"   🗺️  routes.json pushed ({len(routes_data.get('events', []))} event(s))")
             except Exception as e:
                 print(f"   ⚠️ routes.json push failed (non-critical): {e}")
         
