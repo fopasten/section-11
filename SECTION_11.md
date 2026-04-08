@@ -1,70 +1,66 @@
 # Section 11 — AI Coach Protocol
 
-**Protocol Version:** 11.18  
-**Last Updated:** 2026-03-19
+**Protocol Version:** 11.29  
+**Last Updated:** 2026-04-07
 **License:** [MIT](https://opensource.org/licenses/MIT)
 
 ### Changelog
 
-**v11.18 — Environmental Conditions Protocol:**
-- New section: delta-based heat stress tiers (relative to athlete's 14-day thermal baseline), absolute guardrails, insufficient-baseline fallback
-- Session-type modification rules: endurance (HR ceiling), threshold/SS (keep power, cut volume), VO₂max (keep targets, cut sets), long rides (power pacing, HR abort)
-- Heat acclimatization timeline, decay guidance, indoor heat interpretation, cardiac drift contextualization
-- Cross-references added to *3 Metabolic & Environmental Progression and Durability Sub-Metrics diagnostic
-- Evidence table updated (Tatterson, Tucker, Racinais, Périard, Hettinga, Ely, Steadman)
-- Template additions: heat-specific coach notes in pre/post-workout reports
-- Cold weather subsection: warm-up extension, bronchospasm risk, wind chill safety, cold power meter lag
+**v11.29 — Post-Workout Report Completeness Rules:**
+- Three new Do-NOT rules in Post-Workout Report Structure: never omit any completed activity on the report day (walks, ski-erg, short/aborted rides, commutes all get their own block); never merge activities (one activity ID = one block); never invent explanations for anomalous sessions (use only `description`/`chat_notes` fields, otherwise report as-is)
+- POST_WORKOUT_REPORT_TEMPLATE.md: `[Repeat block for additional sessions]` replaced with explicit rule mirroring the Tomorrow-line guarantee — every completed activity on the report day (athlete local time), one block per activity ID, never merge
+- POST_WORKOUT_REPORT_EXAMPLES.md: new Example 2 (Multi-Sport Day: Short Ride + Bike + SkiErg + Walk) demonstrating short-session inclusion and the anti-hallucination pattern. Old Examples 2–4 renumbered to 3–5
+- Motivation: multi-model test showed two of three models dropping walks from post-workout reports, and one hallucinating a narrative for an unexplained short ride. Template said "one per activity" but lacked the force of the Tomorrow-line's "never drop secondary sessions" rule, and every multi-session example was cycling-only — models pattern-matched on examples over spec
+- Docs-only, no sync.py changes
 
-**v11.17 — Phase Context + Tomorrow Preview in Report Templates:**
-- Phase line added to pre-workout (Current Status Summary) and post-workout (Weekly totals) — first line, frames all metrics below
-- Conditional: include only when `phase_detection.confidence` is "high" or "medium"; omit when "low" or null
-- Tomorrow preview added to post-workout: next planned session after interpretation. Conditional: omit when no session planned
-- Session profile field documented in post-workout Field Notes table
-- Pre/post-workout "must include" lists updated in protocol
+**v11.28 — Schema Hygiene: Easy Time Ratio Rename:**
+- Renamed `derived_metrics.polarisation_index` → `easy_time_ratio` to disambiguate from Seiler `polarization_index` (Treff PI). The two fields measure different things (0–1 easy-time share vs logarithmic Treff PI) and models were conflating them in reports
+- Renamed `polarisation_note` → `easy_time_ratio_note`
+- Old name was misleading: the field is a 0–1 ratio, not an index. The academic "Polarization Index" name (Treff et al. 2019) is reserved for the logarithmic formula, which stays as `seiler_tid_*.polarization_index`
+- All display labels updated across SECTION_11.md (metric reference tables, relationship tables, validated ranges, Tier 3 diagnostics, schema documentation, sample JSON); README.md, examples/README.md, examples/json-manual/SETUP.md updated to match
+- No formula change, no value change — rename only
+- Requires sync.py v3.98
 
-**v11.16 — Wellness Field Expansion:**
-- All Intervals.icu wellness fields now passed through: subjective state (stress, mood, motivation, injury, fatigue, soreness, hydration), vitals (spO2, blood glucose, blood pressure, Baevsky SI, lactate, respiration), body composition (body fat, abdomen), nutrition (kcal, carbs, protein, fat), lifestyle (steps, hydration volume), cycle tracking (menstrual phase + predicted)
-- `wellness_field_scales` legend added to READ_THIS_FIRST — documents 1→4 positional scale (1 = best, 4 = worst) with per-field labels
-- Recovery Metrics section updated with extended wellness field reference
-- Bug fix: `hrvSdnn` → `hrvSDNN` case mismatch in `_format_wellness()` (was silently returning null)
-- Pure data passthrough — no readiness_decision changes, no new decision logic
-- sync.py v3.85
+**v11.27 — Readiness Signal Hygiene (ACWR/RI):**
+- Low-side ACWR (<0.8) removed from readiness_decision ambers and ACWR alerts. Low ACWR is a load-state/undertraining context signal, not a fatigue or overload signal. Context still surfaces via `acwr_interpretation` in derived_metrics.
+- RI amber now requires 2-day persistence (`ri < 0.7` today AND yesterday) to filter single-night noise from a composite signal. Single-day dips in the 0.6–0.7 band are context, not amber. Red (`ri < 0.6`) unchanged — fires on any single day.
+- ACWR high-side boundary unified across code and docs: `≥ 1.3` amber/caution, `≥ 1.5` red/danger (replaces mixed `>` / `>=` usage).
+- Signal Classification table and Validated Endurance Ranges table reconciled to match the new readiness_decision logic.
+- New transparency note under Signal Classification explaining both changes.
+- Requires sync.py v3.97 (`recovery_index_yesterday`).
 
-**v11.15 — Per-Sport Zone Preference:**
-- `ZONE_PREFERENCE` config: per-sport override for which zone basis (power/HR) feeds aggregations
-- Format: `sport_family:basis` pairs, e.g. `run:hr,cycling:power`. Unspecified sports keep default (power-preferred, HR fallback)
-- Config cascade: `.sync_config.json` → `ZONE_PREFERENCE` env var → default. `--setup` wizard updated.
-- `zone_basis` field added to `zone_distribution_7d`, all `seiler_tid_*` blocks: `"power"` / `"hr"` / `"mixed"` / null
-- `zone_preference` field added to `READ_THIS_FIRST` — shows active config
-- `_aggregate_seiler_zones()` refactored to use shared `_get_activity_zones()` (eliminated duplicated zone extraction)
-- Per-activity zone output unchanged — still includes both `power_zones` and `hr_zones`
-- sync.py v3.83
+**v11.26 — Nutrition & Pacing Protocol:**
+- Nutrition Protocol expansion: kJ→carbs dosing table, absorption limits by carb type, glycogen budget model, temperature-driven hydration frequency
+- Fast-start penalty emphasis (pacing literature, no specific magnitude claim)
+- W′ depletion under glycogen deficit: ~20% W′ reduction (Miura et al., 2000)
+- Evidence base: 4 new entries (Jeukendrup 2014 expanded, Hearris et al. 2022, CTS/Rutberg 2025, Miura et al. 2000)
 
-**v11.14 — Feel/RPE Scope Clarification:**
-- Feel removed from automated readiness_decision signals — 6 signals remain (HRV, RHR, Sleep, TSB, ACWR, RI)
-- Feel/RPE defined at three layers: wellness (daily entry), activity (post-session), in-session (real-time)
-- Feel enriches coaching decisions when present in data; solicited when decision-relevant; never required as routine input
-- Feel removed from Tier 1 PRIMARY READINESS hierarchy — replaced by Sleep (quality + hours)
-- Readiness Thresholds header updated: "All Available Must Be Met" (unavailable metrics do not block progression)
-- Feel/RPE Override block added to readiness_decision: escalation unconditional, de-escalation P2 only (max 2 amber, athlete must attribute cause, AI documents override). P0/P1 not overridable. Underreporting caveat when 3+ objective signals converge.
+**v11.25 — Course Character Fix:**
+- Course character classification uses elevation_per_km only (distance-blind absolute thresholds removed)
+- start_time added to routes.json events
 
-**v11.13 — Readiness Decision (AAS Formalization):**
-- Pre-computed `readiness_decision` replaces implicit go/modify/skip synthesis
-- Priority ladder: P0 (safety stop) → P1 (acute overload) → P2 (accumulated fatigue) → P3 (green light)
-- 7 signals evaluated: HRV, RHR, Sleep, Feel, TSB, ACWR, RI — each with green/amber/red/unavailable status
-- Phase modifiers: Build loosens thresholds (3 amber), Taper/Race week tighten (1 amber), all others default (2 amber)
-- Structured modification output: trigger categories + adjustment directions (intensity/volume/cap_zone)
-- Wires into existing alerts (P0/P1 read tier-1 alarms, no duplication)
-- AAS row removed from threshold table — replaced by `readiness_decision` reference
-- sync.py v3.72: `_compute_readiness_decision()`, `_get_phase_modifiers()`, `_build_modification()`
+**v11.24 — Route & Terrain Protocol:**
+- New section: route analysis, terrain-adjusted power estimation, wind overlay, drafting, segment reasoning, nutrition timing, weather, pre-ride briefing flow
+- Variable power pacing by gradient (Atkinson & Brunskill, Boswell)
+- Progressive target adjustment cross-referencing sustainability_profile and durability metrics
+- Wind impact classification by gradient tier
+- Strava segment feasibility and wind×bearing attempt/skip logic
+- Conditional terrain context block in pre-workout reports
+- Evidence base: 11 entries (9 cited, 2 convention disclosures)
+- Requires sync.py v3.95 (polyline, start_time, indoor flag)
 
-**v11.12 — HRRc Integration + Phase Transition Narrative:**
-- HRRc (heart rate recovery) added to activity output and capability namespace (7d/28d aggregate trend)
-- HRRc: largest 60s HR drop (bpm) after exceeding threshold HR for >1 min. API field `icu_hrr`. Display only
-- Trend: 7d mean vs 28d mean, >10% = meaningful. Min 1 session/7d, 3 sessions/28d
-- Phase transition narrative guidance added to weekly/block report templates
-- Phase timeline added to block report template
-- References: Fecchio et al. (2019) HRR reproducibility; Lamberts et al. (2024) cyclist HRR reliability; Buchheit (2006)
+**v11.23** — Checklist 5b: training metrics must come from current JSON data read, never from conversation history, prior messages, or cached/recalled context  
+**v11.22** — Sustainability Profile capability metric: per-sport power/HR sustainability table for race estimation, 42-day window, cycling three-layer model (actual MMP, Coggan factors, CP/W'); sync.py v3.91  
+**v11.21** — Sleep Signal Simplification: hours-only (quality/score removed from readiness — double-counts HRV/HR); sync.py v3.90  
+**v11.20** — HR Curve Delta capability metric: max sustained HR at 4 anchor durations across two 28-day windows, no sport filter (cross-sport physiological); sync.py v3.88  
+**v11.19** — Power Curve Delta capability metric: MMP at 5 anchor durations across two 28-day windows, rotation index (sprint vs endurance adaptation); sync.py v3.87  
+**v11.18** — Environmental Conditions Protocol: delta-based heat stress tiers, session-type modification rules, acclimatization timeline, cold-weather subsection  
+**v11.17** — Phase context + tomorrow preview in report templates (conditional on phase confidence, session planning)  
+**v11.16** — Wellness field expansion: all Intervals.icu wellness fields passthrough (subjective, vitals, body comp, nutrition, lifestyle, cycle); `hrvSDNN` case-bug fix; sync.py v3.85  
+**v11.15** — Per-sport zone preference: `ZONE_PREFERENCE` config for power/HR zone basis per sport family (config → env → default cascade); sync.py v3.83  
+**v11.14** — Feel/RPE scope clarified: removed from automated readiness_decision signals (6 remain); three-layer definition (wellness/activity/in-session); Feel/RPE Override block, P2 de-escalation only  
+**v11.13** — Readiness Decision (AAS formalization): pre-computed go/modify/skip, P0–P3 priority ladder, 7 signals, phase modifiers, structured modification output; sync.py v3.72  
+**v11.12** — HRRc integration (heart rate recovery, 7d/28d trend); phase transition narrative + phase timeline added to weekly/block report templates  
 
 **v11.11** — Phase Detection v2: dual-stream architecture (retrospective + prospective), 8 phase states, confidence model, hysteresis, reason codes  
 **v11.10** — Hard day HR zone fallback for non-power sports (running, SkiErg, rowing); shared zone helpers  
@@ -108,7 +104,7 @@ Section 11 operates as a **self-contained AI protocol**. All metric definitions,
 | Zone Distribution Metrics | Section 11 (11A, subsection 9) | AI intensity monitoring |
 | Seiler TID Classification | Section 11 (11A, Zone Distribution) | AI TID classification and drift detection |
 | Aggregate Durability | Section 11 (11A, subsection 9) | AI durability trend tracking |
-| Capability Metrics | Section 11 (11A, subsection 9) | AI capability-layer analysis (durability + TID comparison) |
+| Capability Metrics | Section 11 (11A, subsection 9) | AI capability-layer analysis (durability, TID comparison, power curve delta, HR curve delta, sustainability profile) |
 | Validation Metadata | Section 11 (11C) | AI audit schema |
 
 AI systems should reference the athlete dossier for athlete-specific values (FTP, zones, goals, schedule) and this protocol for all coaching logic, thresholds, and decision rules.
@@ -353,7 +349,7 @@ Phase detection uses a **dual-stream architecture** combining retrospective trai
 
 | **Phase** | **Classification Logic** | **Key Thresholds** |
 |-----------|------------------------|--------------------|
-| Overreached | Safety gate — triggers immediately when detected | Current-week ACWR >1.5, or elevated monotony (>2.5) + ACWR >1.3 + rising trend |
+| Overreached | Safety gate — triggers immediately when detected | Current-week ACWR ≥1.5, or elevated monotony (>2.5) + ACWR ≥1.3 + rising trend |
 | Taper | Race-anchored — requires race in calendar | Race (A/B priority) within 14 days + volume reducing (planned TSS ≤80% of recent avg) |
 | Peak | Race approaching, fitness at cycle high | Race within 21 days + CTL within 5% of lookback max + volume NOT yet reducing + positive CTL slope |
 | Deload | Calendar-driven load reduction within Build block | Build history (rising CTL + ≥1.5 hard days/week over 3+ weeks) + planned TSS ≤80% + no hard sessions planned. Confirmed if next week load resumes (≥80%). Medium confidence if next-week plan is empty. |
@@ -400,7 +396,7 @@ This system applies Seiler's 3-zone endurance framework (Z1 = < LT1, Z2 = LT1–
 | Polarization Combined (All-Sport)| (Z1 + Z2) / Total zone time (HR + Power)| Foster et al. (2001); Seiler & Tønnessen (2009)| Global endurance load structure; ≥ 0.8 = strongly polarized      |
 | Training Monotony Index          | Mean Load / SD(Load)                    | Foster (1998)                             | Evaluates load variation; high values = risk of uniformity or overuse |
 
-**Simple Polarisation Index** (used in `derived_metrics.polarisation_index`):
+**Easy Time Ratio** (used in `derived_metrics.easy_time_ratio`):
 - Formula: `(Z1 + Z2) / Total zone time` — a 0–1 ratio of easy time
 - Target: ≥0.80 for polarized training
 - This is a quick sanity check for 80/20 compliance
@@ -575,6 +571,7 @@ Before providing recommendations, AI systems must verify:
 | 3  | No Virtual Math Policy           | Ensure all computed metrics originate from raw or mirrored data. No interpolation, smoothing, or estimation permitted.                                 |
 | 4  | Tolerance Compliance             | Recommendations must remain within: ±3 W power, ±1 bpm HR, ±1% dataset variance.                                                                       |
 | 5  | Missing-Data Handling            | If a metric is unavailable or outdated, explicitly request it from athlete. Never assume or project unseen values.                                     |
+| 5b | No Conversational Data Substitution | Training metrics must come from the current JSON data read. Never use values from conversation history, prior messages, cached session context, or AI memory/recall. No data read in this response = no metric cited. If a value isn't in the JSON files at query time, state "data unavailable." |
 | 6  | Temporal Data Validation         | Verify "last_updated" timestamp is <24 hours old. If data is >48 hours, request a refresh. Flag if athlete context (illness, travel) contradicts data. |               
 | 6b | UTC Time Synchronization         | Confirm dataset and system clocks align to UTC. Flag if offset >60 min or timestamps appear ahead of query time.                                       |
 | 7  | Multi-Metric Conflict Resolution | If HRV/RHR conflict with athlete-reported state, prioritize athlete-provided readiness. Note discrepancy, request clarification. Never override illness/fatigue with “good” TSB. |
@@ -711,6 +708,9 @@ See **Output Format Guidelines** for full field reference, assessment labels, an
 - Ask follow-up questions when data is complete and metrics are good
 - Omit weekly totals (polarization, durability, TID 28d, TSB, CTL, ATL, ACWR, hours, TSS)
 - Cite "per Section 11" or "according to the protocol"
+- Omit any completed activity whose date falls on the report day (athlete local time). Every such activity gets its own session block — walks, ski-erg, short rides, aborted rides, commutes included.
+- Merge multiple activities into a single block. One activity ID, one block.
+- Invent explanations for anomalous sessions (very short duration, aborted, equipment issue). Report what the data shows. If context is needed, use only the activity's `description` or `chat_notes` fields. If neither explains it, include the block and, if relevant, note the anomaly plainly in the interpretation without speculating about cause.
 
 Elaborate only when thresholds are breached or athlete requests deeper analysis.
 
@@ -722,7 +722,7 @@ Present actionable guidance in concise, prioritized lists (3–5 items maximum).
 
 Each recommendation must be specific, measurable, and data-linked:
 - "Maintain ≥70% Z1–Z2 time this week."
-- "If RI < 0.7 for 3 days, shift next 3 sessions to recovery emphasis."
+- "If RI < 0.7 for 3+ consecutive days, shift next 3 sessions to recovery emphasis."
 - “FTP reassessments are not scheduled.”
 
 Avoid narrative advice or motivational filler.
@@ -740,14 +740,14 @@ When validating datasets, cross-check computed fatigue and load ratios against v
 
 | **Metric**                   | **Valid Range**                                    | **Flag (Early Warning)**           | **Alarm (Action Needed)**           | **Notes**                                                           |
 |------------------------------|----------------------------------------------------|------------------------------------|-------------------------------------|---------------------------------------------------------------------|
-| ACWR                         | 0.8–1.3                                            | At 0.8 / 1.3 (edges of optimal)   | At 0.75 / 1.35 (outside optimal)   | Persistence: >1.3 or <0.8 for 3+ days → alarm                     |
+| ACWR                         | 0.8–1.3                                            | ≥ 1.3 (edge of optimal)           | ≥ 1.35 (above optimal)             | High-side only for readiness/overload. Low-side (<0.8) is load-state context (undertraining/taper), surfaced via acwr_interpretation. Persistence: ≥ 1.3 for 3+ days → alarm |
 | Monotony                     | < 2.5                                              | At 2.3                             | At 2.5                              | See Monotony Deload Context below                                   |
 | Strain                       | < 3500                                             | —                                  | > 3500                              | Cumulative stress                                                   |
-| Recovery Index (RI)          | ≥ 0.8 good / 0.6–0.79 moderate / < 0.6 deload      | < 0.7 for > 1 day                 | < 0.7 for 3 days → deload review; < 0.6 → immediate deload | Readiness indicator                                |
+| Recovery Index (RI)          | ≥ 0.8 good / 0.6–0.79 moderate / < 0.6 deload      | < 0.7 for 2+ days                 | < 0.7 for 3+ days → deload review; < 0.6 → immediate deload | Readiness indicator. Single-day dips 0.6–0.79 are context, not amber. |
 | HRV                          | Within personal baseline                           | ↓ > 20% vs baseline               | Persists > 2 days                   | Use 7-day rolling baseline                                          |
 | RHR                          | Within personal baseline                           | ↑ ≥ 5 bpm vs baseline             | Persists > 2 days                   | Use 7-day rolling baseline                                          |
 | Fatigue Trend                | −0.2 to +0.2                                       | —                                  | —                                   | ΔATL − ΔCTL (stable range)                                          |
-| Polarisation Ratio           | 0.75–0.9                                           | —                                  | —                                   | ~80/20 distribution                                                 |
+| Easy Time Ratio              | 0.75–0.9                                           | —                                  | —                                   | ~80/20 distribution                                                 |
 | Durability Index (DI)        | ≥ 0.9                                              | —                                  | —                                   | Avg Power last hour ÷ first hour                                    |
 | Readiness Decision         | Pre-computed go/modify/skip (P0–P3 ladder)         | —                                  | —                                   | See Readiness Decision section. sync.py v3.72+          |
 | Load Ratio                   | < 3500                                             | —                                  | —                                   | Monotony × Mean Load — cumulative stress indicator                  |
@@ -812,8 +812,8 @@ RI = (HRV_today / HRV_baseline) ÷ (RHR_today / RHR_baseline)
 
 **RI Trend Monitoring:**
 - 7-day mean should remain ≥ 0.8 for progression weeks
-- If RI < 0.7 for > 1 day → flag for monitoring (early warning)
-- If RI < 0.7 for > 3 consecutive days → trigger block-level deload or load-modulation review
+- If RI < 0.7 for 2+ consecutive days → flag for monitoring (early warning)
+- If RI < 0.7 for 3+ consecutive days → trigger block-level deload or load-modulation review
 - If RI < 0.6 → immediate deload required regardless of duration
 
 AI systems must only consider caloric-reduction or weight-optimization phases during readiness-positive windows (DI ≥ 0.95, HR drift ≤ 3 %, RI ≥ 0.8), referencing Section 8 — Weight Adjustment Control.
@@ -829,8 +829,8 @@ AI systems must only consider caloric-reduction or weight-optimization phases du
 | Priority | Condition | Result |
 |----------|-----------|--------|
 | **P0 — Safety stop** | RI < 0.6, OR any tier-1 alarm active | **Skip** (non-negotiable) |
-| **P1 — Acute overload** | ACWR > 1.5, OR (TSB < -30 + HRV ↓>10%), OR (RI < 0.7 + tier-1 alert persisting ≥2 days) | **Skip** |
-| **P1 — Acute overload (modify)** | ACWR > 1.3, OR (TSB < -25 + HRV ↓>10%) | **Modify** |
+| **P1 — Acute overload** | ACWR ≥ 1.5, OR (TSB < -30 + HRV ↓>10%), OR (RI < 0.7 + tier-1 alert persisting ≥2 days) | **Skip** |
+| **P1 — Acute overload (modify)** | ACWR ≥ 1.3, OR (TSB < -25 + HRV ↓>10%) | **Modify** |
 | **P2 — Accumulated fatigue** | Red signal count ≥ 2, OR (1 red in tightened phase), OR amber count ≥ phase threshold | **Modify** (or Skip if 2+ red) |
 | **P3 — Green light** | None of the above | **Go** |
 
@@ -840,12 +840,16 @@ AI systems must only consider caloric-reduction or weight-optimization phases du
 |--------|-------|-------|-----|
 | HRV | Within ±10% of 7d baseline | ↓ 10–20% | ↓ >20% |
 | RHR | At or below baseline | ↑ 3–4 bpm | ↑ ≥5 bpm |
-| Sleep | ≥ 7h AND quality ≤ 2 | 5–7h OR quality 3 | < 5h OR quality 4 |
+| Sleep | ≥ 7h | 5–7h | < 5h |
 | TSB | > phase threshold (default -15) | Between threshold and -30 | < -30 |
-| ACWR | 0.8–1.3 | <0.8 or 1.3–1.5 | > 1.5 |
-| RI | ≥ 0.8 | 0.6–0.79 | < 0.6 |
+| ACWR | < 1.3 | ≥ 1.3 and < 1.5 | ≥ 1.5 |
+| RI | ≥ 0.7, or single-day 0.6–0.69 | < 0.7 for 2+ consecutive days | < 0.6 |
 
 Missing signals are classified as `unavailable` and excluded from amber/red counts.
+
+**Heuristic notes (transparency):**
+- **Low-side ACWR is intentionally excluded from readiness ambers.** An ACWR < 0.8 indicates reduced recent load relative to chronic fitness (taper, detraining, or simply an off-rhythm week) — it is a load-state/context signal, not a fatigue or overload signal. Using it as a readiness penalty conflates "did little recently" with "can't handle much today," which are near-opposite states. Low-side context still surfaces via `derived_metrics.acwr_interpretation` ("undertraining") for the AI layer to read as context, but it no longer contributes to amber counts or overload alerts.
+- **RI amber requires 2-day persistence** (`ri < 0.7` today AND yesterday) to filter single-night noise from a composite signal built on HRV and RHR. Single-day dips in the 0.6–0.7 band remain visible via the reported value but do not trigger an amber. Red (`ri < 0.6`) still fires on any single day — deload review is warranted regardless of persistence.
 
 **Feel/RPE Override:**
 Athlete-reported state (wellness Feel, activity RPE, or direct communication) can adjust the readiness_decision in either direction:
@@ -1032,7 +1036,7 @@ It governs acute, session-level performance safety, ensuring localized overreach
 - Classify as acute overreach.  
 - For minor deviations (isolated fatigue signals or transient HR drift), insert **1–2 days of Z1-only training** to restore autonomic stability.  
 - If fatigue persists after 2 days (HR recovery >15 bpm or RPE +2), revert next interval session to prior week’s load or reduce volume 30–40% for 3–4 days.
-- Maintain normal Z2 endurance unless global readiness metrics also indicate systemic fatigue (RI < 0.7 for >3 days, HRV ↓ > 20%)
+- Maintain normal Z2 endurance unless global readiness metrics also indicate systemic fatigue (RI < 0.7 for 3+ days, HRV ↓ > 20%)
 
 ---
 
@@ -1043,7 +1047,8 @@ It governs acute, session-level performance safety, ensuring localized overreach
 **Key Variables:**
 - HRV (ms): 7-day rolling baseline comparison
 - RHR (bpm): 7-day rolling baseline comparison
-- Sleep Quality (1–4): Subjective quality rating (inverted scale: 1=Great, 4=Poor) — manual entry or auto-derived from device sleep score
+- Sleep Hours: Objective duration. Classified as readiness signal (Green ≥ 7h, Amber 5–7h, Red < 5h)
+- Sleep Quality / Sleep Score: Excluded from readiness classification (v11.21). These are device-derived composites of HRV + HR during sleep — signals already captured independently. Downstream impact of poor sleep surfaces in HRV and RHR. Quality/score remain in wellness data as coaching context.
 - Feel (1–5): Manual subjective entry (1=Strong, 2=Good, 3=Normal, 4=Poor, 5=Weak)
 
 **Extended Wellness Fields (v3.85+):** sync.py passes through all Intervals.icu wellness fields — subjective state (stress, mood, motivation, injury, fatigue, soreness, hydration), vitals (spO2, blood glucose, blood pressure, Baevsky SI, lactate, respiration), body composition (body fat, abdomen), nutrition (kcal, carbs, protein, fat), lifestyle (steps, hydration volume), and cycle tracking (menstrual phase). All categorical fields use a 1→4 positional scale where **1 = best state, 4 = worst state**. Per-field labels are in `wellness_field_scales` in READ_THIS_FIRST. Fields are null when not reported. These are coaching context — none are wired into the automated readiness_decision pipeline.
@@ -1061,7 +1066,6 @@ Feel/RPE is not wired into the automated readiness_decision pipeline. It enriche
 **Decision Logic:**
 - HRV ↓ > 20% vs baseline → Active recovery / easy spin
 - RHR ↑ ≥ 5 bpm vs baseline → Fatigue / illness flag
-- Sleep Quality = 4 → Reduce next-session intensity by 1 zone
 
 The following thresholds apply to wellness-level Feel. If Feel is present in the data, use it. If absent and other signals are ambiguous, solicit it. If absent and the picture is clear, do not ask.
 
@@ -1072,8 +1076,6 @@ The following thresholds apply to wellness-level Feel. If Feel is present in the
 
 **Integration:**
 Daily metrics synchronised through data hierarchy and mirrored in JSON dataset each morning. AI-coach systems must reference latest values before prescribing or validating any session.
-
-If HRV unavailable, Sleep quality substitutes as primary subjective readiness indicator.
 
 ---
 
@@ -1255,7 +1257,238 @@ Cold weather is a minor environmental modifier. It does not require tiers, sessi
 | Steadman (1979) | Heat index formula combining air temperature and relative humidity | Practical alternative to WBGT for field-based heat assessment |
 | Racinais et al. (2023) Br J Sports Med — IOC consensus | Updated IOC recommendations on event regulations in heat; WBGT-based risk classification | Environmental risk classification framework |
 | Montain & Coyle (1992) | Dehydration exacerbates thermal and cardiovascular strain during exercise in heat | Hydration as heat stress modifier |
+| Maunder et al. (2020) | At moderate heat stress (34–35°C), increased carbohydrate oxidation at higher intensities | Glycogen depletes faster in heat; adjust nutrition frequency in Tier 1+ conditions |
 | Rundell et al. (2004, 2013) | Higher prevalence of airway hyperresponsiveness and EIB in athletes training in cold/dry air at high ventilation rates; repeated exposure causes airway damage | Flag high-intensity sessions below 0°C; cold weather bronchospasm risk |
+
+---
+
+### Route & Terrain Protocol
+
+When `routes.json` contains terrain data for a planned event (`has_terrain: true` on the event in `latest.json`), the AI has access to the full route profile — distance, elevation, climbs, descents, gradients at 500m resolution, and GPS coordinates. This section defines how to interpret that data and apply it to coaching decisions: pacing, effort distribution, nutrition timing, segment targeting, and pre-ride briefing.
+
+Route intelligence applies to any coaching conversation where terrain is known — race preparation, pre-ride planning, session context, or block-level event previewing. It is not limited to race day.
+
+#### Route Analysis
+
+**`routes.json` structure:** Each event with a GPX/TCX attachment produces a `terrain_summary` containing: `total_distance_km`, `total_elevation_m`, `elevation_per_km`, `course_character`, `climbs` array, `descents` array, and `polyline` (GPS track downsampled at 500m intervals with elevation).
+
+**Course character** classifies the overall route profile using elevation density (m/km). Total elevation alone is distance-blind — 2000m over 300 km is rolling, not hilly. Section 11 convention:
+
+| Classification | Criteria |
+|---|---|
+| flat | <5 m/km |
+| rolling | ≥5 m/km |
+| hilly | ≥20 m/km, OR has Cat 2 / Cat 1 / HC climb |
+| mountain | ≥30 m/km |
+
+Climb category presence upgrades classification — a route with a Cat 1 climb is `hilly` regardless of elevation density. A route with ≥30 m/km is `mountain` even without a single long categorized climb (catches routes with many short steep pitches).
+
+**Climb classification** follows conventional UCI/Tour-derived categories based on elevation gain:
+
+| Category | Elevation Gain | Character |
+|---|---|---|
+| Cat 4 | 100–200m | Short or gentle climb |
+| Cat 3 | 200–400m | Moderate climb |
+| Cat 2 | 400–650m | Significant sustained climb |
+| Cat 1 | 650–1000m | Major climb |
+| HC | 1000m+ | Extreme climb |
+
+These are elevation-based conventions, not gradient-based. A 150m gain at 10% average is physiologically harder than 200m at 4% — the category captures scale, not intensity. The AI should communicate both category and gradient when briefing climbs. Climbs below 100m elevation gain with <3% average gradient are filtered out as terrain noise.
+
+**Climb detail fields:** Each climb entry includes `position_km` (distance from start), `distance_km`, `elevation_m`, `avg_gradient_pct`, `max_gradient_pct` (steepest 200m subsection), `category`, and `start_coords`/`end_coords`. Use `max_gradient_pct` to warn about steep sections within an otherwise moderate climb — "averages 5.8% but kicks to 11.2% in the final kilometer."
+
+**Descents as recovery windows:** Descents are not just terrain features — they are tactical recovery and fueling opportunities. Each descent entry includes the same positional and gradient fields. The AI should frame descents relative to the efforts around them: "4.2 km descent after the Cat 2 — eat, drink, recover before the rolling section."
+
+**Polyline:** The `polyline` array provides `[km, lat, lon, elevation]` at every 500m of road distance, plus start and end points. This gives the AI gradient context at any point on the route — not just within detected climbs and descents. Use for: identifying false flats between climbs, spotting gradual elevation trends that don't trigger climb detection, and providing gradient-aware pacing guidance across the full course.
+
+#### Terrain-Adjusted Power Estimation
+
+Constant power on a variable-gradient course is not optimal. Research consistently shows that increasing power on climbs and decreasing it on descents — bounded variability — produces faster finishing times at the same physiological cost.
+
+**Variable power pacing by gradient:**
+
+The time savings from increasing power are disproportionately large on climbs and negligible on fast descents, because aerodynamic drag scales cubically with speed while gravitational resistance scales linearly with gradient:
+
+- On a 6% grade, a 5% power increase above flat baseline saves approximately 78 seconds per 2.5 km (Atkinson & Brunskill, 2000).
+- On a 1% grade, the same 5% increase saves only 16 seconds per 2.5 km.
+- On descents above approximately 60 km/h, additional power provides diminishing returns — aerodynamic position matters more than watts.
+- As a practical guideline, increase power 10–20% above flat baseline on climbs, scaling approximately 3–5% per 1% of gradient. Reduce power on descents — the time cost of soft-pedaling downhill is minimal.
+- Comparative modeling confirms the effect: at identical average power of 300W, a variable strategy (285W flat / 325W climbing) beat constant 300W by 30 seconds over a 20 km TT with a 7% grade finish (2PEAK).
+- Finite element optimization modeling showed 0.45–2.84% overall time improvement from variable vs constant power pacing (Boswell, 2025).
+
+**Connecting to sustainability_profile:** The `capability.sustainability_profile` provides what the athlete can sustain at race-relevant durations. Apply gradient adjustments on top of these ceilings — not on top of FTP directly. For a climb estimated at 20 minutes, reference the athlete's 20-minute sustainability data, then adjust for gradient. If the climb's average gradient is 6%, the target power is 10–18% above the athlete's flat sustainable power for that duration — but capped at the athlete's actual observed MMP for that duration.
+
+**Progressive target adjustment:** Effective threshold power decreases with accumulated work. After 2 hours at moderate intensity, power at the moderate-to-heavy transition drops approximately 10% (Maunder et al., 2022). In Five Monuments analysis, top-5 finishers maintained stable power beyond 60 kJ/kg of accumulated work while finishers 6th–30th showed significant declines (Leo et al., 2023/2025). The AI should reduce sustainable power targets by approximately 5% per hour after the first 2 hours, calibrated against the athlete's individual durability baseline from `durability_7d_mean` and `durability_28d_mean`. A climb at km 120 does not get the same target as the same gradient at km 30.
+
+**Reduction rate honesty:** The ~5% per hour linear guideline is a practical heuristic informed by the Maunder (~10% at 2h) and Leo (durability decay beyond 60 kJ/kg) findings, not a directly cited threshold from a single study. Actual decay rates vary by athlete — the individual `durability_7d_mean` and `durability_28d_mean` baselines are the calibration signal. The heuristic provides a starting point when individual data is sparse.
+
+**Fast starts are costly.** Exceeding planned power by more than 5% in the opening minutes consistently produces significantly worse overall finishing times in events over 30 minutes. The direction is well-established in pacing literature; specific magnitude varies by event duration and overcooking severity. The AI should flag early overcooking, not just late fading.
+
+#### Wind Overlay
+
+Wind direction and speed from weather data, matched against route bearing, determines headwind/tailwind assessment at any point on the course.
+
+**Convention:** Meteorological wind direction is the direction wind comes FROM (0° = north, 90° = east). Segment or route bearing is the direction the athlete RIDES (standard geographic bearing). When wind direction equals route bearing, the athlete rides directly into the wind — headwind.
+
+**Headwind/tailwind classification:**
+
+```
+angle_diff = abs(route_bearing - wind_direction)
+if angle_diff > 180:
+    angle_diff = 360 - angle_diff
+
+if angle_diff < 45:       → headwind
+elif angle_diff < 135:    → crosswind
+else:                     → tailwind
+```
+
+Route bearing can be computed from consecutive polyline points for any section of the course. A route that goes north for 40 km then returns south has opposite wind effects on each leg.
+
+**Wind impact by gradient tier:**
+
+Wind impact is proportional to the athlete's speed, because aerodynamic drag scales with velocity cubed. On steep climbs, speed is low and gravity dominates — wind is a minor factor. On flat terrain, speed is high and aero drag dominates — wind is the primary external variable.
+
+| Gradient | Speed regime | Wind impact | Coaching implication |
+|---|---|---|---|
+| Flat (<3%) | High (35+ km/h) | Dominant factor | Headwind substantially increases power cost at speed. Reduce speed target, not overcook effort. Tailwind = free speed |
+| Moderate climb (3–6%) | Medium (15–25 km/h) | Secondary factor | Headwind adds cost but gradient is primary. Tailwind helps but don't oversell it |
+| Steep climb (>6%) | Low (<15 km/h) | Minimal | Aerodynamic drag is a small fraction of total resistance at climbing speeds. Don't mention wind on steep climbs |
+
+The AI should not cite wind as a factor on steep climbs — it misleads the athlete about what's actually hard. On flat and rolling terrain, wind context is essential for pacing and effort budgeting.
+
+#### Drafting Estimates
+
+In group riding situations, drafting reduces aerodynamic drag significantly, but the benefit is position-dependent: second wheel sees roughly 5–10% drag reduction, while riders deep in a large peloton can see 40% or more (Blocken et al., 2018). The commonly cited ~30% is a mid-group average. This substantially lowers the power required to maintain a given speed on flat and rolling terrain. On steep climbs, drafting benefit diminishes as gravity becomes the dominant resistance force.
+
+When the AI knows the athlete will be in a group (race, group ride, sportive), power estimates for flat and rolling sections should account for drafting. Solo breakaway or time trial efforts use undrafted power. The AI should not assume drafting unless the context confirms it — a solo training ride is undrafted regardless of course character.
+
+#### Segment Reasoning (Strava Integration)
+
+When the agentic platform has Strava API access, segment data enriches route intelligence. This is protocol for the AI layer — not pipeline automation in `sync.py`.
+
+**Priority hierarchy:** Starred segments (from `/athlete/segments/starred`) that fall on today's route are automatic priority targets. The athlete may also name specific segments in conversation. All other segments found along the route via `/segments/explore` are opportunistic — mention if conditions are perfect, don't pre-brief.
+
+**Feasibility assessment:** Cross-reference the segment's expected duration (estimated from distance and gradient) with the athlete's power curve from `capability.sustainability_profile`. If the athlete's MMP at the expected segment duration is within 5% of the estimated power requirement, it's a realistic target. If the gap exceeds 10–15%, the AI should say so directly — the segment is above the athlete's current capability at that point in the ride. Factor in position in the ride: a segment at km 80 after 1500m of climbing requires progressive durability adjustment (see Terrain-Adjusted Power Estimation above).
+
+**Wind × bearing = attempt/skip:** Compute headwind/tailwind from segment bearing (start to end coordinates) vs wind direction. A tailwind on a climb segment is the best-case scenario. A headwind on a flat segment makes PRs unlikely and the effort disproportionately expensive. The AI should proactively recommend which segments have favorable conditions today and which to skip, with reasoning.
+
+**Strava API endpoints (reference):**
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /segments/explore?bounds=...&activity_type=riding` | Find segments in bounding boxes along the route |
+| `GET /segments/{id}` | Full segment detail including polyline |
+| `GET /athlete/segments/starred` | Athlete's starred segments — automatic priorities |
+| `GET /segment_efforts?segment_id={id}` | Athlete's effort history — PR context |
+
+The AI does not call these endpoints directly from `sync.py`. They are available when the agentic platform has Strava OAuth access. Reasoning rules apply regardless of how segment data arrives — Strava API, athlete-provided segment IDs, or manual upload.
+
+#### Nutrition Timing Relative to Terrain
+
+Terrain structure dictates when the athlete can and cannot eat. Fueling during a steep climb is physiologically harder (high breathing rate, high effort) and mechanically awkward. Descents and flat sections are optimal fueling windows.
+
+**Rules:**
+
+- Fuel before climbs, not during them. Carbohydrates require 15–20 minutes to absorb (Jeukendrup, 2014). Cue nutrition 15–20 minutes before the effort, which on a hilly course often means fueling on the preceding flat or descent.
+- Descents are the primary fueling opportunity on mountain and hilly courses. The athlete can eat and drink without effort cost. If a climb follows, the descent is the last comfortable fueling window.
+- On flat and rolling courses, nutrition timing is less constrained — the athlete can fuel at any point. Follow standard kJ-based dosing: approximately 250–300 kJ between fuel cues as a backstop.
+- The AI should connect terrain to the nutrition skeleton in a pre-ride briefing: "Eat at km 15 on the flat before the Cat 3. Next opportunity is the descent at km 35. Fuel again at km 52 before the Cat 2."
+
+**kJ-Based Carbohydrate Dosing:**
+
+The terrain rules above govern *when* to fuel. This table governs *how much*. Carbohydrate requirements scale with actual energy expenditure (kJ output), not fixed gram-per-hour targets. The AI computes kJ/hour from ride data and maps to the appropriate intake rate:
+
+| kJ/hour Output | Carb Target (g/hour) | Typical Context |
+|---|---|---|
+| 400–500 | 50–60 | Endurance pace, recreational athlete |
+| 600–800 | 75–100 | Hard training day, fit amateur |
+| 800+ | 90–120 | Race intensity, requires gut training |
+
+**Dosing convention honesty:** The kJ→carbs mapping is a practical guideline synthesized from Jeukendrup (2014) dose-response findings and CTS/Rutberg (2025) field recommendations, not a single directly cited table. The relationship is physiologically grounded — higher output burns more glycogen, requiring proportionally more exogenous carbohydrate — but the specific g/hour figures per kJ band are applied engineering.
+
+**Absorption limits by carbohydrate type:**
+
+| Carb Source | Max Absorption Rate | Mechanism |
+|---|---|---|
+| Single source (glucose only) | ~60 g/hour | Saturates SGLT1 transporter |
+| Glucose + fructose (1:0.8 ratio) | ~90 g/hour | Dual transporters (SGLT1 + GLUT5) |
+| Gut-trained elite athletes | Up to 120 g/hour | Trained absorption capacity (Hearris et al., 2022) |
+
+The absorption ceiling constrains what's achievable regardless of expenditure rate. An athlete burning 900 kJ/hour who hasn't gut-trained above 60 g/hour cannot absorb 90 g/hour just because the dosing table says so. The AI should match intake recommendations to the athlete's trained absorption capacity when known (from dossier or conversation), and default to 60 g/hour single-source when unknown.
+
+Absorption form does not matter — drinks, gels, and chews produce equivalent exogenous carbohydrate oxidation rates at matched doses (Hearris et al., 2022).
+
+**Glycogen Budget Model:**
+
+The body stores approximately 2,000 kcal of glycogen (liver + muscle combined). Due to human mechanical efficiency (~22.5%), the kJ-to-kcal relationship is approximately 1:1 — kilojoules of work measured by a power meter roughly equal kilocalories burned. This means `kj_total` (or `kcal` from the activity payload) is a direct proxy for energy expenditure.
+
+The AI can estimate glycogen status for pre-ride planning and post-ride analysis:
+
+- **Pre-ride:** Estimate total kJ for the planned ride (from duration × expected NP, or from route profile and sustainability data). Compare against glycogen stores + planned intake to verify the nutrition plan is sufficient. A 4-hour ride at 200W NP burns ~2,880 kJ — more than glycogen stores alone. Without fueling, the athlete bonks.
+- **Post-ride:** Compare `kj_total` against estimated carbohydrate intake. If the deficit exceeds 1,500–1,800 kcal, the athlete was in or approaching bonk territory. Use this to explain performance collapse in the final hour.
+- **Glycogen depletion compounds with heat:** At 34–35°C, carbohydrate oxidation increases at high intensities (Maunder et al., 2020). In heat stress conditions (Tier 1+), the AI should assume glycogen burns faster and adjust nutrition recommendations accordingly.
+
+CHO ingestion during exercise does not spare muscle glycogen — it maintains blood glucose, which is the actual fatigue trigger (Coyle et al., 1986). Low blood glucose signals the brain to terminate exercise. The practical implication: fueling prevents the bonk by maintaining blood glucose, not by topping up glycogen stores mid-ride.
+
+**Glycogen budget honesty:** The ~2,000 kcal glycogen figure and the kJ≈kcal equivalence are well-established in exercise physiology. The 1,500–1,800 kcal deficit threshold for bonk risk is a practical heuristic — individual glycogen stores vary by body mass, muscle fiber composition, and pre-ride carbohydrate loading status. Athletes who carb-load effectively (10–12 g/kg from D-4, per Section 11's event preparation section) start with higher stores.
+
+**Temperature-Driven Hydration Frequency:**
+
+| Condition | Reminder Frequency | Notes |
+|---|---|---|
+| Below 15°C | Every 30–40 minutes | Easy to forget in cold; still losing fluid |
+| 15–20°C | Every 20–30 minutes | Thermoneutral; standard hydration |
+| 20–30°C | Every 15–20 minutes | Increased sweat rate |
+| Above 30°C | Every 10–15 minutes | Aggressive; dehydration exacerbates cardiac drift (Montain & Coyle, 1992) |
+
+HR drift at stable power in heat is a dehydration signal — the AI should combine drink cues with cardiac drift observations when both are present. Cross-reference with the Environmental Conditions Protocol for heat stress tier assessment.
+
+#### Weather Data Source
+
+For pre-ride weather and wind data, yr.no (Norwegian Meteorological Institute) provides free, high-quality forecasts with wind direction, speed, temperature, and precipitation. No API key required for reasonable usage.
+
+MyWindSock offers cycling-specific wind analysis overlaid on route files — parked as a future integration option. Currently protocol-only: the AI can reference wind data from any source the athlete or platform provides.
+
+The AI cross-references temperature against the Environmental Conditions Protocol (see above) for heat stress tier assessment. Wind data feeds the wind overlay logic in this section. Do not duplicate heat/cold guidance here — reference the existing protocol.
+
+#### Pre-Ride Briefing Flow
+
+When route data is available, the AI can produce a structured pre-ride briefing as part of a coaching conversation or pre-workout report. This follows a logical sequence: understand the course → identify key efforts → check conditions → plan pacing → plan nutrition.
+
+**Briefing structure:**
+
+1. **Route summary** — distance, total climbing, course character, number of significant climbs, overall profile narrative ("hilly first half, flat return" or "steady Cat 2 followed by fast descent and rolling finish").
+
+2. **Key climbs and terrain features** — for each categorized climb: position in ride, distance, average and maximum gradient, category. Frame descents as recovery windows between efforts. Note sustained flat sections where the athlete can settle into tempo.
+
+3. **Segment opportunities** — when Strava segment data is available: priority segments with feasibility assessment, conditions-based attempt/skip recommendations, target power and pacing notes. Non-priority segments mentioned only if conditions are unusually favorable.
+
+4. **Conditions assessment** — wind direction and speed matched against route sections and segment bearings. Temperature and heat stress tier (cross-reference Environmental Conditions Protocol). Precipitation if relevant. The value-add is connecting conditions to specific course features: "Tailwind for the Cat 3 at km 22 — favorable. Headwind on the exposed flat from km 45–60 — conserve."
+
+5. **Pacing strategy** — effort distribution across the course. Variable power targets by gradient (see Terrain-Adjusted Power Estimation). Where to push, where to save. Progressive adjustment for long events. Early overcooking warning.
+
+6. **Nutrition skeleton** — fueling timing anchored to terrain features. Pre-climb fueling windows, descent fueling opportunities, flat-section backstops. Connects kJ expenditure estimates to the route profile.
+
+**Conditional inclusion in pre-workout reports:** When `has_terrain: true` on a planned event and `routes.json` contains the corresponding terrain data, the pre-workout report should include a condensed terrain context block after the planned workout section: course character, key climbs (condensed), and a pacing note. The full briefing is available on request. Do not include terrain context when `has_terrain` is false or absent — the data doesn't exist.
+
+#### Route & Terrain — Evidence Base
+
+| Reference | Finding | Section 11 Application |
+|---|---|---|
+| Atkinson & Brunskill (2000), via CTS | 5% power increase saves 78s on 6% grade vs 16s on 1% grade over 2.5 km | Variable power pacing: disproportionate time gain on climbs vs flats |
+| 2PEAK pacing comparison | 285W flat / 325W climbing beat constant 300W by 30s over 20 km TT at identical average power | Confirms variable power superiority at same physiological cost |
+| Boswell (2025), Springer Nature | Finite element optimization showed 0.45–2.84% time improvement from variable vs constant power | Quantifies variable power benefit range |
+| Maunder et al. (2022), Eur J Appl Physiol | Power at moderate-to-heavy transition decreased ~10% after 2h cycling at 90% VT1 | Progressive target reduction for long events; cross-ref sustainability profile |
+| Leo et al. (2023/2025) | Five Monuments top-5 vs 6th–30th: stable power beyond 60 kJ/kg vs significant decline | Durability as differentiator; calibrate targets to accumulated work |
+| Blocken et al. (2018) | CFD analysis of peloton aerodynamics: position-dependent drag reduction from ~5–10% (second wheel) to 40%+ (deep in peloton) | Drafting estimate for group riding power calculations |
+| Jeukendrup (2014) | Carbohydrate absorption requires 15–20 min; dose-response confirmed up to absorption ceiling; single source max ~60 g/h, dual source (glucose+fructose) ~90 g/h | Nutrition timing, absorption limits, kJ-based dosing foundation |
+| Hearris et al. (2022) | Absorption rates identical across sports drinks, gels, and chews at 120 g/h; gut-trained athletes achieve higher oxidation rates | Absorption form doesn't matter; gut training extends ceiling |
+| CTS / Rutberg (2025) | kJ-to-carb dosing table linking output (400–800+ kJ/h) to intake recommendations (50–120 g/h) for amateur through elite | kJ-based nutrition dosing by output level |
+| Miura et al. (2000) | W′ reduced ~20% (12.83→10.33 kJ) by glycogen depletion; CP unaffected | Late-ride segment feasibility: W′-dependent efforts degraded by glycogen deficit |
+| Coyle et al. (1986) | CHO ingestion maintains blood glucose (actual fatigue trigger), does not spare muscle glycogen | Fueling prevents bonk via blood glucose, not glycogen sparing |
+| Springer Nature (2025) | Power response to wind is non-linear and velocity-dependent; headwind substantially increases power cost at speed | Wind impact scales with speed regime, not gradient directly |
+| Climb classification | UCI/Tour conventional categories — elevation-based thresholds | Industry convention, not a single research finding |
+| Course character heuristic | Section 11 convention — flat/rolling/hilly/mountain boundaries from elevation density (m/km) + climb presence | Engineering decision for route classification |
 
 ---
 
@@ -1310,7 +1543,7 @@ These metrics are **secondary** to the primary readiness markers defined in Sect
 
 1. **Primary readiness:** RI, HRV, RHR, Sleep
 2. **Secondary load metrics:** Stress Tolerance, Load-Recovery Ratio, Consistency Index
-3. **Tertiary diagnostics:** Zone Distribution Metrics, Durability Sub-Metrics, Capability Metrics (Aggregate Durability, TID Drift)
+3. **Tertiary diagnostics:** Zone Distribution Metrics, Durability Sub-Metrics, Capability Metrics (Aggregate Durability, TID Drift, Power Curve Delta, HR Curve Delta, Sustainability Profile)
 
 Do not override primary readiness signals with secondary load metrics.
 
@@ -1330,7 +1563,7 @@ Both measurements are valid but serve different purposes. For **high-volume athl
 |----------------------------------|-----------------------------------------|-----------------------------------------------------------|
 | **Grey Zone Percentage**         | `Z3 Time ÷ Total Time × 100`            | Grey zone (tempo) monitoring — **minimize this**          |
 | **Quality Intensity Percentage** | `(Z4+Z5+Z6+Z7) Time ÷ Total Time × 100` | Quality intensity — hard work above threshold             |
-| **Polarisation Index**           | `(Z1+Z2) Time ÷ Total Time`             | Easy time ratio — validates 80/20 distribution by time    |
+| **Easy Time Ratio**              | `(Z1+Z2) Time ÷ Total Time`             | Validates 80/20 distribution by time                      |
 | **Hard Days per Week**           | Count of days with Z4+ work             | Session-based intensity tracking for high-volume athletes |
 
 **Zone Classification (7-Zone to Seiler 3-Zone Mapping):**
@@ -1345,7 +1578,7 @@ Both measurements are valid but serve different purposes. For **high-volume athl
 
 For athletes training **<10 hours/week** (time-based targets more practical):
 
-| **Phase** | **Grey Zone % Target** | **Quality Intensity % Target** | **Polarisation Index** |
+| **Phase** | **Grey Zone % Target** | **Quality Intensity % Target** | **Easy Time Ratio** |
 |-----------|------------------------|--------------------------------|------------------------|
 | Base      | <5%                    | 10–15%                         | ≥0.85                  |
 | Build     | <8%                    | 15–20%                         | ≥0.80                  |
@@ -1532,6 +1765,176 @@ Higher HRRc = faster recovery = better parasympathetic rebound. Trend direction 
 
 ---
 
+#### Power Curve Delta (Capability Metric)
+
+The per-session and trending capability metrics above (Durability, EF, HRRc) diagnose *how* the athlete executes sessions. **Power Curve Delta** provides a *what's changing* view — comparing MMP (Mean Maximal Power) at key durations across two time windows to reveal energy system adaptation direction that CTL/ATL/TSS miss entirely.
+
+**Data Source:** The `capability.power_curve_delta` object in the data mirror compares MMP from two 28-day windows (current vs previous) fetched via the Intervals.icu `power-curves` API. Sport-filtered to cycling (`type=Ride`). Single API call per sync.
+
+**Anchor Durations:**
+
+| Anchor | Duration | Energy System | Physiological Signal |
+|--------|----------|---------------|---------------------|
+| 5s | 5 seconds | Neuromuscular | Sprint power, NM recruitment |
+| 60s | 60 seconds | Anaerobic/VO₂ | Anaerobic capacity |
+| 300s | 5 minutes | MAP | Max Aerobic Power |
+| 1200s | 20 minutes | Threshold | FTP-adjacent sustainable power |
+| 3600s | 60 minutes | Endurance | Aerobic endurance ceiling |
+
+**Rotation Index:**
+
+`rotation_index = mean(5s pct_change, 60s pct_change) - mean(1200s pct_change, 3600s pct_change)`
+
+300s is excluded from the rotation calculation — it sits at the transitional boundary between anaerobic and aerobic energy systems and muddies the signal. It remains in the anchors block for coaching context.
+
+| Rotation Index | Interpretation |
+|---------------|----------------|
+| Positive (> +1.0) | Sprint-biased gains — short-duration power improving faster than endurance |
+| Near zero (±1.0) | Balanced adaptation or minimal change across the curve |
+| Negative (< -1.0) | Endurance-biased gains — long-duration power improving faster than sprint |
+
+**Data Quality Guards:**
+- Per-anchor: null if that duration is not present in the window's data (athlete never rode long enough) or if watts value is 0
+- Per-anchor pct_change: null if either window's anchor watts is null (avoids division by zero)
+- Block-level: entire block nulled when either window has fewer than 3 valid anchor durations
+- Rotation index: null if any of its 4 component anchors (5s, 60s, 1200s, 3600s) has null pct_change
+
+**Interpretation Guidance:**
+- Compare rotation direction to training phase: endurance-biased rotation during Base is expected; sprint-biased during Build with VO₂max work may indicate neuromuscular freshness while threshold stagnates
+- Cross-reference with Benchmark Index and eFTP: if eFTP is flat but 300s/1200s anchors are rising, the power curve is seeing what FTP tracking misses
+- Cross-reference with TID drift: if rotation is sprint-biased but TID shows Polarized → expected. Sprint-biased with Threshold TID → may indicate interval quality is good but volume adaptation is lagging
+- Absolute watts matter for coaching context; pct_change matters for trend direction
+- Small changes (< ±1.5% at an anchor) are within normal variation — don't overinterpret
+
+**Scope:** Display and coaching context only. Not wired into readiness_decision signals. The AI coach layer interprets direction, magnitude, and phase context — no adaptation labels are baked into the data.
+
+**References:**
+- Pinot & Grappe (2011): Power profiling across durations for talent identification and training prescription.
+- Quod et al. (2010): MMP tracking as a training monitoring tool in elite cyclists.
+
+---
+
+#### HR Curve Delta (Capability Metric)
+
+While Power Curve Delta tracks *output* adaptation (watts), **HR Curve Delta** tracks *cardiac* adaptation — comparing max sustained heart rate at key durations across two time windows. This is the universal performance curve: it works for every athlete with a heart rate monitor, regardless of sport or power meter availability.
+
+**Data Source:** The `capability.hr_curve_delta` object in the data mirror compares max sustained HR from two 28-day windows fetched via the Intervals.icu `hr-curves` API. No sport filter — HR is physiological, not sport-specific. Max sustained HR at 300s is max sustained HR at 300s whether it came from cycling, running, or SkiErg. The curve is naturally dominated by the hardest efforts regardless of modality.
+
+**Anchor Durations (4 anchors — no 5s):**
+
+| Anchor | Duration | Signal |
+|--------|----------|--------|
+| 60s | 1 minute | Anaerobic HR ceiling |
+| 300s | 5 minutes | VO₂max HR |
+| 1200s | 20 minutes | Threshold HR |
+| 3600s | 60 minutes | Endurance HR |
+
+No 5s anchor — peak HR at 5 seconds is just maximum heart rate, not an energy system signal.
+
+**Rotation Index:**
+
+`rotation_index = mean(60s pct_change, 300s pct_change) - mean(1200s pct_change, 3600s pct_change)`
+
+| Rotation Index | Interpretation |
+|---------------|----------------|
+| Positive (> +1.0) | Intensity-biased HR shift — short-duration max HR rising faster |
+| Near zero (±1.0) | Balanced or minimal change |
+| Negative (< -1.0) | Endurance-biased HR shift — long-duration sustained HR rising faster |
+
+**CRITICAL — Ambiguity of Rising HR:**
+
+Unlike power where higher is always better, rising max sustained HR is **ambiguous**:
+
+- **Positive interpretation:** Improved cardiac output, better ability to reach and sustain high HR (fitness gain, especially after base phase)
+- **Negative interpretation:** Accumulated fatigue, dehydration, heat stress, overreaching — the heart is working harder for the same or less output
+
+The AI coach **must** cross-reference with:
+- Resting HRV and resting HR trends (declining HRV + rising max HR = fatigue signal)
+- RPE trends (rising HR + rising RPE = fatigue; rising HR + stable/lower RPE = fitness)
+- Power curve delta (rising HR + rising power = fitness; rising HR + flat power = efficiency loss)
+- Environmental context (heat elevates HR — see Environmental Conditions Protocol)
+
+**Data Quality Guards:** Same as power_curve_delta — per-anchor null, div-by-zero protection, block-level null when <3 valid anchors.
+
+**Scope:** Display and coaching context only. Not wired into readiness_decision signals. The ambiguity of HR changes makes automated decision-making inappropriate — interpretation requires multi-signal context.
+
+---
+
+#### Sustainability Profile (Race Estimation)
+
+The capability metrics above track adaptation direction (deltas) and session execution quality (durability, EF, HRRc). **Sustainability Profile** answers a different question: *what can this athlete sustain right now?* — the foundation for race performance estimation.
+
+**Data Source:** The `capability.sustainability_profile` object provides per-sport power and HR sustainability at race-relevant anchor durations, fetched from a single 42-day window via sport-filtered `power-curves` and `hr-curves` API calls. Each sport family that has recent training data gets its own block.
+
+**Three Model Layers (Cycling Only):**
+
+At each anchor duration, cycling provides three power estimates — the divergence between them IS the coaching signal:
+
+1. **Actual MMP** — observed best effort in the 42-day window. Ground truth, but training-context-dependent (athlete may not have produced a true max at every duration).
+2. **Coggan Duration Factors** — sustainable power as % of athlete-set FTP, from the standard reference table (Allen & Coggan, *Training and Racing with a Power Meter*, 3rd ed.). Midpoints of published ranges:
+
+| Duration | Factor | Range | Interpretation |
+|----------|--------|-------|----------------|
+| 5 min    | 1.06   | 1.00–1.12 | MAP / VO₂max ceiling |
+| 10 min   | 0.97   | 0.94–1.00 | Upper threshold |
+| 20 min   | 0.93   | 0.91–0.95 | ~FTP test effort |
+| 30 min   | 0.90   | 0.88–0.93 | Threshold sustainability |
+| 60 min   | 0.86   | 0.83–0.90 | TT pacing target |
+| 90 min   | 0.82   | 0.78–0.85 | Long TT / road race |
+| 2 h      | 0.78   | 0.75–0.82 | Endurance event floor |
+
+3. **CP/W′ Model** — `P = CP + W′/t` (Skiba et al., 2012). Uses athlete-set FTP as CP proxy and W′ from the Intervals.icu power model. One equation, pre-evaluated at each anchor duration. More physiologically grounded at shorter durations where W′ contribution is meaningful.
+
+**Model Trust by Duration:**
+- **≤20 min:** CP/W′ is primary — W′ depletion dynamics dominate. Coggan is a sanity check.
+- **30 min:** Crossover zone — both models apply. Compare for consistency.
+- **≥60 min:** Coggan duration factors are the established reference — at longer durations, P = CP + W′/t converges to just CP, losing discriminatory power. Coggan's empirical percentages better capture real-world duration-dependent fatigue.
+
+**Model Divergence (`model_divergence_pct`):**
+- `(actual_watts - cp_model_watts) / cp_model_watts × 100`
+- Positive at short durations → strong anaerobic capacity relative to CP, or stale W′ value
+- Negative at short durations → athlete hasn't produced recent maximal short efforts (training gap, not necessarily fitness gap)
+- Positive at long durations → aerobic engine outperforming the model (strong durability)
+- Large divergence at any duration → model inputs (FTP, W′) may be stale — cross-reference with `ftp_staleness_days` and `benchmark_index`
+
+**Non-Cycling Power Sports (SkiErg, Rowing):**
+Actual MMP only. No published Coggan-equivalent duration factors exist. No sport-specific CP/W′ values are typically configured. These fields are absent from non-cycling sport blocks (not null — absent). The AI works with observed data and HR.
+
+**Indoor vs Outdoor (Cycling Only):**
+Power curves are fetched separately for `Ride` and `VirtualRide`. At each anchor, the higher value is used. The `source` flag indicates which environment produced the best effort:
+- `observed_outdoor` — from outdoor rides (Ride type)
+- `observed_indoor` — from indoor rides (VirtualRide type)
+- Indoor MMP is typically 3–5% lower than outdoor (cooling limitations, motivational differences). If the best effort at a race-relevant duration is indoor, the outdoor race ceiling is likely higher. The source flag lets the AI communicate this to the athlete.
+
+**HR Layer (Per-Sport):**
+Each sport block includes `actual_hr` (max sustained HR at each anchor) and `pct_lthr` (as % of that sport's LTHR from the per-sport thresholds map, v11.8). HR curves are sport-filtered — cycling HR comes from cycling rides only, SkiErg HR from SkiErg sessions only. This avoids cross-sport contamination (running HR is typically 5–10 bpm higher than cycling at equivalent physiological effort).
+
+**Coverage and Confidence:**
+- `coverage_ratio` — fraction of anchors with observed actual data. Below 0.5, the profile is heavily model-dependent; communicate uncertainty.
+- `ftp_staleness_days` — days since last FTP change in history. >60 days = high staleness; model predictions should carry wider uncertainty bands.
+- Longer anchors (5400s, 7200s) are increasingly model-dependent — most athletes don't produce true max efforts at 90min+ in training. The AI should note when estimates rely on extrapolation.
+
+**What Stays in the AI Layer (Not Pre-Computed):**
+- Connecting the table to specific `race_calendar` events ("your 40km TT is ~60min, here's your sustainability data at that duration")
+- Terrain and conditions adjustments (elevation, heat, wind, drafting, nutrition strategy)
+- Training trajectory interpretation ("CTL rising + power curve delta improving → race-day ceiling is likely higher than today's table")
+- Pacing strategy (even power, negative split, variable-terrain power management)
+- Confidence narrative wrapping the pre-computed signals
+
+**Sport-Specific Anchor Sets:**
+
+| Sport | Anchors | Rationale |
+|-------|---------|-----------|
+| Cycling | 300s, 600s, 1200s, 1800s, 3600s, 5400s, 7200s | Covers 5min MAP through 2h endurance events |
+| SkiErg | 60s, 120s, 300s, 600s, 1200s, 1800s | Sprint (500m) through 30min events |
+| Rowing | 60s, 120s, 300s, 600s, 1200s, 1800s | Sprint (500m) through 30min events |
+
+**Data Quality Guards:** Per-anchor null if duration not in API response or value is 0/null. W/kg null if weight unavailable. `pct_lthr` null if sport LTHR not configured. Block-level null if sport has <2 valid observed anchors. Weight fallback chain: today's wellness → most recent in wellness history → athlete profile (icu_weight) → null.
+
+**Scope:** Coaching context and race estimation. Not wired into readiness_decision signals. The sustainability profile is a ceiling estimate — actual race-day performance depends on conditions, pacing, nutrition, and freshness that the pre-computed table cannot capture.
+
+---
+
 #### W′ Balance Metrics *(When Interval Data Available)*
 
 If workout files include W′ balance data (from Intervals.icu or WKO), the following metrics provide anaerobic capacity insights:
@@ -1554,6 +1957,12 @@ If workout files include W′ balance data (from Intervals.icu or WKO), the foll
 - Do not apply to Z1–Z2 endurance sessions
 - W′ metrics are **Tier 3 (tertiary)** — use for diagnostics, not primary load decisions
 
+**W′ Depletion Under Glycogen Deficit:**
+
+Glycogen depletion significantly reduces W′ (anaerobic work capacity) while Critical Power remains relatively unchanged. Miura et al. (2000) found W′ dropped from 12.83 kJ to 10.33 kJ (~20% reduction) after a glycogen depletion protocol. This means the athlete's ability to surge above threshold — for attacks, climbs, segment attempts — shrinks as the ride progresses and glycogen depletes.
+
+The AI should reduce above-threshold expectations late in long rides. A segment that requires 5 minutes above CP at km 20 may be feasible, but the same effort at km 100 after 3,000+ kJ of expenditure faces a smaller W′ reservoir. Cross-reference with the glycogen budget model in the Nutrition Protocol — if the estimated glycogen deficit exceeds 1,500 kcal, W′-dependent efforts should carry wider feasibility margins in segment reasoning.
+
 ---
 
 #### Metric Evaluation Hierarchy
@@ -1567,7 +1976,7 @@ To ensure AI systems evaluate metrics in the correct order:
 │  • Recovery Index (RI)                                      │
 │  • HRV (vs baseline)                                        │
 │  • RHR (vs baseline)                                        │
-│  • Sleep (quality + hours)                                  │
+│  • Sleep (hours)                                            │
 │                                                             │
 │  → These determine GO / NO-GO for training                  │
 └─────────────────────────────────────────────────────────────┘
@@ -1588,7 +1997,7 @@ To ensure AI systems evaluate metrics in the correct order:
 │  ─────────────────────────────────────────────              │
 │  • Grey Zone Percentage (grey zone monitoring)              │
 │  • Quality Intensity Percentage / Hard Days                 │
-│  • Polarisation Index                                       │
+│  • Easy Time Ratio                                          │
 │  • Durability Sub-Metrics (Endurance Decay, Z2 Stability)   │
 │  • Specificity Volume Ratio                                 │
 │  • Benchmark Index (with seasonal context)                  │
@@ -1611,12 +2020,12 @@ To ensure AI systems evaluate metrics in the correct order:
 | Load-Recovery Ratio          | Fatigue Index Ratio (FIR) | **Different purpose.** FIR measures power sustainability (20min vs 60min). Load-Recovery Ratio measures load vs recovery capacity.   |
 | Specificity Volume Ratio     | Specificity Score         | **Complementary.** Volume Ratio tracks *how much* time is event-specific. Score tracks *how well* sessions match event demands.      |
 | Endurance Decay              | Durability Index (DI)     | **Diagnostic breakdown.** DI is the primary metric. Endurance Decay provides detail when DI <0.95.                                   |
-| Grey Zone Percentage         | Polarisation Index        | **Complementary.** Polarisation Index validates 80/20 by easy time. Grey Zone Percentage specifically flags grey zone creep.         |
-| Quality Intensity Percentage | Polarisation Index        | **Complementary.** Quality Intensity Percentage tracks quality intensity. For high-volume athletes, Hard Days per Week is preferred. |
+| Grey Zone Percentage         | Easy Time Ratio           | **Complementary.** Easy Time Ratio validates 80/20 by easy time. Grey Zone Percentage specifically flags grey zone creep.            |
+| Quality Intensity Percentage | Easy Time Ratio           | **Complementary.** Quality Intensity Percentage tracks quality intensity. For high-volume athletes, Hard Days per Week is preferred. |
 | Stress Tolerance             | Strain                    | **Derived from.** Stress Tolerance = (Strain ÷ Monotony) ÷ 100, providing absorption capacity context.                               |
 | Aggregate Durability         | HR–Power Decoupling       | **Aggregates.** Per-session decoupling is the raw input; aggregate durability provides the 7d/28d trend view.                        |
 | Aggregate Durability         | Durability Index (DI)     | **Complementary.** DI = power output sustainability. Aggregate Durability = cardiovascular efficiency trend across sessions.          |
-| Seiler TID (Treff PI)        | Polarisation Index        | **Different scale.** Simple Polarisation Index = 0–1 easy-time ratio. Treff PI = logarithmic scale with 5-class classification.      |
+| Seiler TID (Treff PI)        | Easy Time Ratio           | **Different scale.** Easy Time Ratio = 0–1 easy-time share. Treff PI = logarithmic scale with 5-class classification.                |
 | TID Drift                    | Seiler TID                | **Temporal comparison.** TID Drift compares 7d vs 28d Seiler TID to detect distribution shifts over time.                            |
 
 ---
@@ -1889,7 +2298,7 @@ This header documents provenance, deterministic context, and planning logic for 
 Plans breaching tolerance limits must not publish until validated.
 
 AI systems must output an explicit reason string for rejections, e.g.:
-"error": "ACWR > 1.35 — exceeds safe progression threshold"
+"error": "ACWR ≥ 1.35 — exceeds safe progression threshold"
 
 Human-review override requires athlete confirmation and metadata flag "override": true.
 
@@ -1929,7 +2338,7 @@ This subsection defines the formal self-validation and audit metadata structure 
     "data_source_fetched": true,
     "json_fetch_status": "success",
     "protocol_version": "11.11",
-    "checklist_passed": [1, 2, 3, 4, 5, 6, "6b", 7, 8, 9, 10],
+    "checklist_passed": [1, 2, 3, 4, 5, "5b", 6, "6b", 7, 8, 9, 10],
     "checklist_failed": [],
     "data_timestamp": "2026-01-13T22:32:05Z",
     "data_age_hours": 2.3,
@@ -1976,7 +2385,7 @@ This subsection defines the formal self-validation and audit metadata structure 
     "grey_zone_percentage": 3.2,
     "quality_intensity_percentage": 2.7,
     "hard_days_this_week": 2,
-    "polarisation_index": 0.97,
+    "easy_time_ratio": 0.97,
     "specificity_volume_ratio": 0.58,
     "load_recovery_ratio": 1.8,
     "primary_readiness_status": "RI 0.84 — Good",
@@ -2047,7 +2456,7 @@ This subsection defines the formal self-validation and audit metadata structure 
 | `grey_zone_percentage`         | number   | Grey zone time as percentage — to minimize                                          |
 | `quality_intensity_percentage` | number   | Quality intensity time as percentage                                                |
 | `hard_days_this_week`          | number/null | Count of days meeting zone ladder thresholds. **Power ladder** (5 rungs): Z3+ ≥ 30min, Z4+ ≥ 10min, Z5+ ≥ 5min, Z6+ ≥ 2min, or Z7 ≥ 1min. **HR fallback** (2 rungs, when no power zones): Z4+ ≥ 10min or Z5+ ≥ 5min. `null` if no zone data exists. Per Seiler 3-zone model + Foster |
-| `polarisation_index`           | number   | Easy time (Z1+Z2) as ratio of total                                                 |
+| `easy_time_ratio`              | number   | Easy time (Z1+Z2) as ratio of total                                                 |
 | `specificity_volume_ratio`     | number   | Event-specific volume ratio (0–1)                                                   |
 | `load_recovery_ratio`          | number   | 7-day load divided by RI (secondary metric)                                         |
 | `primary_readiness_status`     | string   | Summary of primary readiness marker (RI)                                            |
@@ -2067,6 +2476,44 @@ This subsection defines the formal self-validation and audit metadata structure 
 | `capability.hrrc.mean_hrrc_7d` | number/null | Mean HRRc (bpm) from qualifying sessions in last 7 days. Requires ≥ 1 session. |
 | `capability.hrrc.mean_hrrc_28d`| number/null | Mean HRRc (bpm) from qualifying sessions in last 28 days. Requires ≥ 3 sessions. |
 | `capability.hrrc.trend`        | string/null | HRRc trend: "improving" / "stable" / "declining". >10% difference between 7d and 28d means = meaningful. Null if either window has insufficient sessions. Display only — not wired into readiness_decision signals. |
+| `capability.power_curve_delta.window_days` | number | Window size in days (default 28). |
+| `capability.power_curve_delta.current_window` | object | `{start, end}` date strings for the current (recent) window. |
+| `capability.power_curve_delta.previous_window` | object | `{start, end}` date strings for the previous (comparison) window. |
+| `capability.power_curve_delta.anchors` | object/null | Per-anchor MMP comparison. Keys: `5s`, `60s`, `300s`, `1200s`, `3600s`. Each has `current_watts`, `previous_watts`, `pct_change`. Null when block-level guard fails. |
+| `capability.power_curve_delta.anchors.{dur}.current_watts` | number/null | MMP watts at this anchor duration in the current window. Null if duration not in data or watts is 0. |
+| `capability.power_curve_delta.anchors.{dur}.previous_watts` | number/null | MMP watts at this anchor duration in the previous window. Null if duration not in data or watts is 0. |
+| `capability.power_curve_delta.anchors.{dur}.pct_change` | number/null | Percentage change from previous to current window. Rounded to 1 decimal. Null if either window's watts is null. |
+| `capability.power_curve_delta.rotation_index` | number/null | `mean(5s,60s pct_change) - mean(1200s,3600s pct_change)`. Positive = sprint-biased gains, negative = endurance-biased. 300s excluded. Null if any component anchor has null pct_change. Rounded to 1 decimal. |
+| `capability.power_curve_delta.note` | string | Interpretation guidance for AI coaches. |
+| `capability.hr_curve_delta.window_days` | number | Window size in days (default 28). |
+| `capability.hr_curve_delta.current_window` | object | `{start, end}` date strings for the current (recent) window. |
+| `capability.hr_curve_delta.previous_window` | object | `{start, end}` date strings for the previous (comparison) window. |
+| `capability.hr_curve_delta.anchors` | object/null | Per-anchor max sustained HR comparison. Keys: `60s`, `300s`, `1200s`, `3600s`. Each has `current_bpm`, `previous_bpm`, `pct_change`. Null when block-level guard fails. |
+| `capability.hr_curve_delta.anchors.{dur}.current_bpm` | number/null | Max sustained HR (bpm) at this anchor duration in the current window. Null if duration not in data or value is 0. |
+| `capability.hr_curve_delta.anchors.{dur}.previous_bpm` | number/null | Max sustained HR (bpm) at this anchor duration in the previous window. Null if duration not in data or value is 0. |
+| `capability.hr_curve_delta.anchors.{dur}.pct_change` | number/null | Percentage change from previous to current window. Rounded to 1 decimal. Null if either window's value is null. |
+| `capability.hr_curve_delta.rotation_index` | number/null | `mean(60s,300s pct_change) - mean(1200s,3600s pct_change)`. Positive = intensity-biased HR shift, negative = endurance-biased. Null if any component anchor has null pct_change. AMBIGUOUS: rising HR may indicate fitness or fatigue — cross-reference required. |
+| `capability.hr_curve_delta.note` | string | Interpretation guidance for AI coaches. Emphasizes HR ambiguity. |
+| `capability.sustainability_profile.window` | object | `{days, start, end}` — window size and date range for sustainability curves. Default 42 days. |
+| `capability.sustainability_profile.weight_kg` | number/null | Weight used for W/kg calculations. Null if no weight available (all W/kg fields null). |
+| `capability.sustainability_profile.weight_source` | string/null | Source of weight: `wellness_recent`, `wellness_extended`, or `athlete_profile`. Null if unavailable. |
+| `capability.sustainability_profile.{sport}` | object/null | Per-sport sustainability block. Key is sport family: `cycling`, `ski`, `rowing`. Absent if sport has no recent activity data. |
+| `capability.sustainability_profile.{sport}.anchors` | object/null | Per-anchor sustainability data. Keys are duration labels (e.g., `300s`, `1200s`, `3600s`). Null if <2 valid observed anchors. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.actual_watts` | number/null | Observed MMP at this duration in the 42d window. Null if no effort at this duration or value is 0. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.actual_wpkg` | number/null | Actual watts / weight_kg. Null if watts or weight unavailable. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.actual_hr` | number/null | Max sustained HR (bpm) at this duration from sport-filtered HR curves. Null if unavailable. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.pct_lthr` | number/null | `actual_hr / sport_lthr × 100`. Uses sport-specific LTHR from per-sport thresholds (v11.8). Null if LTHR not configured for this sport. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.source` | string/null | `observed_outdoor`, `observed_indoor` (cycling only — from Ride vs VirtualRide), or `observed` (non-cycling). Null if no observed data. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.coggan_watts` | number/null | Cycling only. FTP × Coggan duration factor (midpoint). Null for non-cycling sports or if FTP unavailable. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.coggan_wpkg` | number/null | Cycling only. Coggan watts / weight_kg. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.cp_model_watts` | number/null | Cycling only. `CP + W′/t` where CP ≈ FTP, t = anchor duration in seconds. Null if FTP or W′ unavailable. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.cp_model_wpkg` | number/null | Cycling only. CP model watts / weight_kg. |
+| `capability.sustainability_profile.{sport}.anchors.{dur}.model_divergence_pct` | number/null | Cycling only. `(actual - cp_model) / cp_model × 100`. Positive = actual exceeds model. Null if either value missing. |
+| `capability.sustainability_profile.{sport}.coverage_ratio` | number | Fraction of anchors with observed actual_watts data. 0.0–1.0. Below 0.5 = heavily model-dependent. |
+| `capability.sustainability_profile.cycling.ftp_used` | number/null | Cycling only. Athlete-set FTP used for Coggan and CP/W′ calculations. From sportSettings, not eFTP. |
+| `capability.sustainability_profile.cycling.w_prime_used` | number/null | Cycling only. W′ (joules) from Intervals.icu power model, used for CP/W′ calculations. |
+| `capability.sustainability_profile.cycling.ftp_staleness_days` | number/null | Cycling only. Days since last FTP change in ftp_history.json. >60 = high staleness. |
+| `capability.sustainability_profile.cycling.model_trust_note` | string | Cycling only. Interpretation guidance for model trust by duration. |
 
 ---
 

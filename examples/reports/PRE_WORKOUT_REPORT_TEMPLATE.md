@@ -34,10 +34,15 @@ Total activities, last 7 days: [XX]
 Total TSS, last 7 days: [XXX]
 
 Planned Workouts for Today (Planned TSS: [XXX]):
-[WorkoutType] [Duration] — [structure/targets]
+[WorkoutType] [Duration] — [main set condensed, e.g., "3×12m @260W"]
+[Use workout_summary as source. Condense to main set — omit warmup/cooldown/recovery steps. If workout_summary is null, use description_preview.]
 
 [If rest day: "Rest day — no sessions scheduled."]
 [If rest day: "Next session: [Day] — [workout preview]"]
+
+Terrain Context ([course_character], [total_distance_km] km, [total_elevation_m]m):
+[Key climbs condensed: "Cat 2 at km 48 (6.8 km, 6.3% avg, max 11%). Cat 4 at km 71 (1.4 km, 4.8% avg)."]
+[Pacing note: one sentence connecting terrain to today's effort strategy.]
 
 Recommendation: [readiness_decision.recommendation — Go / Modify / Skip]
 
@@ -65,6 +70,7 @@ AI may override the pre-computed recommendation with explicit rationale.]
 | TID 28d + drift | Include as separate line **only** if drift is "shifting" or "acute_depolarization". Omit entire line when "consistent" |
 | Load/Recovery context | Include tolerance note only when within 0.2 of threshold |
 | Next session | Include only on rest days |
+| Terrain Context | Include when `has_terrain: true` on a planned event and `routes.json` has the corresponding terrain data. Omit entirely otherwise. Full pre-ride briefing available on request |
 | Modify/Skip rationale | Required when recommendation is not "Go" |
 
 ## Readiness Decision Logic

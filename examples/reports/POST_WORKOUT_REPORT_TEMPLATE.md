@@ -33,7 +33,7 @@ Feel: [X/5] ([label])
 RPE: [X/10]
 Note: [description or chat_notes text]
 
-[Repeat block for additional sessions]
+[Repeat block for every completed activity whose date falls on the report day (athlete local time). One block per activity ID — never merge. Include walks, ski-erg, short rides, aborted rides, commutes. Never drop secondary sessions. Within a block, omit only fields the activity type does not have (e.g., no power for a walk).]
 
 Weekly totals:
 Phase: [phase_detection.phase] Wk[phase_detection.phase_duration_weeks]
@@ -54,8 +54,11 @@ TSS: [XXX]
 Interpretation:
 [2-4 sentences: compliance check, key quality metrics, load context, recovery note if applicable.]
 
-Tomorrow: [WorkoutType] [Duration] — [structure/targets]
-[Omit if no planned session tomorrow]
+Tomorrow: [WorkoutType] [Duration], [main set condensed, e.g., "3×12m @260W"]
+[Use workout_summary as source. Condense to main set — omit warmup/cooldown/recovery steps. If workout_summary is null, use description_preview.]
+[If multiple planned workouts tomorrow, list ALL sessions joined with " + " in start-time order:
+ "Tomorrow: Endurance 2h15m, 1h30m @173W + SkiErg 10m Z2 HR"]
+[Never drop secondary sessions. Omit the Tomorrow line only if no planned sessions exist tomorrow.]
 ```
 
 ---
