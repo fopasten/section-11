@@ -3,6 +3,13 @@
 Intervals.icu → GitHub/Local JSON Export
 Exports training data for LLM access.
 Supports both automated GitHub sync and manual local export.
+
+Version 3.100 - DFA power calibration indoor/outdoor split: trailing_by_sport.cycling lt1/lt2
+  estimates now split watts by environment (watts_outdoor, watts_indoor — always present, null
+  when no qualifying sessions). HR stays pooled. Per-environment n_sessions for depth assessment.
+  Shared _is_indoor_cycling() resolver (VirtualRide = indoor) replaces inline checks.
+  Non-cycling sports unchanged. Activity name anonymization removed — names pass through as-is
+  for coaching context (route identification, terrain association). athlete_id always redacted.
   
 Version 3.99 - DFA a1 Protocol: per-session dfa block in intervals.json (artifact-filtered avg,
   4-zone TIZ split with HR/power cross-references, drift, LT1/LT2 crossing-band estimates,
@@ -105,7 +112,7 @@ class IntervalsSync:
     HISTORY_FILE = "history.json"
     UPSTREAM_REPO = "CrankAddict/section-11"
     CHANGELOG_FILE = "changelog.json"
-    VERSION = "3.99"
+    VERSION = "3.100"
     INTERVALS_FILE = "intervals.json"
     ROUTES_FILE = "routes.json"
 
@@ -161,6 +168,14 @@ class IntervalsSync:
     OUTDOOR_TYPES = {"Ride", "MountainBikeRide", "GravelRide", "EBikeRide",
                      "Run", "TrailRun", "NordicSki", "Walk", "Hike"}
     
+    # Indoor cycling detection — shared resolver for DFA profile, sustainability profile, etc.
+    INDOOR_CYCLING_TYPES = {"VirtualRide"}
+
+    @classmethod
+    def _is_indoor_cycling(cls, activity_type: str) -> bool:
+        """True when activity_type represents an indoor cycling session."""
+        return activity_type in cls.INDOOR_CYCLING_TYPES
+
     # Training week start day (Python weekday: Mon=0, Tue=1, Wed=2, Thu=3, Fri=4, Sat=5, Sun=6)
     # Default Monday (ISO). Override via .sync_config.json, WEEK_START env var, or --week-start CLI arg.
     WEEK_START_DAY = 0
@@ -1702,7 +1717,7 @@ class IntervalsSync:
                 "display_formatting": "For durations and sleep, always display the '_formatted' fields (e.g., sleep_formatted, duration_formatted, total_training_formatted) instead of converting decimal '_hours' values. The formatted fields are pre-calculated from raw seconds and avoid rounding errors.",
                 "data_period": f"Last {days_back} days (including today)",
                 "extended_data_note": f"ACWR and baselines calculated from {days_for_acwr} days of data",
-                "capability_metrics_note": "The 'capability' block in derived_metrics contains durability trend (aggregate decoupling 7d/28d), efficiency factor trend (aggregate EF 7d/28d), HRRc trend (heart rate recovery 7d/28d), TID comparison (7d vs 28d distribution drift), power curve delta (MMP shift at anchor durations across 28d windows — energy system adaptation direction), HR curve delta (max sustained HR shift at anchor durations — cardiac adaptation, cross-sport), sustainability profile (per-sport power/HR sustainability table for race estimation — 42d window, sport-filtered), and DFA a1 profile (per-session non-linear HRV index from AlphaHRV Connect IQ field — latest_session + trailing_by_sport with crossing-band LT1/LT2 estimates). These measure HOW the athlete expresses fitness, not just load. Use these for coaching context alongside traditional load metrics. Durability and EF trend direction matters more than absolute values. HRRc is display only — higher = better parasympathetic recovery. Power curve delta rotation_index reveals whether gains are sprint-biased (positive) or endurance-biased (negative). HR curve delta is ambiguous — rising max sustained HR may indicate fitness or fatigue; cross-reference with resting HRV/HR and RPE. Sustainability profile provides race estimation lookup: actual MMP, Coggan predicted (cycling only), CP/W' model (cycling only), model_divergence_pct (actual vs CP — divergence IS the coaching signal). CP/W' is primary for durations ≤20min; Coggan duration factors are the established reference for ≥60min. Source flag (observed_outdoor/observed_indoor) matters for cycling race estimation — indoor MMP is typically 3-5% lower. DFA a1 profile: thresholds (1.0 ≈ LT1, 0.5 ≈ LT2) cycling-validated only — non-cycling sports get rollups but validated=False. Crossing-band estimates (avg HR/watts in narrow bands around each threshold) are provisional at confidence='low' (suppressed for calibration delta surfacing) and usable at 'moderate' or 'high'. DFA a1 is a Tier-2 interpretive signal — does NOT enter readiness P0–P3 ladder, does NOT auto-update dossier zones; surfaces calibration deltas only. Quality gate: refuse to interpret when latest_session.sufficient=false or trailing confidence=null. See SECTION_11.md DFA a1 Protocol for full interpretation rules.",
+                "capability_metrics_note": "The 'capability' block in derived_metrics contains durability trend (aggregate decoupling 7d/28d), efficiency factor trend (aggregate EF 7d/28d), HRRc trend (heart rate recovery 7d/28d), TID comparison (7d vs 28d distribution drift), power curve delta (MMP shift at anchor durations across 28d windows — energy system adaptation direction), HR curve delta (max sustained HR shift at anchor durations — cardiac adaptation, cross-sport), sustainability profile (per-sport power/HR sustainability table for race estimation — 42d window, sport-filtered), and DFA a1 profile (per-session non-linear HRV index from AlphaHRV Connect IQ field — latest_session + trailing_by_sport with crossing-band LT1/LT2 estimates). These measure HOW the athlete expresses fitness, not just load. Use these for coaching context alongside traditional load metrics. Durability and EF trend direction matters more than absolute values. HRRc is display only — higher = better parasympathetic recovery. Power curve delta rotation_index reveals whether gains are sprint-biased (positive) or endurance-biased (negative). HR curve delta is ambiguous — rising max sustained HR may indicate fitness or fatigue; cross-reference with resting HRV/HR and RPE. Sustainability profile provides race estimation lookup: actual MMP, Coggan predicted (cycling only), CP/W' model (cycling only), model_divergence_pct (actual vs CP — divergence IS the coaching signal). CP/W' is primary for durations ≤20min; Coggan duration factors are the established reference for ≥60min. Source flag (observed_outdoor/observed_indoor) matters for cycling race estimation — indoor MMP is typically 3-5% lower. DFA a1 profile: thresholds (1.0 ≈ LT1, 0.5 ≈ LT2) cycling-validated only — non-cycling sports get rollups but validated=False. Crossing-band estimates: HR is pooled across all sessions; watts are split by environment for cycling (watts_outdoor, watts_indoor with per-environment n_sessions) — compare watts_outdoor against ftp, watts_indoor against ftp_indoor. Non-cycling sports keep pooled watts. Estimates are provisional at confidence='low' (suppressed for calibration delta surfacing) and usable at 'moderate' or 'high'. DFA a1 is a Tier-2 interpretive signal — does NOT enter readiness P0–P3 ladder, does NOT auto-update dossier zones; surfaces calibration deltas only. Quality gate: refuse to interpret when latest_session.sufficient=false or trailing confidence=null. See SECTION_11.md DFA a1 Protocol for full interpretation rules.",
                 "readiness_decision_note": "The 'readiness_decision' block contains a pre-computed go/modify/skip recommendation with priority level (P0=safety, P1=overload, P2=fatigue, P3=green), individual signal statuses, phase-adjusted thresholds, and structured modification guidance. Use this as the baseline for pre-workout recommendations. Override with explanation in the coach note if the AI's contextual judgment disagrees.",
                 "zone_preference": self.zone_preference if self.zone_preference else "default (power preferred, HR fallback)",
                 "wellness_field_scales": {
@@ -3478,9 +3493,10 @@ class IntervalsSync:
             drift_mean = round(sum(drift_values) / len(drift_values), 3) if drift_values else None
 
             # Threshold estimates from crossing bands — only sessions with sufficient dwell
-            def _avg_crossing(key, field):
+            def _avg_crossing(key, field, subset=None):
+                source = subset if subset is not None else window
                 vals = []
-                for a in window:
+                for a in source:
                     cb = a["dfa"].get(key)
                     if cb and cb.get("secs_in_band", 0) >= self.DFA_MIN_CROSSING_DWELL_SECS:
                         v = cb.get(field)
@@ -3490,10 +3506,24 @@ class IntervalsSync:
                     return None, 0
                 return round(sum(vals) / len(vals)), len(vals)
 
+            # HR estimates — pooled across all sessions (physiology signal, not environment-dependent)
             lt1_hr, lt1_n_hr = _avg_crossing("lt1_crossing", "avg_hr")
-            lt1_watts, lt1_n_w = _avg_crossing("lt1_crossing", "avg_watts")
             lt2_hr, lt2_n_hr = _avg_crossing("lt2_crossing", "avg_hr")
-            lt2_watts, lt2_n_w = _avg_crossing("lt2_crossing", "avg_watts")
+
+            # Watts estimates — split by environment for cycling, pooled for other sports
+            is_cycling = (family == "cycling")
+            if is_cycling:
+                indoor = [a for a in window if self._is_indoor_cycling(a.get("type", ""))]
+                outdoor = [a for a in window if not self._is_indoor_cycling(a.get("type", ""))]
+                lt1_watts_out, lt1_n_w_out = _avg_crossing("lt1_crossing", "avg_watts", outdoor)
+                lt1_watts_in, lt1_n_w_in = _avg_crossing("lt1_crossing", "avg_watts", indoor)
+                lt2_watts_out, lt2_n_w_out = _avg_crossing("lt2_crossing", "avg_watts", outdoor)
+                lt2_watts_in, lt2_n_w_in = _avg_crossing("lt2_crossing", "avg_watts", indoor)
+                lt1_n_w = lt1_n_w_out + lt1_n_w_in
+                lt2_n_w = lt2_n_w_out + lt2_n_w_in
+            else:
+                lt1_watts, lt1_n_w = _avg_crossing("lt1_crossing", "avg_watts")
+                lt2_watts, lt2_n_w = _avg_crossing("lt2_crossing", "avg_watts")
 
             # Observability: how many sessions in window had ≥dwell threshold in each band.
             # If confidence stays stuck at low/null with high n_sessions, these counts reveal
@@ -3526,6 +3556,37 @@ class IntervalsSync:
             )
 
             validated = family in self.DFA_VALIDATED_SPORTS
+
+            # Build estimate blocks — cycling splits watts by environment, others keep pooled
+            if is_cycling:
+                lt1_est = {
+                    "hr": lt1_hr if confidence else None,
+                    "watts_outdoor": lt1_watts_out if confidence else None,
+                    "watts_indoor": lt1_watts_in if confidence else None,
+                    "n_sessions": max(lt1_n_hr, lt1_n_w),
+                    "n_sessions_outdoor": lt1_n_w_out,
+                    "n_sessions_indoor": lt1_n_w_in,
+                } if confidence else None
+                lt2_est = {
+                    "hr": lt2_hr if confidence else None,
+                    "watts_outdoor": lt2_watts_out if confidence else None,
+                    "watts_indoor": lt2_watts_in if confidence else None,
+                    "n_sessions": max(lt2_n_hr, lt2_n_w),
+                    "n_sessions_outdoor": lt2_n_w_out,
+                    "n_sessions_indoor": lt2_n_w_in,
+                } if confidence else None
+            else:
+                lt1_est = {
+                    "hr": lt1_hr if confidence else None,
+                    "watts": lt1_watts if confidence else None,
+                    "n_sessions": max(lt1_n_hr, lt1_n_w),
+                } if confidence else None
+                lt2_est = {
+                    "hr": lt2_hr if confidence else None,
+                    "watts": lt2_watts if confidence else None,
+                    "n_sessions": max(lt2_n_hr, lt2_n_w),
+                } if confidence else None
+
             sport_block = {
                 "n_sessions": n,
                 "date_range": [window[-1].get("date"), window[0].get("date")],
@@ -3533,16 +3594,8 @@ class IntervalsSync:
                 "drift_delta_mean": drift_mean,
                 "lt1_crossing_sessions": lt1_crossing_sessions,
                 "lt2_crossing_sessions": lt2_crossing_sessions,
-                "lt1_estimate": {
-                    "hr": lt1_hr if confidence else None,
-                    "watts": lt1_watts if confidence else None,
-                    "n_sessions": max(lt1_n_hr, lt1_n_w),
-                } if confidence else None,
-                "lt2_estimate": {
-                    "hr": lt2_hr if confidence else None,
-                    "watts": lt2_watts if confidence else None,
-                    "n_sessions": max(lt2_n_hr, lt2_n_w),
-                } if confidence else None,
+                "lt1_estimate": lt1_est,
+                "lt2_estimate": lt2_est,
                 "quality_avg_pct": quality_avg,
                 "validated": validated,
                 "confidence": confidence,
@@ -3713,7 +3766,7 @@ class IntervalsSync:
                             if best_watts is None or val > best_watts:
                                 best_watts = val
                                 if is_cycling:
-                                    if ptype == "VirtualRide":
+                                    if self._is_indoor_cycling(ptype):
                                         best_source = "observed_indoor"
                                     else:
                                         best_source = "observed_outdoor"
