@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-04-08T20:53:29.094956",
+  "generated_at": "2026-04-28T23:25:04.785350",
   "source": "Intervals.icu API",
-  "sync_version": "3.98",
-  "script_hash": "02e4f2d6c77c",
+  "sync_version": "3.109",
+  "script_hash": "f54c8dd00126",
   "data_range": {
     "earliest": "2023-07-20",
-    "latest": "2026-04-07",
-    "total_months": 32
+    "latest": "2026-04-28",
+    "total_months": 33
   },
   "ftp_timeline": [
     {
@@ -260,925 +260,49 @@
     {
       "period": "2026-03-16 to 2026-03-18",
       "days_missing": 3
+    },
+    {
+      "period": "2026-04-20 to 2026-04-22",
+      "days_missing": 3
     }
   ],
   "summaries": {
     "90d": {
-      "avg_weekly_tss": 373.0,
-      "avg_weekly_hours": 6.5,
-      "ctl_start": 56.2,
-      "ctl_end": 51.3,
-      "total_activities": 51,
-      "rest_days": 39,
-      "hard_days": 35
+      "avg_weekly_tss": 347.0,
+      "avg_weekly_hours": 5.9,
+      "ctl_start": 68.0,
+      "ctl_end": 57.5,
+      "total_activities": 46,
+      "rest_days": 44,
+      "hard_days": 32
     },
     "180d": {
-      "avg_weekly_tss": 383.0,
-      "avg_weekly_hours": 6.5,
-      "ctl_start": 14.4,
-      "ctl_end": 51.3,
+      "avg_weekly_tss": 402.0,
+      "avg_weekly_hours": 6.9,
+      "ctl_start": 30.0,
+      "ctl_end": 57.5,
       "weeks_tracked": 27
     },
     "1y": {
-      "avg_monthly_tss": 901.0,
+      "avg_monthly_tss": 1004.0,
       "ctl_peak": 64.9,
       "ctl_low": 7.7,
       "months_tracked": 13
     },
     "2y": {
-      "avg_monthly_tss": 624.0,
+      "avg_monthly_tss": 685.0,
       "ctl_peak": 64.9,
       "ctl_low": 1.7,
       "months_tracked": 25
     },
     "3y": {
-      "avg_monthly_tss": 658.0,
+      "avg_monthly_tss": 703.0,
       "ctl_peak": 64.9,
       "ctl_low": 0.7,
       "months_tracked": 37
     }
   },
   "daily_90d": [
-    {
-      "date": "2026-01-09",
-      "total_hours": 1.59,
-      "total_tss": 78,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 56.225628,
-      "atl": 80.94394,
-      "tsb": -24.7,
-      "hrv": 48.0,
-      "rhr": 51,
-      "sleep_hours": 6.64,
-      "sleep_formatted": "6h38m",
-      "sleep_quality": 3,
-      "sleep_score": 67.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.375,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 74.0
-    },
-    {
-      "date": "2026-01-10",
-      "total_hours": 0.0,
-      "total_tss": 0,
-      "activity_count": 0,
-      "activity_types": "Rest",
-      "ctl": 54.902733,
-      "atl": 70.16851,
-      "tsb": -15.3,
-      "hrv": 53.0,
-      "rhr": 50,
-      "sleep_hours": 9.51,
-      "sleep_formatted": "9h30m",
-      "sleep_quality": 1,
-      "sleep_score": 85.0,
-      "weight_kg": null,
-      "is_hard_day": null,
-      "intensity_basis": null,
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.75,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 89.0
-    },
-    {
-      "date": "2026-01-11",
-      "total_hours": 4.07,
-      "total_tss": 282,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 60.24595,
-      "atl": 98.367966,
-      "tsb": -38.1,
-      "hrv": 56.0,
-      "rhr": 48,
-      "sleep_hours": 5.94,
-      "sleep_formatted": "5h56m",
-      "sleep_quality": 3,
-      "sleep_score": 65.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.375,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 80.0
-    },
-    {
-      "date": "2026-01-12",
-      "total_hours": 0.0,
-      "total_tss": 0,
-      "activity_count": 0,
-      "activity_types": "Rest",
-      "ctl": 58.828465,
-      "atl": 85.27302,
-      "tsb": -26.4,
-      "hrv": 42.0,
-      "rhr": 53,
-      "sleep_hours": 5.73,
-      "sleep_formatted": "5h44m",
-      "sleep_quality": 3,
-      "sleep_score": 60.0,
-      "weight_kg": null,
-      "is_hard_day": null,
-      "intensity_basis": null,
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.75,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 60.0
-    },
-    {
-      "date": "2026-01-13",
-      "total_hours": 1.96,
-      "total_tss": 84,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 59.420708,
-      "atl": 85.10355,
-      "tsb": -25.7,
-      "hrv": 50.0,
-      "rhr": 48,
-      "sleep_hours": 7.92,
-      "sleep_formatted": "7h55m",
-      "sleep_quality": 2,
-      "sleep_score": 81.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.75,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 85.0
-    },
-    {
-      "date": "2026-01-14",
-      "total_hours": 0.0,
-      "total_tss": 0,
-      "activity_count": 0,
-      "activity_types": "Rest",
-      "ctl": 58.02264,
-      "atl": 73.77439,
-      "tsb": -15.8,
-      "hrv": 56.0,
-      "rhr": 49,
-      "sleep_hours": 7.07,
-      "sleep_formatted": "7h4m",
-      "sleep_quality": 3,
-      "sleep_score": 62.0,
-      "weight_kg": null,
-      "is_hard_day": null,
-      "intensity_basis": null,
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.75,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 78.0
-    },
-    {
-      "date": "2026-01-15",
-      "total_hours": 2.08,
-      "total_tss": 149,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 60.163185,
-      "atl": 83.78858,
-      "tsb": -23.6,
-      "hrv": 55.0,
-      "rhr": 47,
-      "sleep_hours": 7.78,
-      "sleep_formatted": "7h47m",
-      "sleep_quality": 1,
-      "sleep_score": 85.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 14.0,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 90.0
-    },
-    {
-      "date": "2026-01-16",
-      "total_hours": 2.07,
-      "total_tss": 110,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 61.335762,
-      "atl": 87.2779,
-      "tsb": -25.9,
-      "hrv": 49.0,
-      "rhr": 49,
-      "sleep_hours": 6.81,
-      "sleep_formatted": "6h48m",
-      "sleep_quality": 2,
-      "sleep_score": 76.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.375,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 83.0
-    },
-    {
-      "date": "2026-01-17",
-      "total_hours": 1.72,
-      "total_tss": 112,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 62.527805,
-      "atl": 90.56896,
-      "tsb": -28.0,
-      "hrv": 45.0,
-      "rhr": 50,
-      "sleep_hours": 6.98,
-      "sleep_formatted": "6h59m",
-      "sleep_quality": 3,
-      "sleep_score": 69.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.75,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 79.0
-    },
-    {
-      "date": "2026-01-18",
-      "total_hours": 1.41,
-      "total_tss": 69,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 62.680084,
-      "atl": 87.697655,
-      "tsb": -25.0,
-      "hrv": 56.0,
-      "rhr": 47,
-      "sleep_hours": 7.81,
-      "sleep_formatted": "7h48m",
-      "sleep_quality": 2,
-      "sleep_score": 80.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 14.0,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 82.0
-    },
-    {
-      "date": "2026-01-19",
-      "total_hours": 0.0,
-      "total_tss": 0,
-      "activity_count": 0,
-      "activity_types": "Rest",
-      "ctl": 61.205326,
-      "atl": 76.023155,
-      "tsb": -14.8,
-      "hrv": 49.0,
-      "rhr": 47,
-      "sleep_hours": 6.58,
-      "sleep_formatted": "6h34m",
-      "sleep_quality": 3,
-      "sleep_score": 63.0,
-      "weight_kg": null,
-      "is_hard_day": null,
-      "intensity_basis": null,
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 14.25,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 77.0
-    },
-    {
-      "date": "2026-01-20",
-      "total_hours": 1.59,
-      "total_tss": 111,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 62.37691,
-      "atl": 80.679344,
-      "tsb": -18.3,
-      "hrv": 65.0,
-      "rhr": 45,
-      "sleep_hours": 6.94,
-      "sleep_formatted": "6h56m",
-      "sleep_quality": 2,
-      "sleep_score": 81.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 14.0,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 86.0
-    },
-    {
-      "date": "2026-01-21",
-      "total_hours": 0.87,
-      "total_tss": 36,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 61.756306,
-      "atl": 74.73154,
-      "tsb": -13.0,
-      "hrv": 54.0,
-      "rhr": 48,
-      "sleep_hours": 8.51,
-      "sleep_formatted": "8h30m",
-      "sleep_quality": 1,
-      "sleep_score": 85.0,
-      "weight_kg": null,
-      "is_hard_day": false,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.875,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 88.0
-    },
-    {
-      "date": "2026-01-22",
-      "total_hours": 1.86,
-      "total_tss": 127,
-      "activity_count": 2,
-      "activity_types": "Ride",
-      "ctl": 63.291378,
-      "atl": 81.68962,
-      "tsb": -18.4,
-      "hrv": 54.0,
-      "rhr": 48,
-      "sleep_hours": 7.22,
-      "sleep_formatted": "7h13m",
-      "sleep_quality": 2,
-      "sleep_score": 79.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.875,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 86.0
-    },
-    {
-      "date": "2026-01-23",
-      "total_hours": 1.0,
-      "total_tss": 52,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 63.02571,
-      "atl": 77.737274,
-      "tsb": -14.7,
-      "hrv": 45.0,
-      "rhr": 50,
-      "sleep_hours": 5.51,
-      "sleep_formatted": "5h30m",
-      "sleep_quality": 4,
-      "sleep_score": 58.0,
-      "weight_kg": null,
-      "is_hard_day": false,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 14.125,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 72.0
-    },
-    {
-      "date": "2026-01-24",
-      "total_hours": 2.97,
-      "total_tss": 210,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 66.483765,
-      "atl": 95.34437,
-      "tsb": -28.9,
-      "hrv": 50.0,
-      "rhr": 49,
-      "sleep_hours": 6.8,
-      "sleep_formatted": "6h48m",
-      "sleep_quality": 2,
-      "sleep_score": 74.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.625,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 83.0
-    },
-    {
-      "date": "2026-01-25",
-      "total_hours": 1.72,
-      "total_tss": 33,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 65.695946,
-      "atl": 87.04495,
-      "tsb": -21.3,
-      "hrv": 49.0,
-      "rhr": 49,
-      "sleep_hours": 7.63,
-      "sleep_formatted": "7h38m",
-      "sleep_quality": 2,
-      "sleep_score": 78.0,
-      "weight_kg": null,
-      "is_hard_day": false,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.875,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 83.0
-    },
-    {
-      "date": "2026-01-26",
-      "total_hours": 1.19,
-      "total_tss": 52,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 65.3737,
-      "atl": 82.37969,
-      "tsb": -17.0,
-      "hrv": 65.0,
-      "rhr": 45,
-      "sleep_hours": 7.02,
-      "sleep_formatted": "7h1m",
-      "sleep_quality": 2,
-      "sleep_score": 81.0,
-      "weight_kg": null,
-      "is_hard_day": false,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.75,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 87.0
-    },
-    {
-      "date": "2026-01-27",
-      "total_hours": 1.54,
-      "total_tss": 116,
-      "activity_count": 1,
-      "activity_types": "Ride",
-      "ctl": 66.56486,
-      "atl": 86.8553,
-      "tsb": -20.3,
-      "hrv": 59.0,
-      "rhr": 47,
-      "sleep_hours": 6.9,
-      "sleep_formatted": "6h54m",
-      "sleep_quality": 2,
-      "sleep_score": 78.0,
-      "weight_kg": null,
-      "is_hard_day": true,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 14.125,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 83.0
-    },
-    {
-      "date": "2026-01-28",
-      "total_hours": 1.81,
-      "total_tss": 57,
-      "activity_count": 2,
-      "activity_types": "Ride",
-      "ctl": 66.33981,
-      "atl": 82.8809,
-      "tsb": -16.5,
-      "hrv": 55.0,
-      "rhr": 47,
-      "sleep_hours": 7.43,
-      "sleep_formatted": "7h26m",
-      "sleep_quality": 2,
-      "sleep_score": 84.0,
-      "weight_kg": null,
-      "is_hard_day": false,
-      "intensity_basis": "power",
-      "fatigue": null,
-      "soreness": null,
-      "stress": null,
-      "mood": null,
-      "motivation": null,
-      "injury": null,
-      "hydration": null,
-      "spO2": null,
-      "blood_glucose": null,
-      "systolic": null,
-      "diastolic": null,
-      "baevsky_si": null,
-      "lactate": null,
-      "respiration": 13.875,
-      "body_fat_pct": null,
-      "abdomen_cm": null,
-      "steps": null,
-      "hydration_volume_l": null,
-      "kcal_consumed": null,
-      "carbohydrates_g": null,
-      "protein_g": null,
-      "fat_g": null,
-      "menstrual_phase": null,
-      "menstrual_phase_predicted": null,
-      "readiness": 83.0
-    },
     {
       "date": "2026-01-29",
       "total_hours": 1.75,
@@ -1195,6 +319,9 @@
       "sleep_quality": 2,
       "sleep_score": 80.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -1239,6 +366,9 @@
       "sleep_quality": 2,
       "sleep_score": 76.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1283,6 +413,9 @@
       "sleep_quality": 2,
       "sleep_score": 83.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1327,6 +460,9 @@
       "sleep_quality": 2,
       "sleep_score": 78.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -1371,6 +507,9 @@
       "sleep_quality": 2,
       "sleep_score": 74.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -1415,6 +554,9 @@
       "sleep_quality": 2,
       "sleep_score": 76.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -1459,6 +601,9 @@
       "sleep_quality": 2,
       "sleep_score": 70.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1503,6 +648,9 @@
       "sleep_quality": null,
       "sleep_score": null,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1547,6 +695,9 @@
       "sleep_quality": 1,
       "sleep_score": 86.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1591,6 +742,9 @@
       "sleep_quality": 2,
       "sleep_score": 74.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1635,6 +789,9 @@
       "sleep_quality": 1,
       "sleep_score": 87.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1679,6 +836,9 @@
       "sleep_quality": 2,
       "sleep_score": 82.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1723,6 +883,9 @@
       "sleep_quality": 2,
       "sleep_score": 75.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1767,6 +930,9 @@
       "sleep_quality": 4,
       "sleep_score": 43.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1811,6 +977,9 @@
       "sleep_quality": 2,
       "sleep_score": 82.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -1855,6 +1024,9 @@
       "sleep_quality": 2,
       "sleep_score": 75.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -1899,6 +1071,9 @@
       "sleep_quality": 2,
       "sleep_score": 74.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -1943,6 +1118,9 @@
       "sleep_quality": 2,
       "sleep_score": 74.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -1987,6 +1165,9 @@
       "sleep_quality": 2,
       "sleep_score": 80.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2031,6 +1212,9 @@
       "sleep_quality": 2,
       "sleep_score": 81.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -2075,6 +1259,9 @@
       "sleep_quality": 2,
       "sleep_score": 84.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2119,6 +1306,9 @@
       "sleep_quality": 2,
       "sleep_score": 70.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -2163,6 +1353,9 @@
       "sleep_quality": 3,
       "sleep_score": 67.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2207,6 +1400,9 @@
       "sleep_quality": 3,
       "sleep_score": 64.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2251,6 +1447,9 @@
       "sleep_quality": 2,
       "sleep_score": 76.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -2295,6 +1494,9 @@
       "sleep_quality": 2,
       "sleep_score": 81.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2339,6 +1541,9 @@
       "sleep_quality": 2,
       "sleep_score": 73.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -2383,6 +1588,9 @@
       "sleep_quality": 1,
       "sleep_score": 87.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2427,6 +1635,9 @@
       "sleep_quality": 3,
       "sleep_score": 67.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -2471,6 +1682,9 @@
       "sleep_quality": 2,
       "sleep_score": 80.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2515,6 +1729,9 @@
       "sleep_quality": 2,
       "sleep_score": 78.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2559,6 +1776,9 @@
       "sleep_quality": 2,
       "sleep_score": 80.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2603,6 +1823,9 @@
       "sleep_quality": 2,
       "sleep_score": 78.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2647,6 +1870,9 @@
       "sleep_quality": 1,
       "sleep_score": 88.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2691,6 +1917,9 @@
       "sleep_quality": 2,
       "sleep_score": 78.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2735,6 +1964,9 @@
       "sleep_quality": 2,
       "sleep_score": 73.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2779,6 +2011,9 @@
       "sleep_quality": 1,
       "sleep_score": 90.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2823,6 +2058,9 @@
       "sleep_quality": 2,
       "sleep_score": 79.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2867,6 +2105,9 @@
       "sleep_quality": 2,
       "sleep_score": 81.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -2911,6 +2152,9 @@
       "sleep_quality": 2,
       "sleep_score": 79.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": false,
       "intensity_basis": "power",
       "fatigue": null,
@@ -2955,6 +2199,9 @@
       "sleep_quality": 2,
       "sleep_score": 76.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": false,
       "intensity_basis": "power",
       "fatigue": null,
@@ -2999,6 +2246,9 @@
       "sleep_quality": 2,
       "sleep_score": 80.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": false,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3043,6 +2293,9 @@
       "sleep_quality": 2,
       "sleep_score": 80.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3087,6 +2340,9 @@
       "sleep_quality": 1,
       "sleep_score": 90.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3131,6 +2387,9 @@
       "sleep_quality": 1,
       "sleep_score": 88.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3175,6 +2434,9 @@
       "sleep_quality": 3,
       "sleep_score": 61.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3219,6 +2481,9 @@
       "sleep_quality": 2,
       "sleep_score": 71.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3263,6 +2528,9 @@
       "sleep_quality": 2,
       "sleep_score": 82.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3307,6 +2575,9 @@
       "sleep_quality": 1,
       "sleep_score": 88.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3351,6 +2622,9 @@
       "sleep_quality": 1,
       "sleep_score": 85.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3395,6 +2669,9 @@
       "sleep_quality": 2,
       "sleep_score": 82.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3439,6 +2716,9 @@
       "sleep_quality": 1,
       "sleep_score": 88.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3483,6 +2763,9 @@
       "sleep_quality": 2,
       "sleep_score": 73.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3527,6 +2810,9 @@
       "sleep_quality": 1,
       "sleep_score": 85.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3571,6 +2857,9 @@
       "sleep_quality": 2,
       "sleep_score": 81.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3615,6 +2904,9 @@
       "sleep_quality": 2,
       "sleep_score": 80.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": false,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3659,6 +2951,9 @@
       "sleep_quality": 2,
       "sleep_score": 75.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": false,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3703,6 +2998,9 @@
       "sleep_quality": 1,
       "sleep_score": 85.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3747,6 +3045,9 @@
       "sleep_quality": 3,
       "sleep_score": 67.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3791,6 +3092,9 @@
       "sleep_quality": 1,
       "sleep_score": 96.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3835,6 +3139,9 @@
       "sleep_quality": null,
       "sleep_score": null,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3879,6 +3186,9 @@
       "sleep_quality": 2,
       "sleep_score": 78.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -3923,6 +3233,9 @@
       "sleep_quality": 2,
       "sleep_score": 84.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -3967,6 +3280,9 @@
       "sleep_quality": 2,
       "sleep_score": 83.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -4011,6 +3327,9 @@
       "sleep_quality": null,
       "sleep_score": null,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -4055,6 +3374,9 @@
       "sleep_quality": 1,
       "sleep_score": 87.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -4099,6 +3421,9 @@
       "sleep_quality": 3,
       "sleep_score": 64.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -4143,6 +3468,9 @@
       "sleep_quality": 2,
       "sleep_score": 78.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": false,
       "intensity_basis": "power",
       "fatigue": null,
@@ -4187,6 +3515,9 @@
       "sleep_quality": 2,
       "sleep_score": 73.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": true,
       "intensity_basis": "power",
       "fatigue": null,
@@ -4226,11 +3557,343 @@
       "tsb": 3.4,
       "hrv": 55.0,
       "rhr": 52,
-      "sleep_hours": 7.04,
-      "sleep_formatted": "7h2m",
+      "sleep_hours": 7.15,
+      "sleep_formatted": "7h9m",
       "sleep_quality": 2,
-      "sleep_score": 79.0,
+      "sleep_score": 78.0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.625,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 80.0
+    },
+    {
+      "date": "2026-04-09",
+      "total_hours": 1.23,
+      "total_tss": 84,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 52.086945,
+      "atl": 52.76089,
+      "tsb": -0.7,
+      "hrv": 61.0,
+      "rhr": 49,
+      "sleep_hours": 7.93,
+      "sleep_formatted": "7h56m",
+      "sleep_quality": 1,
+      "sleep_score": 91.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": true,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.875,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 91.0
+    },
+    {
+      "date": "2026-04-10",
+      "total_hours": 0.85,
+      "total_tss": 32,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 51.614334,
+      "atl": 49.997158,
+      "tsb": 1.6,
+      "hrv": 58.0,
+      "rhr": 50,
+      "sleep_hours": 6.29,
+      "sleep_formatted": "6h17m",
+      "sleep_quality": 2,
+      "sleep_score": 75.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": false,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.75,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 74.0
+    },
+    {
+      "date": "2026-04-11",
+      "total_hours": 4.08,
+      "total_tss": 192,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 54.917374,
+      "atl": 68.90087,
+      "tsb": -14.0,
+      "hrv": 55.0,
+      "rhr": 50,
+      "sleep_hours": 6.34,
+      "sleep_formatted": "6h20m",
+      "sleep_quality": 2,
+      "sleep_score": 71.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": true,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.25,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 82.0
+    },
+    {
+      "date": "2026-04-12",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 53.62526,
+      "atl": 59.72864,
+      "tsb": -6.1,
+      "hrv": 36.0,
+      "rhr": 54,
+      "sleep_hours": 6.62,
+      "sleep_formatted": "6h37m",
+      "sleep_quality": 2,
+      "sleep_score": 74.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.75,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 69.0
+    },
+    {
+      "date": "2026-04-13",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 52.36355,
+      "atl": 51.77744,
+      "tsb": 0.6,
+      "hrv": 50.0,
+      "rhr": 48,
+      "sleep_hours": 7.72,
+      "sleep_formatted": "7h43m",
+      "sleep_quality": 1,
+      "sleep_score": 90.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 14.25,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 90.0
+    },
+    {
+      "date": "2026-04-14",
+      "total_hours": 1.37,
+      "total_tss": 105,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 53.601994,
+      "atl": 58.862537,
+      "tsb": -5.3,
+      "hrv": 56.0,
+      "rhr": 47,
+      "sleep_hours": 7.33,
+      "sleep_formatted": "7h20m",
+      "sleep_quality": 1,
+      "sleep_score": 85.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": true,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.875,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 87.0
+    },
+    {
+      "date": "2026-04-15",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 52.340828,
+      "atl": 51.026634,
+      "tsb": 1.3,
+      "hrv": 47.0,
+      "rhr": 50,
+      "sleep_hours": 7.46,
+      "sleep_formatted": "7h27m",
+      "sleep_quality": 1,
+      "sleep_score": 85.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "is_hard_day": null,
       "intensity_basis": null,
       "fatigue": null,
@@ -4257,112 +3920,621 @@
       "fat_g": null,
       "menstrual_phase": null,
       "menstrual_phase_predicted": null,
-      "readiness": 80.0
+      "readiness": 81.0
+    },
+    {
+      "date": "2026-04-16",
+      "total_hours": 1.32,
+      "total_tss": 90,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 53.226883,
+      "atl": 56.21485,
+      "tsb": -3.0,
+      "hrv": 55.0,
+      "rhr": 47,
+      "sleep_hours": 7.38,
+      "sleep_formatted": "7h22m",
+      "sleep_quality": 2,
+      "sleep_score": 83.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": true,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 14.0,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 85.0
+    },
+    {
+      "date": "2026-04-17",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 51.974545,
+      "atl": 48.73141,
+      "tsb": 3.2,
+      "hrv": 55.0,
+      "rhr": 47,
+      "sleep_hours": 7.62,
+      "sleep_formatted": "7h37m",
+      "sleep_quality": 2,
+      "sleep_score": 83.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.0,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 84.0
+    },
+    {
+      "date": "2026-04-18",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 50.75167,
+      "atl": 42.244183,
+      "tsb": 8.5,
+      "hrv": 40.0,
+      "rhr": 52,
+      "sleep_hours": 7.21,
+      "sleep_formatted": "7h12m",
+      "sleep_quality": 2,
+      "sleep_score": 80.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.75,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 81.0
+    },
+    {
+      "date": "2026-04-19",
+      "total_hours": 5.92,
+      "total_tss": 392,
+      "activity_count": 3,
+      "activity_types": "Ride",
+      "ctl": 58.78067,
+      "atl": 88.80441,
+      "tsb": -30.0,
+      "hrv": 34.0,
+      "rhr": 57,
+      "sleep_hours": 6.54,
+      "sleep_formatted": "6h32m",
+      "sleep_quality": 2,
+      "sleep_score": 80.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": true,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 14.125,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 75.0
+    },
+    {
+      "date": "2026-04-20",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 57.39766,
+      "atl": 76.98258,
+      "tsb": -19.6,
+      "hrv": 25.0,
+      "rhr": 59,
+      "sleep_hours": 5.78,
+      "sleep_formatted": "5h47m",
+      "sleep_quality": 3,
+      "sleep_score": 69.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 14.375,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 49.0
+    },
+    {
+      "date": "2026-04-21",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 56.047188,
+      "atl": 66.7345,
+      "tsb": -10.7,
+      "hrv": 52.0,
+      "rhr": 47,
+      "sleep_hours": 6.18,
+      "sleep_formatted": "6h11m",
+      "sleep_quality": 2,
+      "sleep_score": 71.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.875,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 83.0
+    },
+    {
+      "date": "2026-04-22",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 54.728493,
+      "atl": 57.850662,
+      "tsb": -3.1,
+      "hrv": 55.0,
+      "rhr": 45,
+      "sleep_hours": 6.79,
+      "sleep_formatted": "6h47m",
+      "sleep_quality": 2,
+      "sleep_score": 82.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.875,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 79.0
+    },
+    {
+      "date": "2026-04-23",
+      "total_hours": 1.19,
+      "total_tss": 53,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 54.687824,
+      "atl": 57.204933,
+      "tsb": -2.5,
+      "hrv": 56.0,
+      "rhr": 46,
+      "sleep_hours": 6.72,
+      "sleep_formatted": "6h43m",
+      "sleep_quality": 2,
+      "sleep_score": 74.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": false,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.75,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 77.0
+    },
+    {
+      "date": "2026-04-24",
+      "total_hours": 0.91,
+      "total_tss": 34,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 54.201077,
+      "atl": 54.115845,
+      "tsb": 0.1,
+      "hrv": 49.0,
+      "rhr": 48,
+      "sleep_hours": 8.17,
+      "sleep_formatted": "8h10m",
+      "sleep_quality": 1,
+      "sleep_score": 87.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": false,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.875,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 85.0
+    },
+    {
+      "date": "2026-04-25",
+      "total_hours": 1.29,
+      "total_tss": 92,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 55.09042,
+      "atl": 59.15906,
+      "tsb": -4.1,
+      "hrv": 47.0,
+      "rhr": 48,
+      "sleep_hours": 6.59,
+      "sleep_formatted": "6h35m",
+      "sleep_quality": 2,
+      "sleep_score": 81.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": true,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 13.5,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 82.0
+    },
+    {
+      "date": "2026-04-26",
+      "total_hours": 3.45,
+      "total_tss": 195,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 58.382256,
+      "atl": 77.24249,
+      "tsb": -18.9,
+      "hrv": 44.0,
+      "rhr": 50,
+      "sleep_hours": 7.62,
+      "sleep_formatted": "7h37m",
+      "sleep_quality": 2,
+      "sleep_score": 83.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": true,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 14.125,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 79.0
+    },
+    {
+      "date": "2026-04-27",
+      "total_hours": 0.0,
+      "total_tss": 0,
+      "activity_count": 0,
+      "activity_types": "Rest",
+      "ctl": 57.00862,
+      "atl": 66.95981,
+      "tsb": -10.0,
+      "hrv": 41.0,
+      "rhr": 52,
+      "sleep_hours": 7.17,
+      "sleep_formatted": "7h10m",
+      "sleep_quality": 2,
+      "sleep_score": 79.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": null,
+      "intensity_basis": null,
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 14.75,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 74.0
+    },
+    {
+      "date": "2026-04-28",
+      "total_hours": 1.09,
+      "total_tss": 76,
+      "activity_count": 1,
+      "activity_types": "Ride",
+      "ctl": 57.455456,
+      "atl": 68.16326,
+      "tsb": -10.7,
+      "hrv": 56.0,
+      "rhr": 47,
+      "sleep_hours": 6.77,
+      "sleep_formatted": "6h46m",
+      "sleep_quality": 2,
+      "sleep_score": 78.0,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "is_hard_day": true,
+      "intensity_basis": "power",
+      "fatigue": null,
+      "soreness": null,
+      "stress": null,
+      "mood": null,
+      "motivation": null,
+      "injury": null,
+      "hydration": null,
+      "spO2": null,
+      "blood_glucose": null,
+      "systolic": null,
+      "diastolic": null,
+      "baevsky_si": null,
+      "lactate": null,
+      "respiration": 14.25,
+      "body_fat_pct": null,
+      "abdomen_cm": null,
+      "steps": null,
+      "hydration_volume_l": null,
+      "kcal_consumed": null,
+      "carbohydrates_g": null,
+      "protein_g": null,
+      "fat_g": null,
+      "menstrual_phase": null,
+      "menstrual_phase_predicted": null,
+      "readiness": 84.0
     }
   ],
   "weekly_180d": [
-    {
-      "week_start": "2025-10-06",
-      "total_hours": 2.24,
-      "total_tss": 134,
-      "primary_sport": "cycling",
-      "primary_sport_tss": 134.0,
-      "sport_tss_breakdown": {
-        "cycling": 134.0
-      },
-      "activity_count": 2,
-      "ctl_end": 14.4,
-      "atl_end": 19.3,
-      "tsb_end": -5.0,
-      "ramp_rate": 0.81,
-      "avg_hrv": 50.9,
-      "avg_rhr": 49.3,
-      "avg_sleep_hours": 7.69,
-      "z1_z2_pct": 59.1,
-      "z3_pct": 17.3,
-      "z4_plus_pct": 23.5,
-      "hard_days": 2,
-      "longest_ride_hours": 1.64,
-      "avg_feel": 2,
-      "feel_count": 1,
-      "avg_rpe": 4,
-      "rpe_count": 1,
-      "weight_kg": null,
-      "monotony": null,
-      "intensity_basis_breakdown": {
-        "power": 2,
-        "hr": 0
-      },
-      "acwr": null,
-      "phase_detected": null
-    },
-    {
-      "week_start": "2025-10-13",
-      "total_hours": 7.52,
-      "total_tss": 536,
-      "primary_sport": "cycling",
-      "primary_sport_tss": 202.0,
-      "sport_tss_breakdown": {
-        "cycling": 202.0
-      },
-      "activity_count": 6,
-      "ctl_end": 23.6,
-      "atl_end": 46.7,
-      "tsb_end": -23.1,
-      "ramp_rate": 9.18,
-      "avg_hrv": 46.6,
-      "avg_rhr": 51.6,
-      "avg_sleep_hours": 7.38,
-      "z1_z2_pct": 55.3,
-      "z3_pct": 43.7,
-      "z4_plus_pct": 1.0,
-      "hard_days": 2,
-      "longest_ride_hours": 1.79,
-      "avg_feel": 1.7,
-      "feel_count": 6,
-      "avg_rpe": 5.7,
-      "rpe_count": 6,
-      "weight_kg": null,
-      "monotony": 1.29,
-      "intensity_basis_breakdown": {
-        "power": 2,
-        "hr": 0
-      },
-      "acwr": null,
-      "phase_detected": "Build"
-    },
-    {
-      "week_start": "2025-10-20",
-      "total_hours": 3.72,
-      "total_tss": 202,
-      "primary_sport": "cycling",
-      "primary_sport_tss": 107.0,
-      "sport_tss_breakdown": {
-        "cycling": 107.0
-      },
-      "activity_count": 4,
-      "ctl_end": 24.2,
-      "atl_end": 32.6,
-      "tsb_end": -8.4,
-      "ramp_rate": 0.68,
-      "avg_hrv": 44.9,
-      "avg_rhr": 50.9,
-      "avg_sleep_hours": 7.04,
-      "z1_z2_pct": 91.2,
-      "z3_pct": 8.7,
-      "z4_plus_pct": 0.1,
-      "hard_days": 0,
-      "longest_ride_hours": 1.25,
-      "avg_feel": 2.7,
-      "feel_count": 3,
-      "avg_rpe": 4.3,
-      "rpe_count": 3,
-      "weight_kg": null,
-      "monotony": 0.61,
-      "intensity_basis_breakdown": null,
-      "acwr": null,
-      "phase_detected": "Build"
-    },
     {
       "week_start": "2025-10-27",
       "total_hours": 7.25,
@@ -4390,10 +4562,13 @@
       "avg_rpe": 4.8,
       "rpe_count": 6,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 1.18,
       "intensity_basis_breakdown": null,
-      "acwr": 1.5,
-      "phase_detected": "Build"
+      "acwr": null,
+      "phase_detected": null
     },
     {
       "week_start": "2025-11-03",
@@ -4423,12 +4598,15 @@
       "avg_rpe": 5.4,
       "rpe_count": 5,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.76,
       "intensity_basis_breakdown": {
         "power": 1,
         "hr": 0
       },
-      "acwr": 0.99,
+      "acwr": null,
       "phase_detected": "Build"
     },
     {
@@ -4456,10 +4634,13 @@
       "avg_rpe": null,
       "rpe_count": 0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": null,
-      "acwr": 0.0,
-      "phase_detected": "Base"
+      "acwr": null,
+      "phase_detected": "Recovery"
     },
     {
       "week_start": "2025-11-17",
@@ -4488,6 +4669,9 @@
       "avg_rpe": null,
       "rpe_count": 0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": {
         "power": 0,
@@ -4523,6 +4707,9 @@
       "avg_rpe": 7,
       "rpe_count": 1,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": {
         "power": 2,
@@ -4558,6 +4745,9 @@
       "avg_rpe": 6.3,
       "rpe_count": 3,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.8,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -4593,6 +4783,9 @@
       "avg_rpe": 4.7,
       "rpe_count": 3,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.8,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -4628,6 +4821,9 @@
       "avg_rpe": 4.5,
       "rpe_count": 2,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": {
         "power": 2,
@@ -4663,6 +4859,9 @@
       "avg_rpe": 4.5,
       "rpe_count": 4,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 1.24,
       "intensity_basis_breakdown": {
         "power": 4,
@@ -4698,6 +4897,9 @@
       "avg_rpe": 3.7,
       "rpe_count": 3,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.69,
       "intensity_basis_breakdown": {
         "power": 2,
@@ -4733,6 +4935,9 @@
       "avg_rpe": 4.8,
       "rpe_count": 4,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.85,
       "intensity_basis_breakdown": {
         "power": 4,
@@ -4768,6 +4973,9 @@
       "avg_rpe": 4.2,
       "rpe_count": 5,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 1.32,
       "intensity_basis_breakdown": {
         "power": 5,
@@ -4803,6 +5011,9 @@
       "avg_rpe": 4.2,
       "rpe_count": 6,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 1.12,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -4838,6 +5049,9 @@
       "avg_rpe": 5.5,
       "rpe_count": 4,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.94,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -4873,6 +5087,9 @@
       "avg_rpe": 4,
       "rpe_count": 2,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": {
         "power": 2,
@@ -4908,6 +5125,9 @@
       "avg_rpe": 4.7,
       "rpe_count": 3,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.74,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -4943,6 +5163,9 @@
       "avg_rpe": 6.3,
       "rpe_count": 3,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.79,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -4978,6 +5201,9 @@
       "avg_rpe": 5.5,
       "rpe_count": 2,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": {
         "power": 2,
@@ -5011,6 +5237,9 @@
       "avg_rpe": null,
       "rpe_count": 0,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": null,
       "acwr": 0.0,
@@ -5043,6 +5272,9 @@
       "avg_rpe": 4.4,
       "rpe_count": 7,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.88,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -5078,6 +5310,9 @@
       "avg_rpe": 4,
       "rpe_count": 3,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": {
         "power": 2,
@@ -5113,6 +5348,9 @@
       "avg_rpe": 3.6,
       "rpe_count": 5,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 1.05,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -5148,6 +5386,9 @@
       "avg_rpe": 4.5,
       "rpe_count": 2,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": 0.78,
       "intensity_basis_breakdown": {
         "power": 3,
@@ -5158,38 +5399,155 @@
     },
     {
       "week_start": "2026-04-06",
-      "total_hours": 1.32,
-      "total_tss": 73,
+      "total_hours": 7.48,
+      "total_tss": 381,
       "primary_sport": "cycling",
-      "primary_sport_tss": 73.0,
+      "primary_sport_tss": 381.0,
       "sport_tss_breakdown": {
-        "cycling": 73.0
+        "cycling": 381.0
       },
-      "activity_count": 2,
-      "ctl_end": 51.3,
-      "atl_end": 48.0,
-      "tsb_end": 3.4,
-      "ramp_rate": -0.48,
-      "avg_hrv": 50.3,
-      "avg_rhr": 52.3,
-      "avg_sleep_hours": 7.04,
-      "z1_z2_pct": 65.3,
-      "z3_pct": 7.7,
-      "z4_plus_pct": 26.9,
-      "hard_days": 1,
-      "longest_ride_hours": 1.04,
-      "avg_feel": 1.5,
-      "feel_count": 2,
-      "avg_rpe": 3,
-      "rpe_count": 2,
+      "activity_count": 5,
+      "ctl_end": 53.6,
+      "atl_end": 59.7,
+      "tsb_end": -6.1,
+      "ramp_rate": 0.3,
+      "avg_hrv": 51.6,
+      "avg_rhr": 51.4,
+      "avg_sleep_hours": 6.92,
+      "z1_z2_pct": 65.2,
+      "z3_pct": 18.4,
+      "z4_plus_pct": 16.4,
+      "hard_days": 3,
+      "longest_ride_hours": 4.08,
+      "avg_feel": 1.8,
+      "feel_count": 4,
+      "avg_rpe": 3.8,
+      "rpe_count": 4,
       "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "monotony": 0.79,
+      "intensity_basis_breakdown": {
+        "power": 3,
+        "hr": 0
+      },
+      "acwr": 1.2,
+      "phase_detected": "Build"
+    },
+    {
+      "week_start": "2026-04-13",
+      "total_hours": 8.61,
+      "total_tss": 587,
+      "primary_sport": "cycling",
+      "primary_sport_tss": 587.0,
+      "sport_tss_breakdown": {
+        "cycling": 587.0
+      },
+      "activity_count": 5,
+      "ctl_end": 58.8,
+      "atl_end": 88.8,
+      "tsb_end": -30.0,
+      "ramp_rate": 5.16,
+      "avg_hrv": 48.1,
+      "avg_rhr": 49.7,
+      "avg_sleep_hours": 7.32,
+      "z1_z2_pct": 48.5,
+      "z3_pct": 19.6,
+      "z4_plus_pct": 31.9,
+      "hard_days": 3,
+      "longest_ride_hours": 4.2,
+      "avg_feel": 1,
+      "feel_count": 4,
+      "avg_rpe": 6.2,
+      "rpe_count": 4,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "monotony": 0.58,
+      "intensity_basis_breakdown": {
+        "power": 3,
+        "hr": 0
+      },
+      "acwr": 1.58,
+      "phase_detected": "Build"
+    },
+    {
+      "week_start": "2026-04-20",
+      "total_hours": 6.83,
+      "total_tss": 374,
+      "primary_sport": "cycling",
+      "primary_sport_tss": 374.0,
+      "sport_tss_breakdown": {
+        "cycling": 374.0
+      },
+      "activity_count": 4,
+      "ctl_end": 58.4,
+      "atl_end": 77.2,
+      "tsb_end": -18.9,
+      "ramp_rate": -0.4,
+      "avg_hrv": 46.9,
+      "avg_rhr": 49,
+      "avg_sleep_hours": 6.84,
+      "z1_z2_pct": 59.1,
+      "z3_pct": 23.2,
+      "z4_plus_pct": 17.8,
+      "hard_days": 2,
+      "longest_ride_hours": 3.45,
+      "avg_feel": 1,
+      "feel_count": 4,
+      "avg_rpe": 4.2,
+      "rpe_count": 4,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
+      "monotony": 0.75,
+      "intensity_basis_breakdown": {
+        "power": 2,
+        "hr": 0
+      },
+      "acwr": 0.85,
+      "phase_detected": "Build"
+    },
+    {
+      "week_start": "2026-04-27",
+      "total_hours": 1.09,
+      "total_tss": 76,
+      "primary_sport": "cycling",
+      "primary_sport_tss": 76.0,
+      "sport_tss_breakdown": {
+        "cycling": 76.0
+      },
+      "activity_count": 1,
+      "ctl_end": 57.5,
+      "atl_end": 68.2,
+      "tsb_end": -10.7,
+      "ramp_rate": 1.41,
+      "avg_hrv": 48.5,
+      "avg_rhr": 49.5,
+      "avg_sleep_hours": 6.97,
+      "z1_z2_pct": 66.8,
+      "z3_pct": 6.9,
+      "z4_plus_pct": 26.3,
+      "hard_days": 1,
+      "longest_ride_hours": 1.09,
+      "avg_feel": 1,
+      "feel_count": 1,
+      "avg_rpe": 6,
+      "rpe_count": 1,
+      "weight_kg": null,
+      "display": {
+        "weight": null
+      },
       "monotony": null,
       "intensity_basis_breakdown": {
         "power": 1,
         "hr": 0
       },
-      "acwr": 0.23,
-      "phase_detected": "Deload"
+      "acwr": 0.17,
+      "phase_detected": null
     }
   ],
   "monthly_1y": [
@@ -5209,6 +5567,9 @@
       "hard_days_avg_per_week": 0.5,
       "longest_ride_hours": 1.41,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -5228,6 +5589,9 @@
       "hard_days_avg_per_week": 0.5,
       "longest_ride_hours": 1.48,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -5247,6 +5611,9 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 2.71,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 30
     },
@@ -5266,6 +5633,9 @@
       "hard_days_avg_per_week": 1.1,
       "longest_ride_hours": 1.42,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -5285,6 +5655,12 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 2.41,
       "avg_weight_kg": 74.0,
+      "display": {
+        "avg_weight": {
+          "value": 74.0,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -5304,6 +5680,9 @@
       "hard_days_avg_per_week": 0.7,
       "longest_ride_hours": 1.5,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -5323,6 +5702,9 @@
       "hard_days_avg_per_week": 1.1,
       "longest_ride_hours": 2.16,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -5342,6 +5724,9 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 1.81,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 30
     },
@@ -5361,6 +5746,9 @@
       "hard_days_avg_per_week": 2.7,
       "longest_ride_hours": 5.23,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -5380,6 +5768,9 @@
       "hard_days_avg_per_week": 3.6,
       "longest_ride_hours": 4.07,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -5399,6 +5790,9 @@
       "hard_days_avg_per_week": 2.8,
       "longest_ride_hours": 4.27,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 28
     },
@@ -5418,27 +5812,33 @@
       "hard_days_avg_per_week": 1.8,
       "longest_ride_hours": 3.9,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 31
     },
     {
       "month": "2026-04",
-      "total_hours": 8.24,
-      "total_tss": 429,
-      "activity_count": 7,
-      "ctl_peak": 53.3,
+      "total_hours": 30.93,
+      "total_tss": 1774,
+      "activity_count": 20,
+      "ctl_peak": 58.8,
       "ctl_low": 49.4,
-      "ctl_end": 51.3,
-      "avg_hrv": 47.3,
-      "avg_rhr": 52.3,
-      "z1_z2_pct": 63.9,
-      "z3_pct": 22.4,
-      "z4_plus_pct": 13.7,
-      "hard_days_avg_per_week": 3.5,
-      "longest_ride_hours": 2.79,
+      "ctl_end": 57.5,
+      "avg_hrv": 48.3,
+      "avg_rhr": 50.3,
+      "z1_z2_pct": 58.9,
+      "z3_pct": 20.9,
+      "z4_plus_pct": 20.2,
+      "hard_days_avg_per_week": 3.0,
+      "longest_ride_hours": 4.2,
       "avg_weight_kg": null,
-      "dominant_phase": "Maintenance",
-      "days_with_data": 8
+      "display": {
+        "avg_weight": null
+      },
+      "dominant_phase": "Build",
+      "days_with_data": 28
     }
   ],
   "monthly_2y": [
@@ -5458,6 +5858,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 1.95,
       "avg_weight_kg": 70.6,
+      "display": {
+        "avg_weight": {
+          "value": 70.6,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 30
     },
@@ -5477,6 +5883,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": 69.8,
+      "display": {
+        "avg_weight": {
+          "value": 69.8,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 31
     },
@@ -5496,6 +5908,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": 71.7,
+      "display": {
+        "avg_weight": {
+          "value": 71.7,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -5515,6 +5933,12 @@
       "hard_days_avg_per_week": 0.2,
       "longest_ride_hours": 1.18,
       "avg_weight_kg": 73.4,
+      "display": {
+        "avg_weight": {
+          "value": 73.4,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -5534,6 +5958,9 @@
       "hard_days_avg_per_week": 0.7,
       "longest_ride_hours": 1.79,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -5553,6 +5980,9 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 0.44,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -5572,6 +6002,9 @@
       "hard_days_avg_per_week": 0.5,
       "longest_ride_hours": 0.26,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -5591,6 +6024,9 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -5610,6 +6046,9 @@
       "hard_days_avg_per_week": 0.2,
       "longest_ride_hours": 1.53,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -5629,6 +6068,9 @@
       "hard_days_avg_per_week": 1.1,
       "longest_ride_hours": 2.02,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -5648,6 +6090,9 @@
       "hard_days_avg_per_week": 1.5,
       "longest_ride_hours": 3.0,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 28
     },
@@ -5667,6 +6112,9 @@
       "hard_days_avg_per_week": 0.7,
       "longest_ride_hours": 1.79,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 31
     },
@@ -5686,6 +6134,9 @@
       "hard_days_avg_per_week": 0.5,
       "longest_ride_hours": 1.41,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -5705,6 +6156,9 @@
       "hard_days_avg_per_week": 0.5,
       "longest_ride_hours": 1.48,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -5724,6 +6178,9 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 2.71,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 30
     },
@@ -5743,6 +6200,9 @@
       "hard_days_avg_per_week": 1.1,
       "longest_ride_hours": 1.42,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -5762,6 +6222,12 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 2.41,
       "avg_weight_kg": 74.0,
+      "display": {
+        "avg_weight": {
+          "value": 74.0,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -5781,6 +6247,9 @@
       "hard_days_avg_per_week": 0.7,
       "longest_ride_hours": 1.5,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -5800,6 +6269,9 @@
       "hard_days_avg_per_week": 1.1,
       "longest_ride_hours": 2.16,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -5819,6 +6291,9 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 1.81,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 30
     },
@@ -5838,6 +6313,9 @@
       "hard_days_avg_per_week": 2.7,
       "longest_ride_hours": 5.23,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -5857,6 +6335,9 @@
       "hard_days_avg_per_week": 3.6,
       "longest_ride_hours": 4.07,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -5876,6 +6357,9 @@
       "hard_days_avg_per_week": 2.8,
       "longest_ride_hours": 4.27,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 28
     },
@@ -5895,27 +6379,33 @@
       "hard_days_avg_per_week": 1.8,
       "longest_ride_hours": 3.9,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 31
     },
     {
       "month": "2026-04",
-      "total_hours": 8.24,
-      "total_tss": 429,
-      "activity_count": 7,
-      "ctl_peak": 53.3,
+      "total_hours": 30.93,
+      "total_tss": 1774,
+      "activity_count": 20,
+      "ctl_peak": 58.8,
       "ctl_low": 49.4,
-      "ctl_end": 51.3,
-      "avg_hrv": 47.3,
-      "avg_rhr": 52.3,
-      "z1_z2_pct": 63.9,
-      "z3_pct": 22.4,
-      "z4_plus_pct": 13.7,
-      "hard_days_avg_per_week": 3.5,
-      "longest_ride_hours": 2.79,
+      "ctl_end": 57.5,
+      "avg_hrv": 48.3,
+      "avg_rhr": 50.3,
+      "z1_z2_pct": 58.9,
+      "z3_pct": 20.9,
+      "z4_plus_pct": 20.2,
+      "hard_days_avg_per_week": 3.0,
+      "longest_ride_hours": 4.2,
       "avg_weight_kg": null,
-      "dominant_phase": "Maintenance",
-      "days_with_data": 8
+      "display": {
+        "avg_weight": null
+      },
+      "dominant_phase": "Build",
+      "days_with_data": 28
     }
   ],
   "monthly_3y": [
@@ -5924,7 +6414,7 @@
       "total_hours": 0.0,
       "total_tss": 0,
       "activity_count": 0,
-      "ctl_peak": 6.2,
+      "ctl_peak": 3.8,
       "ctl_low": 3.7,
       "ctl_end": 3.7,
       "avg_hrv": null,
@@ -5935,8 +6425,11 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
-      "days_with_data": 22
+      "days_with_data": 2
     },
     {
       "month": "2023-05",
@@ -5954,6 +6447,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": 79.3,
+      "display": {
+        "avg_weight": {
+          "value": 79.3,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -5973,6 +6472,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": 78.4,
+      "display": {
+        "avg_weight": {
+          "value": 78.4,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -5992,6 +6497,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 1.02,
       "avg_weight_kg": 77.6,
+      "display": {
+        "avg_weight": {
+          "value": 77.6,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -6011,6 +6522,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": 78.2,
+      "display": {
+        "avg_weight": {
+          "value": 78.2,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -6030,6 +6547,12 @@
       "hard_days_avg_per_week": 0.7,
       "longest_ride_hours": 2.33,
       "avg_weight_kg": 78.3,
+      "display": {
+        "avg_weight": {
+          "value": 78.3,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Build",
       "days_with_data": 30
     },
@@ -6049,6 +6572,12 @@
       "hard_days_avg_per_week": 1.6,
       "longest_ride_hours": 2.75,
       "avg_weight_kg": 77.4,
+      "display": {
+        "avg_weight": {
+          "value": 77.4,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -6068,6 +6597,12 @@
       "hard_days_avg_per_week": 1.4,
       "longest_ride_hours": 2.35,
       "avg_weight_kg": 76.4,
+      "display": {
+        "avg_weight": {
+          "value": 76.4,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -6087,6 +6622,12 @@
       "hard_days_avg_per_week": 2.7,
       "longest_ride_hours": 4.7,
       "avg_weight_kg": 75.7,
+      "display": {
+        "avg_weight": {
+          "value": 75.7,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -6106,6 +6647,12 @@
       "hard_days_avg_per_week": 2.9,
       "longest_ride_hours": 3.81,
       "avg_weight_kg": 74.8,
+      "display": {
+        "avg_weight": {
+          "value": 74.8,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -6125,6 +6672,12 @@
       "hard_days_avg_per_week": 1.7,
       "longest_ride_hours": 3.19,
       "avg_weight_kg": 73.4,
+      "display": {
+        "avg_weight": {
+          "value": 73.4,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 29
     },
@@ -6144,6 +6697,12 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 0.86,
       "avg_weight_kg": 72.3,
+      "display": {
+        "avg_weight": {
+          "value": 72.3,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 31
     },
@@ -6163,6 +6722,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 1.95,
       "avg_weight_kg": 70.6,
+      "display": {
+        "avg_weight": {
+          "value": 70.6,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 30
     },
@@ -6182,6 +6747,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": 69.8,
+      "display": {
+        "avg_weight": {
+          "value": 69.8,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 31
     },
@@ -6201,6 +6772,12 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": 71.7,
+      "display": {
+        "avg_weight": {
+          "value": 71.7,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -6220,6 +6797,12 @@
       "hard_days_avg_per_week": 0.2,
       "longest_ride_hours": 1.18,
       "avg_weight_kg": 73.4,
+      "display": {
+        "avg_weight": {
+          "value": 73.4,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -6239,6 +6822,9 @@
       "hard_days_avg_per_week": 0.7,
       "longest_ride_hours": 1.79,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -6258,6 +6844,9 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 0.44,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -6277,6 +6866,9 @@
       "hard_days_avg_per_week": 0.5,
       "longest_ride_hours": 0.26,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -6296,6 +6888,9 @@
       "hard_days_avg_per_week": 0.0,
       "longest_ride_hours": 0.0,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -6315,6 +6910,9 @@
       "hard_days_avg_per_week": 0.2,
       "longest_ride_hours": 1.53,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -6334,6 +6932,9 @@
       "hard_days_avg_per_week": 1.1,
       "longest_ride_hours": 2.02,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -6353,6 +6954,9 @@
       "hard_days_avg_per_week": 1.5,
       "longest_ride_hours": 3.0,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 28
     },
@@ -6372,6 +6976,9 @@
       "hard_days_avg_per_week": 0.7,
       "longest_ride_hours": 1.79,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 31
     },
@@ -6391,6 +6998,9 @@
       "hard_days_avg_per_week": 0.5,
       "longest_ride_hours": 1.41,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -6410,6 +7020,9 @@
       "hard_days_avg_per_week": 0.5,
       "longest_ride_hours": 1.48,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -6429,6 +7042,9 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 2.71,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 30
     },
@@ -6448,6 +7064,9 @@
       "hard_days_avg_per_week": 1.1,
       "longest_ride_hours": 1.42,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 31
     },
@@ -6467,6 +7086,12 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 2.41,
       "avg_weight_kg": 74.0,
+      "display": {
+        "avg_weight": {
+          "value": 74.0,
+          "unit": "kg"
+        }
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -6486,6 +7111,9 @@
       "hard_days_avg_per_week": 0.7,
       "longest_ride_hours": 1.5,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Maintenance",
       "days_with_data": 30
     },
@@ -6505,6 +7133,9 @@
       "hard_days_avg_per_week": 1.1,
       "longest_ride_hours": 2.16,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Base",
       "days_with_data": 31
     },
@@ -6524,6 +7155,9 @@
       "hard_days_avg_per_week": 0.9,
       "longest_ride_hours": 1.81,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 30
     },
@@ -6543,6 +7177,9 @@
       "hard_days_avg_per_week": 2.7,
       "longest_ride_hours": 5.23,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -6562,6 +7199,9 @@
       "hard_days_avg_per_week": 3.6,
       "longest_ride_hours": 4.07,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Build",
       "days_with_data": 31
     },
@@ -6581,6 +7221,9 @@
       "hard_days_avg_per_week": 2.8,
       "longest_ride_hours": 4.27,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 28
     },
@@ -6600,27 +7243,33 @@
       "hard_days_avg_per_week": 1.8,
       "longest_ride_hours": 3.9,
       "avg_weight_kg": null,
+      "display": {
+        "avg_weight": null
+      },
       "dominant_phase": "Recovery",
       "days_with_data": 31
     },
     {
       "month": "2026-04",
-      "total_hours": 8.24,
-      "total_tss": 429,
-      "activity_count": 7,
-      "ctl_peak": 53.3,
+      "total_hours": 30.93,
+      "total_tss": 1774,
+      "activity_count": 20,
+      "ctl_peak": 58.8,
       "ctl_low": 49.4,
-      "ctl_end": 51.3,
-      "avg_hrv": 47.3,
-      "avg_rhr": 52.3,
-      "z1_z2_pct": 63.9,
-      "z3_pct": 22.4,
-      "z4_plus_pct": 13.7,
-      "hard_days_avg_per_week": 3.5,
-      "longest_ride_hours": 2.79,
+      "ctl_end": 57.5,
+      "avg_hrv": 48.3,
+      "avg_rhr": 50.3,
+      "z1_z2_pct": 58.9,
+      "z3_pct": 20.9,
+      "z4_plus_pct": 20.2,
+      "hard_days_avg_per_week": 3.0,
+      "longest_ride_hours": 4.2,
       "avg_weight_kg": null,
-      "dominant_phase": "Maintenance",
-      "days_with_data": 8
+      "display": {
+        "avg_weight": null
+      },
+      "dominant_phase": "Build",
+      "days_with_data": 28
     }
   ]
 }
