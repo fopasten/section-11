@@ -2,6 +2,10 @@
 
 **Structure only — no data. Replace `[placeholders]` with actual values.**
 
+**Data Freshness:** Every numeric value in a report must come from a current read of its source JSON file. Do not carry forward values from earlier reports or earlier in the conversation — re-read before quoting.
+
+**Display Units:** For distance / elevation / weight / height / position / speed, quote `display.*` fields from the source JSON — they're pre-converted to the athlete's Intervals.icu preferences. Use canonical metric (`*_km`, `*_m`, `*_kg`) only for calculations. W/kg, kJ, IF, % are universal physics units, not pref-dependent. See SECTION_11.md §Display Unit Semantics.
+
 Generated at end of each training block (3–5 weeks).
 
 ---
@@ -58,6 +62,17 @@ Sustainability Ceilings (omit section if sustainability_profile null):
   Model trust: CP/W′ primary ≤20min, Coggan reference ≥60min
   [For non-cycling sports: show actual_watts + actual_hr + pct_lthr only, no model columns]
   Block-over-block: [did ceilings move? did coverage improve? did model divergence shift?]
+
+DFA a1 Calibration (omit section entirely if dfa_a1_profile null, OR cycling block missing, OR trailing_by_sport.cycling.confidence in {null, "low"}, OR trailing_by_sport.cycling.validated false):
+  Sessions in window: [N] sufficient (LT1 crossings: [X], LT2 crossings: [Y])
+  Confidence: [moderate / high]
+  Average DFA a1: [X.XX] (drift mean: [+/-X.XX])
+  Empirical LT1: [XXX] bpm (from [N] sessions) / outdoor [XXX] W (from [N] sessions) / indoor [XXX] W (from [N] sessions) [omit environment line if n_sessions_outdoor or n_sessions_indoor is 0]
+  Empirical LT2: [XXX] bpm (from [N] sessions) / outdoor [XXX] W (from [N] sessions) / indoor [XXX] W (from [N] sessions) [omit line if lt2_estimate null — happens when athlete rarely crosses 0.5; omit environment if n_sessions is 0]
+  Dossier LT1 (cycling): [XXX] bpm / outdoor [XXX] W / indoor [XXX] W
+  Dossier LT2 (cycling): [XXX] bpm / outdoor [XXX] W / indoor [XXX] W
+  Delta: [LT1 outdoor +X% / LT1 indoor -Y% / LT2 outdoor +Z% / no notable delta] [report only deltas >5% per DFA a1 Protocol §Zone Validation Use; per-environment watts deltas require environment-specific n_sessions ≥4 for moderate confidence]
+  [If delta surfaced: 1-2 sentence note flagging the delta as a coaching observation, NOT an auto-update. Recommend formal retest before any dossier change.]
 
 Polarization (block average):
   Z1+Z2: [XX]%
@@ -138,6 +153,7 @@ Next Block Plan:
 | **Power Curve Rotation** | rotation_index from capability.power_curve_delta | Sprint-biased (positive) vs endurance-biased (negative) adaptation across the block. Omit if null |
 | **HR Curve Rotation** | rotation_index from capability.hr_curve_delta | Intensity-biased (positive) vs endurance-biased (negative) HR shift. AMBIGUOUS — cross-reference with HRV/RHR. Omit if null |
 | **Sustainability Ceilings** | capability.sustainability_profile.{sport}.anchors | Per-sport MMP + HR at race-relevant durations. Cycling: Coggan + CP/W' model layers with divergence. Coverage ratio flags data gaps. Block-over-block: compare ceilings, coverage, and divergence shift. Omit if null |
+| **DFA a1 Calibration** | capability.dfa_a1_profile.trailing_by_sport.cycling | Empirical LT1/LT2 estimates from artifact-filtered AlphaHRV data, surfaced only when cycling block present, validated=true, and confidence is moderate or high. HR estimates are pooled across all sessions. Watts estimates are split by environment: `watts_outdoor` / `watts_indoor` (always present, null when no sessions in that environment). Compare `watts_outdoor` against dossier `ftp`, `watts_indoor` against `ftp_indoor`. Per-environment `n_sessions_outdoor` / `n_sessions_indoor` must meet the same 3/4–5/≥6 confidence thresholds before surfacing a watts calibration delta for that environment. If only one environment has sufficient data and the dossier lacks a threshold for the other, the available estimate may inform directionally with cross-environment caveat. Never auto-updates dossier zones. lt2_estimate may be null even at moderate/high confidence if the athlete rarely crosses 0.5 — that's by design, surface lt1 only in that case. See `lt1_crossing_sessions` / `lt2_crossing_sessions` for diagnostic counts. Tier-2 interpretive signal — does NOT affect the Phase Progression Check |
 | **Decoupling trend** | Long ride aerobic efficiency | Improving decoupling = aerobic base building |
 | **Polarization by Week** | Weekly zone distributions | Catches grey zone creep within a block. Append classification + PI only when week diverges from block-scale TID |
 | **Durability by Week** | Weekly mean decoupling from steady-state sessions | VI ≤ 1.05, ≥ 90min. Shows aerobic efficiency trajectory across block |
@@ -179,6 +195,7 @@ Next Block Plan:
 - **Efficiency Factor by Week** catches aerobic fitness trends that complement durability; rising EF at same intensity = improving fitness
 - **HRRc by Week** shows recovery quality trajectory across the block; omit entire section if fewer than 3 qualifying sessions in the block. Individual weeks with 0 qualifying sessions show "— no data". Context-dependent: varies with exercise intensity, type, and recording conditions
 - **Sustainability Ceilings** show what the athlete can sustain right now at race-relevant durations. Block-over-block: rising ceilings confirm adaptation; narrowing model divergence confirms model inputs are current; improving coverage means the athlete is producing efforts across more durations. Low coverage (<50%) means the profile is heavily model-dependent — note this. Indoor source on key anchors means outdoor race ceiling is likely 3–5% higher
+- **DFA a1 Calibration** is the appropriate cadence for surfacing empirical-vs-dossier threshold deltas — block-scale, not weekly. The section is heavily gated (cycling only, validated=true, confidence ≥ moderate) because non-validated or low-confidence estimates create more noise than signal. When the section appears, treat the deltas as coaching observations: flag the discrepancy, recommend formal retest, do not modify dossier or workouts based on the estimate alone. The protocol explicitly forbids auto-updating zones from DFA — see SECTION_11.md DFA a1 Protocol §Boundaries
 - **Phase Timeline** makes phase stability visible across the block — the Phase Progression Check is more meaningful when you can see the phase held steady or oscillated
 - **Phase Progression Check** makes the protocol's decision logic transparent to the athlete
 - **Next Block Plan** should flow directly from the Phase Progression Check — if criteria aren't met, explain what the next block does differently
