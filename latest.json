@@ -70,7 +70,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-04-28T20:39:55.621960",
+    "last_updated": "2026-04-28T21:41:49.627553",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.98"
@@ -118,20 +118,20 @@
       "unavailable": 0
     },
     "phase_context": {
-      "phase": "Deload",
+      "phase": "Build",
       "phase_week": 1,
-      "amber_threshold": 2,
-      "modifier_applied": "default"
+      "amber_threshold": 3,
+      "modifier_applied": "build_loosened"
     },
     "race_week_defers": false,
     "modification": null,
-    "reason": "P3 green light. 5 green, 1 amber (threshold 2), 0 red.",
+    "reason": "P3 green light. 5 green, 1 amber (threshold 3), 0 red.",
     "alarm_refs": []
   },
   "history": {
     "available": true,
     "last_generated": "2026-04-08",
-    "age_days": 19,
+    "age_days": 20,
     "total_months": 32,
     "history_confidence": "high"
   },
@@ -155,13 +155,13 @@
       "atl": 58.05,
       "tsb": -2.38,
       "ramp_rate": -0.38,
-      "fitness_source": "From Intervals.icu API (reflects completed workouts)"
+      "fitness_source": "Decayed from yesterday (today's planned workouts not yet completed)"
     },
     "thresholds": {
-      "eftp": 228.8,
-      "w_prime": 19289,
+      "eftp": 229.0,
+      "w_prime": 19309,
       "w_prime_kj": 19.3,
-      "p_max": 963,
+      "p_max": 964,
       "vo2max": null,
       "sports": {
         "cycling": {
@@ -518,21 +518,22 @@
           },
           "coverage_ratio": 1.0,
           "ftp_used": 235,
-          "w_prime_used": 19289,
+          "w_prime_used": 19309,
           "ftp_staleness_days": 61,
           "model_trust_note": "CP/W' model (P=CP+W'/t) is primary for durations \u226420min where W' contribution is meaningful. Coggan duration factors (Allen & Coggan, 3rd ed.) are the established reference for \u226560min. 30min is the crossover zone where both apply. model_divergence_pct = (actual - CP_model) / CP_model \u00d7 100. Positive divergence at short durations may indicate strong anaerobic capacity or stale W' value. Indoor MMP is typically 3-5% lower than outdoor (cooling, motivation) \u2014 source flag indicates which environment produced each anchor."
         }
       }
     },
-    "consistency_index": 1.0,
+    "consistency_index": 0.75,
     "consistency_details": {
-      "planned_days": 3,
+      "planned_days": 4,
       "completed_days": 4,
       "matched_days": 3,
       "planned_dates": [
         "2026-04-23",
         "2026-04-24",
-        "2026-04-25"
+        "2026-04-25",
+        "2026-04-28"
       ],
       "completed_dates": [
         "2026-04-23",
@@ -542,11 +543,9 @@
       ]
     },
     "phase_detection": {
-      "phase": "Deload",
-      "confidence": "medium",
-      "reason_codes": [
-        "PLAN_GAP_NEXT_WEEK"
-      ],
+      "phase": "Build",
+      "confidence": "high",
+      "reason_codes": [],
       "basis": {
         "stream_1": {
           "ctl_slope": 2.2,
@@ -555,11 +554,11 @@
           "weeks_available": 4
         },
         "stream_2": {
-          "planned_tss_delta": null,
-          "hard_sessions_planned": 0,
+          "planned_tss_delta": 0.26,
+          "hard_sessions_planned": 1,
           "race_proximity": null,
           "next_week_load": null,
-          "plan_coverage_current_week": 0.0,
+          "plan_coverage_current_week": 0.2,
           "plan_coverage_next_week": 0.0
         },
         "data_quality": "good",
@@ -570,10 +569,8 @@
       "dossier_declared": null,
       "dossier_agreement": null
     },
-    "phase_detected": "Deload",
-    "phase_triggers": [
-      "PLAN_GAP_NEXT_WEEK"
-    ],
+    "phase_detected": "Build",
+    "phase_triggers": [],
     "seasonal_context": "Late Base / Build",
     "benchmark_indoor": {
       "current_ftp": null,
@@ -589,19 +586,19 @@
       "benchmark_percentage": "+0.0%",
       "seasonal_expected": false
     },
-    "eftp": 228.8,
-    "w_prime": 19289,
+    "eftp": 229.0,
+    "w_prime": 19309,
     "w_prime_kj": 19.3,
-    "p_max": 963,
+    "p_max": 964,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-04-28T20:39:55.620638",
+    "calculation_timestamp": "2026-04-28T21:41:49.626292",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
       "activities_7d": 4,
       "activities_28d": 19,
-      "planned_workouts_7d": 3,
+      "planned_workouts_7d": 4,
       "ftp_history_days": {
         "indoor": 0,
         "outdoor": 0
@@ -1873,11 +1870,25 @@
       "readiness": 84.0
     }
   ],
-  "planned_workouts": [],
+  "planned_workouts": [
+    {
+      "id": 107150933,
+      "date": "2026-04-28",
+      "name": "VO2 Priming",
+      "type": "WORKOUT",
+      "sport_type": "Ride",
+      "planned_tss": 71,
+      "duration_hours": 1.08,
+      "duration_formatted": "1h5m",
+      "workout_summary": "20m @117W | 5\u00d73m / 3m rec | 15m",
+      "has_terrain": false,
+      "description": "- 20m ramp 45-55%\n\n5x\n- 3m z5\n- 3m z2\n\n- 15m z1 cooldown"
+    }
+  ],
   "workout_summary_stats": {
-    "attempted": 0,
-    "success": 0,
-    "patternA": 0,
+    "attempted": 1,
+    "success": 1,
+    "patternA": 1,
     "patternB": 0,
     "bail_no_workout_doc": 0,
     "bail_no_match": 0
