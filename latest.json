@@ -70,7 +70,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-05-03T04:19:17.926675",
+    "last_updated": "2026-05-03T06:40:09.508329",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.109"
@@ -143,14 +143,14 @@
       "unavailable": 4
     },
     "phase_context": {
-      "phase": "Build",
-      "phase_week": 4,
-      "amber_threshold": 3,
-      "modifier_applied": "build_loosened"
+      "phase": "Deload",
+      "phase_week": 1,
+      "amber_threshold": 2,
+      "modifier_applied": "default"
     },
     "race_week_defers": false,
     "modification": null,
-    "reason": "P3 green light. 2 green, 0 amber (threshold 3), 0 red. Note: 4 signals unavailable \u2014 limited data.",
+    "reason": "P3 green light. 2 green, 0 amber (threshold 2), 0 red. Note: 4 signals unavailable \u2014 limited data.",
     "alarm_refs": []
   },
   "history": {
@@ -185,14 +185,14 @@
       "ctl": 56.04,
       "atl": 56.77,
       "tsb": -0.73,
-      "ramp_rate": -2.34,
-      "fitness_source": "From Intervals.icu API (reflects completed workouts)"
+      "ramp_rate": 2.25,
+      "fitness_source": "Decayed from yesterday (today's planned workouts not yet completed)"
     },
     "thresholds": {
-      "eftp": 228.8,
-      "w_prime": 19289,
+      "eftp": 229.0,
+      "w_prime": 19309,
       "w_prime_kj": 19.3,
-      "p_max": 963,
+      "p_max": 964,
       "vo2max": null,
       "sports": {
         "cycling": {
@@ -557,20 +557,25 @@
           },
           "coverage_ratio": 1.0,
           "ftp_used": 235,
-          "w_prime_used": 19289,
+          "w_prime_used": 19309,
           "ftp_staleness_days": 66,
           "model_trust_note": "CP/W' model (P=CP+W'/t) is primary for durations \u226420min where W' contribution is meaningful. Coggan duration factors (Allen & Coggan, 3rd ed.) are the established reference for \u226560min. 30min is the crossover zone where both apply. model_divergence_pct = (actual - CP_model) / CP_model \u00d7 100. Positive divergence at short durations may indicate strong anaerobic capacity or stale W' value. Indoor MMP is typically 3-5% lower than outdoor (cooling, motivation) \u2014 source flag indicates which environment produced each anchor."
         }
       },
       "dfa_a1_profile": null
     },
-    "consistency_index": 1.0,
+    "consistency_index": 0.67,
     "consistency_details": {
-      "planned_days": 1,
+      "planned_days": 6,
       "completed_days": 4,
-      "matched_days": 1,
+      "matched_days": 4,
       "planned_dates": [
-        "2026-04-28"
+        "2026-04-28",
+        "2026-04-29",
+        "2026-04-30",
+        "2026-05-01",
+        "2026-05-02",
+        "2026-05-03"
       ],
       "completed_dates": [
         "2026-04-28",
@@ -580,10 +585,10 @@
       ]
     },
     "phase_detection": {
-      "phase": "Build",
+      "phase": "Deload",
       "confidence": "medium",
       "reason_codes": [
-        "NO_PLANNED_WORKOUTS"
+        "PLAN_GAP_NEXT_WEEK"
       ],
       "basis": {
         "stream_1": {
@@ -593,26 +598,26 @@
           "weeks_available": 4
         },
         "stream_2": {
-          "planned_tss_delta": null,
+          "planned_tss_delta": 2.66,
           "hard_sessions_planned": 0,
-          "current_week_hard_days_completed": 0,
-          "current_week_hard_days_total": 0,
+          "current_week_hard_days_completed": 3,
+          "current_week_hard_days_total": 3,
           "race_proximity": null,
           "next_week_load": null,
-          "plan_coverage_current_week": 0.0,
+          "plan_coverage_current_week": 0.2,
           "plan_coverage_next_week": 0.0
         },
         "data_quality": "good",
         "stream_agreement": null
       },
       "previous_phase": "Build",
-      "phase_duration_weeks": 4,
+      "phase_duration_weeks": 1,
       "dossier_declared": null,
       "dossier_agreement": null
     },
-    "phase_detected": "Build",
+    "phase_detected": "Deload",
     "phase_triggers": [
-      "NO_PLANNED_WORKOUTS"
+      "PLAN_GAP_NEXT_WEEK"
     ],
     "seasonal_context": "Build / Early Race Season",
     "benchmark_indoor": {
@@ -629,19 +634,19 @@
       "benchmark_percentage": null,
       "seasonal_expected": null
     },
-    "eftp": 228.8,
-    "w_prime": 19289,
+    "eftp": 229.0,
+    "w_prime": 19309,
     "w_prime_kj": 19.3,
-    "p_max": 963,
+    "p_max": 964,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-05-03T04:19:17.925488",
+    "calculation_timestamp": "2026-05-03T06:40:09.507175",
     "data_quality": {
       "hrv_data_points": 6,
       "rhr_data_points": 6,
       "activities_7d": 4,
       "activities_28d": 18,
-      "planned_workouts_7d": 1,
+      "planned_workouts_7d": 6,
       "ftp_history_days": {
         "indoor": 0,
         "outdoor": 0
@@ -653,7 +658,7 @@
       "id": "i144939347",
       "date": "2026-05-02T11:34:57",
       "type": "Ride",
-      "name": "Cycling",
+      "name": "Quality Sweetspot + Z2",
       "duration_hours": 2.4,
       "distance_km": 57.01,
       "tss": 144,
@@ -914,7 +919,7 @@
       "id": "i144683089",
       "date": "2026-04-30T10:08:58",
       "type": "Ride",
-      "name": "Cycling",
+      "name": "Z2 Endurance gravel",
       "duration_hours": 1.48,
       "distance_km": 36.22,
       "tss": 73,
@@ -1058,7 +1063,7 @@
       "id": "i144121546",
       "date": "2026-04-29T14:19:47",
       "type": "Ride",
-      "name": "Afternoon Ride",
+      "name": "Recovery",
       "duration_hours": 0.27,
       "distance_km": 4.94,
       "tss": 6,
@@ -4307,14 +4312,28 @@
       "readiness": null
     }
   ],
-  "planned_workouts": [],
+  "planned_workouts": [
+    {
+      "id": 107805590,
+      "date": "2026-05-03",
+      "name": "Aerobic Durability (The \"Re-Test\")",
+      "type": "WORKOUT",
+      "sport_type": "Ride",
+      "planned_tss": 170,
+      "duration_hours": 4.0,
+      "duration_formatted": "4h",
+      "workout_summary": null,
+      "has_terrain": false,
+      "description": "- 4h z2"
+    }
+  ],
   "workout_summary_stats": {
-    "attempted": 0,
+    "attempted": 1,
     "success": 0,
     "patternA": 0,
     "patternB": 0,
     "bail_no_workout_doc": 0,
-    "bail_no_match": 0
+    "bail_no_match": 1
   },
   "weekly_summary": {
     "total_training_hours": 5.24,
