@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-08T23:11:14.512872",
+  "generated_at": "2026-05-09T00:09:50.010653",
   "version": "3.109",
   "script_hash": "f54c8dd00126",
   "scan_hours": 72,
@@ -486,27 +486,6 @@
           "zone": 2,
           "training_load": 16.499687,
           "decoupling": -24.670298
-        }
-      ]
-    },
-    {
-      "activity_id": "i142569980",
-      "date": "2026-04-24",
-      "type": "Ride",
-      "name": "Active Recovery / Biomechanical Flush",
-      "interval_summary": null,
-      "intervals": [
-        {
-          "type": "RECOVERY",
-          "duration_secs": 3427,
-          "avg_power": 125,
-          "max_power": 630,
-          "avg_hr": 131,
-          "max_hr": 168,
-          "avg_cadence": 72.48042,
-          "zone": 1,
-          "training_load": 33.981133,
-          "decoupling": 4.278864
         }
       ]
     },
