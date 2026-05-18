@@ -1,60 +1,10 @@
 {
-  "generated_at": "2026-05-17T23:30:49.451135",
+  "generated_at": "2026-05-18T01:35:18.894077",
   "version": "3.109",
   "script_hash": "f54c8dd00126",
   "scan_hours": 72,
   "retention_days": 14,
   "activities": [
-    {
-      "activity_id": "i145163036",
-      "date": "2026-05-03",
-      "type": "Ride",
-      "name": "Aerobic Durability (The \"Re-Test\")",
-      "interval_summary": [
-        "2x 2h2m 149w",
-        "1x 17m14s 7w"
-      ],
-      "intervals": [
-        {
-          "type": "WORK",
-          "label": "7350s@149w82rpm",
-          "duration_secs": 7469,
-          "avg_power": 150,
-          "max_power": 502,
-          "avg_hr": 132,
-          "max_hr": 151,
-          "avg_cadence": 82.35007,
-          "zone": 2,
-          "training_load": 96.14073,
-          "decoupling": -6.9741116
-        },
-        {
-          "type": "WORK",
-          "label": "1034s@7w6rpm",
-          "duration_secs": 1034,
-          "avg_power": 7,
-          "max_power": 126,
-          "avg_hr": 104,
-          "max_hr": 135,
-          "avg_cadence": 6.4166665,
-          "zone": 1,
-          "training_load": 0.29375586
-        },
-        {
-          "type": "WORK",
-          "label": "7350s@149w82rpm",
-          "duration_secs": 7231,
-          "avg_power": 147,
-          "max_power": 817,
-          "avg_hr": 135,
-          "max_hr": 159,
-          "avg_cadence": 81.06207,
-          "zone": 2,
-          "training_load": 90.86969,
-          "decoupling": 4.6477284
-        }
-      ]
-    },
     {
       "activity_id": "i146225033",
       "date": "2026-05-07",
