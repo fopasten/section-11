@@ -70,7 +70,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-05-24T15:00:58.706166",
+    "last_updated": "2026-05-24T16:13:53.653052",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.109"
@@ -129,7 +129,7 @@
       },
       "sleep": {
         "status": "green",
-        "hours": 7.57,
+        "hours": 7.71,
         "quality": 2
       },
       "acwr": {
@@ -247,9 +247,9 @@
       "resting_hr": 50,
       "hrv": 53.0,
       "sleep_quality": 2,
-      "sleep_hours": 7.57,
-      "sleep_formatted": "7h34m",
-      "sleep_score": 81.0,
+      "sleep_hours": 7.71,
+      "sleep_formatted": "7h42m",
+      "sleep_score": 80.0,
       "fatigue": null,
       "soreness": null,
       "stress": null,
@@ -263,7 +263,7 @@
       "diastolic": null,
       "baevsky_si": null,
       "lactate": null,
-      "respiration": 13.875,
+      "respiration": 13.75,
       "body_fat_pct": null,
       "abdomen_cm": null,
       "steps": null,
@@ -274,7 +274,7 @@
       "fat_g": null,
       "menstrual_phase": null,
       "menstrual_phase_predicted": null,
-      "readiness": 79.0
+      "readiness": 80.0
     }
   },
   "derived_metrics": {
@@ -652,7 +652,7 @@
     "p_max": 970,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-05-24T15:00:58.704933",
+    "calculation_timestamp": "2026-05-24T16:13:53.651895",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
@@ -3915,10 +3915,10 @@
       "resting_hr": 50,
       "hrv_rmssd": 53.0,
       "hrv_sdnn": null,
-      "sleep_hours": 7.57,
-      "sleep_formatted": "7h34m",
+      "sleep_hours": 7.71,
+      "sleep_formatted": "7h42m",
       "sleep_quality": 2,
-      "sleep_score": 81.0,
+      "sleep_score": 80.0,
       "mental_energy": null,
       "avg_sleeping_hr": 53.125,
       "vo2max": null,
@@ -3935,7 +3935,7 @@
       "diastolic": null,
       "baevsky_si": null,
       "lactate": null,
-      "respiration": 13.875,
+      "respiration": 13.75,
       "body_fat_pct": null,
       "abdomen_cm": null,
       "steps": null,
@@ -3946,7 +3946,7 @@
       "fat_g": null,
       "menstrual_phase": null,
       "menstrual_phase_predicted": null,
-      "readiness": 79.0
+      "readiness": 80.0
     }
   ],
   "planned_workouts": [],
