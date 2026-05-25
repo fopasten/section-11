@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-25T17:19:39.631293",
+  "generated_at": "2026-05-25T18:58:48.081490",
   "version": "3.109",
   "script_hash": "f54c8dd00126",
   "scan_hours": 72,
@@ -669,6 +669,26 @@
           "zone": 1,
           "training_load": 3.5890675,
           "decoupling": -14.881174
+        }
+      ]
+    },
+    {
+      "activity_id": "i151427220",
+      "date": "2026-05-25",
+      "type": "Ride",
+      "name": "Cycling",
+      "interval_summary": [
+        "1x 25m6s 135bpm"
+      ],
+      "intervals": [
+        {
+          "type": "WORK",
+          "label": "1506s@135bpm63rpm",
+          "duration_secs": 1506,
+          "avg_hr": 135,
+          "max_hr": 166,
+          "avg_cadence": 63.022625,
+          "zone": 1
         }
       ]
     }
