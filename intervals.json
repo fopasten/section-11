@@ -1,98 +1,10 @@
 {
-  "generated_at": "2026-05-28T22:54:49.316276",
+  "generated_at": "2026-05-29T00:09:17.779921",
   "version": "3.109",
   "script_hash": "f54c8dd00126",
   "scan_hours": 72,
   "retention_days": 14,
   "activities": [
-    {
-      "activity_id": "i148224878",
-      "date": "2026-05-14",
-      "type": "VirtualRide",
-      "name": "KICKR",
-      "interval_summary": [
-        "1x 21m25s 159w",
-        "2x 12m5s 215w",
-        "1x 5m24s 76w",
-        "1x 5m 109w"
-      ],
-      "intervals": [
-        {
-          "type": "WORK",
-          "label": "1285s@159w94rpm",
-          "duration_secs": 1285,
-          "avg_power": 159,
-          "max_power": 197,
-          "avg_hr": 137,
-          "max_hr": 155,
-          "avg_cadence": 93.57276,
-          "zone": 2,
-          "training_load": 16.75393,
-          "decoupling": 2.464642
-        },
-        {
-          "type": "WORK",
-          "label": "725s@215w94rpm",
-          "duration_secs": 723,
-          "avg_power": 215,
-          "max_power": 240,
-          "avg_hr": 167,
-          "max_hr": 175,
-          "avg_cadence": 93.81528,
-          "zone": 4,
-          "training_load": 16.787107,
-          "decoupling": 6.3206186
-        },
-        {
-          "type": "WORK",
-          "label": "324s@76w42rpm",
-          "duration_secs": 324,
-          "avg_power": 76,
-          "max_power": 199,
-          "avg_hr": 136,
-          "max_hr": 174,
-          "avg_cadence": 41.697533,
-          "zone": 1,
-          "training_load": 2.1336372,
-          "decoupling": -13.932717
-        },
-        {
-          "type": "WORK",
-          "label": "725s@215w94rpm",
-          "duration_secs": 726,
-          "avg_power": 214,
-          "max_power": 240,
-          "avg_hr": 172,
-          "max_hr": 180,
-          "avg_cadence": 94.145836,
-          "zone": 4,
-          "training_load": 16.677382,
-          "decoupling": 1.105547
-        },
-        {
-          "type": "WORK",
-          "label": "300s@109w89rpm",
-          "duration_secs": 300,
-          "avg_power": 109,
-          "max_power": 226,
-          "avg_hr": 143,
-          "max_hr": 179,
-          "avg_cadence": 88.88,
-          "zone": 1,
-          "training_load": 2.1368644,
-          "decoupling": -12.929521
-        },
-        {
-          "type": "WORK",
-          "duration_secs": 3,
-          "avg_hr": 132,
-          "max_hr": 132,
-          "zone": 1,
-          "training_load": 0.0065368945,
-          "decoupling": "NaN"
-        }
-      ]
-    },
     {
       "activity_id": "i148633392",
       "date": "2026-05-15",
