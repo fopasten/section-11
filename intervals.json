@@ -1,52 +1,10 @@
 {
-  "generated_at": "2026-06-02T23:43:45.244290",
+  "generated_at": "2026-06-03T02:12:43.406028",
   "version": "3.109",
   "script_hash": "f54c8dd00126",
   "scan_hours": 72,
   "retention_days": 14,
   "activities": [
-    {
-      "activity_id": "i149693427",
-      "date": "2026-05-19",
-      "type": "Ride",
-      "name": "Cycling",
-      "interval_summary": null,
-      "intervals": [
-        {
-          "type": "RECOVERY",
-          "duration_secs": 1011,
-          "avg_power": 157,
-          "max_power": 467,
-          "avg_hr": 155,
-          "max_hr": 178,
-          "avg_cadence": 71.679535,
-          "zone": 2,
-          "training_load": 12.024464,
-          "decoupling": 13.396767
-        }
-      ]
-    },
-    {
-      "activity_id": "i149831329",
-      "date": "2026-05-19",
-      "type": "Ride",
-      "name": "Cycling",
-      "interval_summary": null,
-      "intervals": [
-        {
-          "type": "RECOVERY",
-          "duration_secs": 890,
-          "avg_power": 99,
-          "max_power": 533,
-          "avg_hr": 128,
-          "max_hr": 153,
-          "avg_cadence": 60.03109,
-          "zone": 1,
-          "training_load": 5.925251,
-          "decoupling": 16.998577
-        }
-      ]
-    },
     {
       "activity_id": "i150411531",
       "date": "2026-05-21",
