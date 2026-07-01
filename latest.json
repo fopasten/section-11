@@ -70,7 +70,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-07-01T13:51:45.565819",
+    "last_updated": "2026-07-01T16:24:06.249327",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.109"
@@ -129,8 +129,8 @@
       },
       "sleep": {
         "status": "amber",
-        "hours": 5.67,
-        "quality": 2
+        "hours": 5.68,
+        "quality": 3
       },
       "acwr": {
         "status": "red",
@@ -237,10 +237,10 @@
       },
       "resting_hr": 50,
       "hrv": 54.0,
-      "sleep_quality": 2,
-      "sleep_hours": 5.67,
-      "sleep_formatted": "5h40m",
-      "sleep_score": 70.0,
+      "sleep_quality": 3,
+      "sleep_hours": 5.68,
+      "sleep_formatted": "5h41m",
+      "sleep_score": 68.0,
       "fatigue": null,
       "soreness": null,
       "stress": null,
@@ -633,7 +633,7 @@
     "p_max": 937,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-07-01T13:51:45.564711",
+    "calculation_timestamp": "2026-07-01T16:24:06.248166",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
@@ -1054,10 +1054,10 @@
       "resting_hr": 50,
       "hrv_rmssd": 54.0,
       "hrv_sdnn": null,
-      "sleep_hours": 5.67,
-      "sleep_formatted": "5h40m",
-      "sleep_quality": 2,
-      "sleep_score": 70.0,
+      "sleep_hours": 5.68,
+      "sleep_formatted": "5h41m",
+      "sleep_quality": 3,
+      "sleep_score": 68.0,
       "mental_energy": null,
       "avg_sleeping_hr": 54.5,
       "vo2max": null,
