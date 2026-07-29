@@ -4,6 +4,150 @@ Intervals.icu → GitHub/Local JSON Export
 Exports training data for LLM access.
 Supports both automated GitHub sync and manual local export.
 
+Version 3.118 - DFA a1 easy-band rename + dominant_band tie rule. The >1.0 band is renamed
+  tiz_recovery -> tiz_easy (short key recovery -> easy in dfa_summary.tiz_pct,
+  latest_session.tiz_split_pct and the dominant_band VALUE). a1 > 1.0 is the well-correlated
+  easy state above the easy_guard (1.0); it can occur on a recovery ride OR an endurance ride
+  and does not classify the session as recovery - the v3.115 name invited exactly that
+  misreading in reports. Band boundaries and values are UNCHANGED. Not a keys-only release:
+  dominant_band is now selected on raw band secs instead of the rounded one-decimal pct
+  (rounding could manufacture ties), and a genuine exact-second tie resolves by descending
+  intensity (supra > tempo > endurance > easy) instead of alphabetically, so band key names
+  can no longer influence the result and a true tie never understates internal load. No
+  dominant_band change on current live sessions. Hard migration - no dual recovery/easy keys;
+  the script_hash change invalidates intervals.json, so the next run re-scans the full 14d
+  retention window and re-fetches streams. SECTION_11.md v11.50.
+
+Version 3.117 - P1 readiness alarm_refs per-branch attribution: the P1 skip return listed
+  every tier1_persistent ref whenever any P1 reason fired, so an ACWR- or TSB-triggered skip
+  with RI >= 0.7 (persistent branch inactive) and unrelated persistent alerts present could
+  name refs that did not trigger the decision. alarm_refs is now built per firing branch -
+  ACWR contributes the acwr alert ref only if that object is present (guaranteed at >=1.5,
+  which exceeds the >=1.35 alert threshold); the TSB+HRV composite contributes none (no
+  discrete alert object to resolve to, per the alerts[] schema); the RI<0.7 persistent branch
+  contributes its tier-1 metrics only when it fires. Matches the shipped v11.47 alarm_refs
+  contract ("names that triggered P0/P1, each resolving to an alerts[] object"), so doc body
+  unchanged. Also: tier1_persistent persistence_days test switched from (x or 0) >= 2 to an
+  explicit None check (behavior identical). P0 already clean; P2/P3/modify return []. Output
+  change in the edge case only. SECTION_11.md v11.49 records the release (changelog-only).
+
+Version 3.116 - P1 readiness-skip severity gate (Commit B of the alert-tier cycle): the P1
+  "persistent tier-1 alert" skip branch now requires severity in ("warning", "alarm"), not
+  tier alone. Inert on current data - the only tier-1 info alerts (race_taper, race_week)
+  carry persistence_days None and were already excluded by the >=2 check; guards against a
+  future tier-1 info alert with a real persistence value silently forcing a P1 skip. Behavior
+  change to the readiness ladder in principle, no output change today. SECTION_11.md v11.48
+  syncs the P1 doc line + alerts[].severity / alerts[].persistence_days schema rows.
+
+Version 3.115 - DFA a1 TIZ band rename (Commit C of A/B/C): the four time-in-zone bands
+  are renamed to marker-consistent names - values/boundaries UNCHANGED, keys only.
+  Per-session dfa block: tiz_below_lt1 -> tiz_recovery (a1>1.0), tiz_lt1_transition ->
+  tiz_endurance (0.75-1.0), tiz_transition_lt2 -> tiz_tempo (0.5-0.75), tiz_above_lt2 ->
+  tiz_supra (a1<0.5). Compact summaries (latest_session.tiz_split_pct, recent_activities[].
+  dfa_summary.tiz_pct, dominant_band) carry the bare short keys: recovery / endurance /
+  tempo / supra. The old names encoded the pre-v3.114 error (LT1=1.0); the new names read
+  correctly against LT1=0.75 (the 0.75-1.0 band is endurance approaching LT1 from below (LT1 at the 0.75 edge), not a 'transition',
+  and the >1.0 band is recovery, not 'below LT1'). SECTION_11.md v11.46 + report display
+  labels harmonized (Z2/transition/SS/above-LT2 -> recovery/endurance/tempo/supra).
+
+Version 3.114 - DFA a1 three-marker semantics (Commit A of A/B/C): the LT1 crossing
+  estimate moves from a1=1.0 to the literature HRVT1 value a1=0.75 (aerobic threshold),
+  and a1=1.0 becomes its own named 'easy_guard' marker (a conservative easy-state guard,
+  NOT a threshold). Three markers now: easy_guard (1.0), lt1 (0.75), lt2 (0.5). Each
+  per-session crossing block and each trailing estimate carries marker_dfa_a1 so the JSON
+  is self-describing (no AI need remember which a1 value a field means). Per-marker gating/
+  reason logic generalized via _build_marker (called 3x). Sport-level confidence stays a
+  coarse max across the THRESHOLD markers only (lt1, lt2) - easy_guard excluded so easy
+  rides can't inflate threshold-calibration confidence. capability_metrics_note rewritten.
+  NOTE: old lt1_estimate semantics (a1=1.0) now live under easy_guard_estimate; the new
+  lt1_estimate (a1=0.75) reads higher and populates less often. SECTION_11.md v11.45 +
+  report templates + TIZ band rename follow in Commits B/C.
+
+Version 3.113 - DFA a1 crossing integrity: LT1/LT2 crossing estimates now
+  require a sustained CONTIGUOUS crossing (>=DFA_MIN_CROSSING_DWELL_SECS in-band
+  seconds, bridging <=DFA_CROSSING_MAX_GAP_SECS of original ride-time), measured
+  on the original stream index (valid_idx) since valid_* arrays are compacted.
+  Each crossing block gains contiguous_secs, n_qualifying_segments, and a reason
+  (ok / no_samples_in_band / insufficient_total_dwell / no_contiguous_dwell);
+  avg_hr/avg_watts populate only at reason=="ok". trailing_by_sport estimates are
+  gated INDEPENDENTLY per threshold (>=DFA_MIN_CROSSING_SESSIONS_N qualifying
+  sessions), fixing the hollow-block bug where one threshold's crossings emitted
+  the other's estimate all-null; new lt1_reason/lt2_reason explain a null.
+  Sport-level confidence retained as a coarse max-across-thresholds signal.
+  capability_metrics_note updated. (SECTION_11.md v11.44 pairs.)
+  Also (v3.113): _generate_intervals now receives the 28d extended activity set so
+  first-run backfill reaches the full 14d retention window (was silently truncated
+  to the 7d display set), and prunes cached entries whose activity_id is no longer
+  present (deleted/re-uploaded rides); completed recent_activities gain
+  duration_formatted; DFA entries gain start_datetime for same-day latest_session
+  tiebreak.
+
+Version 3.112 - Body weight signal block (current_status.weight): gated fields
+  for block-level W/kg and weekly weight trend, all surfaced via a single
+  _build_weight_signal helper. Failed-gate fields are absent from the JSON;
+  AI layer omits the corresponding report section silently (no boilerplate).
+  Display blocks ship for narrated weights per Display Unit Semantics; W/kg
+  stays unit-universal.
+  Fields:
+    weight_latest_kg / weight_latest_date — gate: latest weigh-in age <=14d
+    wkg_current + wkg_ftp_source [+ ftp_setting_date] — gate: weight_latest
+      present + FTP source. Tested cycling FTP from sportSettings preferred,
+      eFTP fallback. eFTP is not suppressed for stale tested FTP — the
+      source tag plus ftp_setting_date carry the staleness signal. Date
+      reflects the FTP setting change recorded in ftp_history.json (not a
+      formal test date — Intervals does not expose one).
+    wkg_block_start / wkg_block_end / wkg_block_delta — gate: >=1 weigh-in
+      within the FIRST 4 days of the trailing 28d window AND >=1 weigh-in
+      within the LAST 4 days (v1 block proxy; protocol does not yet track
+      explicit block boundaries). Both endpoints use current FTP, so delta
+      reflects weight change only.
+    weight_7d_avg_kg — gate: >=4 weigh-ins in trailing 7d
+    weight_28d_slope_kg_per_week — gate: >=14 weigh-ins in trailing 28d
+    display.{weight_latest, weight_7d_avg, weight_28d_slope_per_week} —
+      _to_display style {value, unit} pairs respecting athlete weight pref;
+      slope built manually to preserve 3dp and append "/week" to unit code.
+  Pairs with SECTION_11.md v11.43 (new Body Weight Handling section incl.
+  Deliberately Deferred subsection) and weight rows in BLOCK / WEEKLY
+  report templates. Pre-workout and post-workout templates intentionally
+  untouched in v1.
+
+Version 3.111 - latest.history.last_generated freshness fix: auto-history
+  generation block (should_generate_history → generate_history → write/publish)
+  moved in main() from after collect_training_data to before it.
+  _get_history_confidence() inside collect_training_data now reads the
+  just-written history.json, so latest.history.last_generated reflects the same
+  generated_at as the on-disk history. Previously, runs that triggered a
+  history rebuild published latest.json with stale last_generated because the
+  freshness read happened during data dict construction, before the rebuild
+  step. Local and GitHub modes share a single guarded block — args.output picks
+  the write target. try/except resilience preserved: failed history regen still
+  permits latest.json publish. Routes/intervals generation unchanged (still
+  runs after collect_training_data, which populates _intervals_data and
+  _routes_data). No schema change.
+
+Version 3.110 - Weekly capability rollup + monthly phase alignment + decoupling 0.0 fix:
+  (1) weekly_180d rows now carry six per-week capability fields: durability_mean /
+  durability_qualifying (VI<=1.05, VI>0, mt>=5400, decoupling not None), ef_mean /
+  ef_qualifying (cycling types, VI<=1.05, VI>0, mt>=1200, EF not None), hrrc_mean /
+  hrrc_qualifying (icu_hrr>0). N>=1 emits a mean; qualifying count signals confidence.
+  Trajectory layer for Season Report v2 — no alert or trend logic at this layer.
+  (2) monthly_*y[].dominant_phase now derives from modal aggregation of already-computed
+  weekly_180d[].phase_detected values rather than the previous standalone CTL-trend +
+  qi_pct inline rule. Overlap test: week_start < next_month AND week_end >= current_month
+  (catches boundary weeks straddling month edges). Most-frequent label wins; TSS is
+  tie-break only. Null when no overlapping weekly rows (month outside 180d window).
+  Vocabulary now matches _detect_phase_v2 output.
+  (3) _calculate_durability: replaced `or`-chain fallback (`get("icu_hr_decoupling") or
+  get("decoupling")`) with explicit is-None check — prevents silent drop of 0.0 values.
+  (4) Same is-None pattern applied to all three HRRc dict-extraction sites
+  (_calculate_hrrc_trend qualifying filter, weekly capability rollup, activity formatter
+  raw_hrrc): explicit `value is None` check before falling through to `hrr`. If API ever
+  returns `{"value": 0, ...}`, 0 is now treated as authoritative (then filtered by the
+  >0 gate) rather than falling through to a sibling key. SEASON_REPORT_TEMPLATE.md Notes
+  section updated: phase-narrative bullet now describes modal-from-_detect_phase_v2
+  derivation and the structural null-for-older-months behavior; capability-absent bullet
+  replaced with per-week trajectory field documentation.
+
 Version 3.109 - Display Unit Semantics: every narrative-bearing field that ships in
   canonical metric (distance_km, elevation_m, weight_kg, height_m, avg_speed/max_speed
   as KPH, position_km, total_distance_km, total_elevation_m, elevation_per_km,
@@ -188,7 +332,7 @@ class IntervalsSync:
     HISTORY_FILE = "history.json"
     UPSTREAM_REPO = "CrankAddict/section-11"
     CHANGELOG_FILE = "changelog.json"
-    VERSION = "3.109"
+    VERSION = "3.118"
     INTERVALS_FILE = "intervals.json"
     ROUTES_FILE = "routes.json"
 
@@ -202,20 +346,26 @@ class IntervalsSync:
     # --- DFA a1 Protocol (v3.99) ---
     # Per-session DFA a1 rollups computed from streams when AlphaHRV Connect IQ field
     # has written to the FIT and Intervals.icu surfaces dfa_a1 + artifacts streams.
-    # Threshold mapping (1.0 / 0.5) is cycling-validated (Rowlands 2017, Gronwald 2020,
-    # Mateo-March 2023). Other sports get rollups but validated=False.
-    DFA_LT1 = 1.0                       # DFA a1 above this = below LT1 (true aerobic)
+    # Three DFA a1 markers (v3.114). Literature: HRVT1/aerobic threshold = 0.75, HRVT2 = 0.5
+    # (Gronwald/Rogers 2020, Rogers 2021, Mateo-March 2023). 1.0 is BELOW the aerobic threshold
+    # (well-correlated easy state) — Section 11 uses it as a deliberate conservative easy-state
+    # guard, NOT as LT1. Mapping cycling-validated; other sports get rollups but validated=False.
+    DFA_EASY_GUARD = 1.0                # v3.114: conservative easy-state guard (α1 1.0) — NOT a threshold
+    DFA_LT1 = 0.75                      # v3.114: HRVT1 / aerobic threshold (literature; was 1.0)
     DFA_LT2 = 0.5                       # DFA a1 below this = above LT2 (supra-threshold)
-    DFA_LT1_BAND = 0.05                 # crossing window for LT1 estimate: 0.95-1.05
+    DFA_EASY_GUARD_BAND = 0.05          # crossing window for easy-guard estimate: 0.95-1.05
+    DFA_LT1_BAND = 0.05                 # crossing window for LT1 estimate: 0.70-0.80
     DFA_LT2_BAND = 0.05                 # crossing window for LT2 estimate: 0.45-0.55
-    DFA_MIN_CROSSING_DWELL_SECS = 60    # min seconds in crossing band to emit threshold estimate
+    DFA_MIN_CROSSING_DWELL_SECS = 60    # min CONTIGUOUS seconds in crossing band to emit threshold estimate (v3.113)
+    DFA_CROSSING_MAX_GAP_SECS = 5       # v3.113: max original-time gap (dropped/out-of-band secs) bridged within one crossing segment
+    DFA_MIN_CROSSING_SESSIONS_N = 3     # v3.113: min sessions with a qualifying crossing to emit a per-threshold estimate (matches 'low' confidence floor)
     DFA_ARTIFACT_MAX_PCT = 5.0          # drop seconds where artifacts % exceeds this
     DFA_MIN_VALID_VALUE = 0.01          # exclude AlphaHRV sentinel zeros
     DFA_MIN_DURATION_SECS = 1200        # 20 min minimum valid data for sufficient=True
     DFA_SUFFICIENT_MIN_VALID_PCT = 70.0 # min valid_pct for sufficient=True (excludes noisy AlphaHRV sessions)
     DFA_DRIFT_INTERPRETABLE_MAX_LT2_PCT = 15.0  # if >15% time above LT2, drift is structural noise
     DFA_TRAILING_WINDOW_N = 7           # latest N AlphaHRV sessions for trailing window (≥6 needed for 'high' confidence)
-    DFA_VALIDATED_SPORTS = {"cycling"}  # sports where 1.0/0.5 mapping is literature-validated
+    DFA_VALIDATED_SPORTS = {"cycling"}  # 0.75/0.5 threshold markers cycling-validated; 1.0 is operational easy_guard
 
     # Sport family mapping for per-sport monotony calculation
     # Multi-sport athletes get inflated total monotony when cross-training
@@ -913,7 +1063,10 @@ class IntervalsSync:
             watts_stream = (watts_stream + [None] * n)[:n]
 
         # Apply filters
-        valid_dfa, valid_hr, valid_watts = [], [], []
+        # v3.113: valid_idx records each surviving sample's ORIGINAL stream index (second-of-ride).
+        # The valid_* arrays are compacted (dropped seconds are skipped), so array-index adjacency
+        # != ride-time adjacency. Crossing contiguity must be measured against valid_idx, not position.
+        valid_dfa, valid_hr, valid_watts, valid_idx = [], [], [], []
         artifact_sum = 0.0
         artifact_count = 0
         for i in range(n):
@@ -929,6 +1082,7 @@ class IntervalsSync:
             valid_dfa.append(d)
             valid_hr.append(hr_stream[i])
             valid_watts.append(watts_stream[i])
+            valid_idx.append(i)
 
         valid_secs = len(valid_dfa)
         total_secs = n
@@ -952,11 +1106,12 @@ class IntervalsSync:
             return {
                 "avg": None,
                 "p25": None, "p50": None, "p75": None,
-                "tiz_below_lt1": None,
-                "tiz_lt1_transition": None,
-                "tiz_transition_lt2": None,
-                "tiz_above_lt2": None,
+                "tiz_easy": None,
+                "tiz_endurance": None,
+                "tiz_tempo": None,
+                "tiz_supra": None,
                 "drift": None,
+                "easy_guard_crossing": None,
                 "lt1_crossing": None,
                 "lt2_crossing": None,
                 "quality": quality,
@@ -992,10 +1147,15 @@ class IntervalsSync:
                 "avg_watts": round(w_sum / w_n) if w_n else None,
             }
 
-        tiz_below_lt1 = _band_stats(lambda d: d > self.DFA_LT1)
-        tiz_lt1_transition = _band_stats(lambda d: 0.75 <= d <= self.DFA_LT1)
-        tiz_transition_lt2 = _band_stats(lambda d: self.DFA_LT2 <= d < 0.75)
-        tiz_above_lt2 = _band_stats(lambda d: d < self.DFA_LT2)
+        # TIZ band boundaries: the four boundaries (1.0 / 0.75 / 0.5) are explicit. DFA_LT1 is
+        # 0.75, so the 1.0 edge references DFA_EASY_GUARD to avoid collapsing the model. Band
+        # VALUES are unchanged; band NAMES are marker-consistent (v3.115, easy renamed v3.118):
+        # easy (a1>1.0 — the easy state above the easy_guard, NOT a session classification),
+        # endurance (0.75-1.0, approaching LT1 from below; 0.75 is LT1), tempo (0.5-0.75), supra (a1<0.5).
+        tiz_easy = _band_stats(lambda d: d > self.DFA_EASY_GUARD)
+        tiz_endurance = _band_stats(lambda d: self.DFA_LT1 <= d <= self.DFA_EASY_GUARD)
+        tiz_tempo = _band_stats(lambda d: self.DFA_LT2 <= d < self.DFA_LT1)
+        tiz_supra = _band_stats(lambda d: d < self.DFA_LT2)
 
         # Drift: first-third vs last-third of valid data
         third = valid_secs // 3
@@ -1007,8 +1167,8 @@ class IntervalsSync:
             drift_delta = round(last_avg - first_avg, 3)
             # Drift is interpretable only on steady-state work — if significant time
             # was spent above LT2, the session has hard intervals and drift is structural
-            above_lt2_pct = tiz_above_lt2["pct"] if tiz_above_lt2 else 0.0
-            interpretable = above_lt2_pct <= self.DFA_DRIFT_INTERPRETABLE_MAX_LT2_PCT
+            supra_pct = tiz_supra["pct"] if tiz_supra else 0.0
+            interpretable = supra_pct <= self.DFA_DRIFT_INTERPRETABLE_MAX_LT2_PCT
             drift = {
                 "first_third_avg": first_avg,
                 "last_third_avg": last_avg,
@@ -1020,38 +1180,79 @@ class IntervalsSync:
 
         # LT1 / LT2 crossing-band estimates (the actually-coachable threshold candidates)
         def _crossing_stats(center, band):
+            # v3.113 contiguous-dwell gate (see class constants). Build segments of in-band
+            # samples, bridging <= DFA_CROSSING_MAX_GAP_SECS of original ride-time (dropped or
+            # out-of-band seconds). Only segments reaching DFA_MIN_CROSSING_DWELL_SECS in-band
+            # seconds qualify; HR/watts pool across qualifying segments only. This rejects the
+            # warmup/cooldown/descent scatter that previously smeared threshold estimates.
+            # Contiguity is measured on valid_idx (original ride-time), NOT array position,
+            # because valid_* are compacted.
             lo, hi = center - band, center + band
-            secs = 0
-            hr_sum, hr_n = 0, 0
-            w_sum, w_n = 0, 0
+            segments = []          # {count, hr_sum, hr_n, w_sum, w_n} per contiguous segment
+            cur = None
+            last_orig = None
+            total_in_band = 0
             for i in range(valid_secs):
-                if lo <= valid_dfa[i] <= hi:
-                    secs += 1
-                    if valid_hr[i] is not None:
-                        hr_sum += valid_hr[i]
-                        hr_n += 1
-                    if valid_watts[i] is not None:
-                        w_sum += valid_watts[i]
-                        w_n += 1
-            if secs < self.DFA_MIN_CROSSING_DWELL_SECS:
-                return {"secs_in_band": secs, "avg_hr": None, "avg_watts": None}
+                if not (lo <= valid_dfa[i] <= hi):
+                    continue
+                total_in_band += 1
+                orig = valid_idx[i]
+                if cur is None or (orig - last_orig - 1) > self.DFA_CROSSING_MAX_GAP_SECS:
+                    cur = {"count": 0, "hr_sum": 0, "hr_n": 0, "w_sum": 0, "w_n": 0}
+                    segments.append(cur)
+                cur["count"] += 1
+                if valid_hr[i] is not None:
+                    cur["hr_sum"] += valid_hr[i]
+                    cur["hr_n"] += 1
+                if valid_watts[i] is not None:
+                    cur["w_sum"] += valid_watts[i]
+                    cur["w_n"] += 1
+                last_orig = orig
+
+            qualifying = [s for s in segments if s["count"] >= self.DFA_MIN_CROSSING_DWELL_SECS]
+            best_segment_secs = max((s["count"] for s in segments), default=0)
+
+            if total_in_band == 0:
+                reason = "no_samples_in_band"
+            elif total_in_band < self.DFA_MIN_CROSSING_DWELL_SECS:
+                reason = "insufficient_total_dwell"
+            elif not qualifying:
+                reason = "no_contiguous_dwell"
+            else:
+                reason = "ok"
+
+            if qualifying:
+                hr_n = sum(s["hr_n"] for s in qualifying)
+                w_n = sum(s["w_n"] for s in qualifying)
+                avg_hr = round(sum(s["hr_sum"] for s in qualifying) / hr_n) if hr_n else None
+                avg_watts = round(sum(s["w_sum"] for s in qualifying) / w_n) if w_n else None
+            else:
+                avg_hr = None
+                avg_watts = None
+
             return {
-                "secs_in_band": secs,
-                "avg_hr": round(hr_sum / hr_n) if hr_n else None,
-                "avg_watts": round(w_sum / w_n) if w_n else None,
+                "marker_dfa_a1": center,
+                "secs_in_band": total_in_band,
+                "contiguous_secs": best_segment_secs,
+                "n_qualifying_segments": len(qualifying),
+                "reason": reason,
+                "avg_hr": avg_hr,
+                "avg_watts": avg_watts,
             }
 
+        easy_guard_crossing = _crossing_stats(self.DFA_EASY_GUARD, self.DFA_EASY_GUARD_BAND)
         lt1_crossing = _crossing_stats(self.DFA_LT1, self.DFA_LT1_BAND)
         lt2_crossing = _crossing_stats(self.DFA_LT2, self.DFA_LT2_BAND)
 
         return {
             "avg": avg,
             "p25": p25, "p50": p50, "p75": p75,
-            "tiz_below_lt1": tiz_below_lt1,
-            "tiz_lt1_transition": tiz_lt1_transition,
-            "tiz_transition_lt2": tiz_transition_lt2,
-            "tiz_above_lt2": tiz_above_lt2,
+            "tiz_easy": tiz_easy,
+            "tiz_endurance": tiz_endurance,
+            "tiz_tempo": tiz_tempo,
+            "tiz_supra": tiz_supra,
             "drift": drift,
+            "easy_guard_crossing": easy_guard_crossing,
             "lt1_crossing": lt1_crossing,
             "lt2_crossing": lt2_crossing,
             "quality": quality,
@@ -1061,24 +1262,42 @@ class IntervalsSync:
         """
         Build the compact dfa_summary attached to recent_activities[] in latest.json (v3.100).
 
-        Pure extractor — no computation. All numbers come from _compute_dfa_block output.
+        Near-pure extractor — every number comes from _compute_dfa_block output; the only
+        derived field is dominant_band, which selects a band (no arithmetic). v3.118: that
+        selection reads raw band secs, not the rounded pct, and breaks exact ties by
+        descending intensity rather than alphabetically — see the comment on the rule below.
         Caller must only invoke this when dfa_block["quality"]["sufficient"] is True;
         the sufficient=False branch of _compute_dfa_block returns all-None tiz_* fields
-        and is not summarisable. Per-band None (zero time in band) is handled here as 0.0.
+        and is not summarisable. Per-band None (zero time in band) is handled here as
+        0.0 pct / 0 secs.
         Optional fields are omitted (not nulled) when their underlying data is absent.
         """
         def _band_pct(name):
             b = dfa_block.get(name)
             return b["pct"] if b else 0.0
 
+        def _band_secs(name):
+            b = dfa_block.get(name)
+            return b["secs"] if b else 0
+
         bands = {
-            "below_lt1": _band_pct("tiz_below_lt1"),
-            "lt1_transition": _band_pct("tiz_lt1_transition"),
-            "transition_lt2": _band_pct("tiz_transition_lt2"),
-            "above_lt2": _band_pct("tiz_above_lt2"),
+            "easy": _band_pct("tiz_easy"),
+            "endurance": _band_pct("tiz_endurance"),
+            "tempo": _band_pct("tiz_tempo"),
+            "supra": _band_pct("tiz_supra"),
         }
-        # Dominant band: max pct, alphabetical tiebreak (deterministic, conservative).
-        dominant_band = sorted(bands.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+        # Dominant band (v3.118): most RAW SECONDS in band. Raw secs, not the one-decimal
+        # `pct`, so rounding can no longer manufacture a tie. A genuine exact-second tie
+        # resolves by descending intensity — the order of _DOMINANT_ORDER below — which is
+        # conservative: a true tie never understates internal load. Band key NAMES cannot
+        # influence the outcome; the pre-3.118 rule (max rounded pct, alphabetical key
+        # tiebreak) could be moved by a rename, which is why it was replaced alongside one.
+        _DOMINANT_ORDER = (("supra", "tiz_supra"), ("tempo", "tiz_tempo"),
+                           ("endurance", "tiz_endurance"), ("easy", "tiz_easy"))
+        dominant_band = sorted(
+            _DOMINANT_ORDER,
+            key=lambda b: (-_band_secs(b[1]), _DOMINANT_ORDER.index(b)),
+        )[0][0]
 
         summary = {
             "avg": dfa_block["avg"],
@@ -1108,7 +1327,7 @@ class IntervalsSync:
         return summary
 
     
-    def _generate_intervals(self, activities: List[Dict]) -> set:
+    def _generate_intervals(self, activities: List[Dict], present_activity_ids: set = None) -> set:
         """
         Generate intervals.json with incremental caching.
         
@@ -1116,6 +1335,13 @@ class IntervalsSync:
         Subsequent runs: scans recent activities (72h) for new sessions only.
         Fetches per-interval data for new qualifying activities, merges
         with cached data, and purges entries older than 14 days.
+
+        v3.113: callers pass the 28d extended activity set as `activities` so the
+        first-run backfill genuinely reaches the full 14d retention window (the old
+        7d display set silently truncated it). `present_activity_ids` (stringified
+        ids from that extended fetch) is used to prune cached entries whose activity
+        no longer exists — deleted/re-uploaded rides that previously lingered until
+        they aged out and could win the latest_session pointer.
 
         DFA a1 (v3.99): for each new qualifying activity, also fetches streams
         (dfa_a1, artifacts, heartrate, watts) and computes a per-session dfa block.
@@ -1249,6 +1475,7 @@ class IntervalsSync:
                 entry = {
                     "activity_id": act_id,
                     "date": act.get("start_date_local", "")[:10],
+                    "start_datetime": act.get("start_date_local", ""),  # v3.113: full local datetime for same-day tiebreak
                     "type": act.get("type", "Unknown"),
                     "name": act.get("name", ""),
                     "interval_summary": act.get("interval_summary"),
@@ -1262,7 +1489,19 @@ class IntervalsSync:
             print(f"    ✅ Fetched intervals for {len(new_entries)} new activit{'y' if len(new_entries) == 1 else 'ies'}")
         
         # Merge: keep cached entries within retention window + new entries
-        retained = [a for a in cached.get("activities", []) if a.get("date", "") >= retention_cutoff]
+        # Merge: keep cached entries within retention window, then (v3.113) drop any whose
+        # activity_id is no longer in the current fetched set. present_activity_ids comes from
+        # the 28d extended fetch, which fully covers the 14d retention window, so absence means
+        # the activity was deleted. Stringified compare guards int/str id mismatch. The
+        # `is None` guard preserves prior behaviour if a caller omits the set.
+        cached_within = [a for a in cached.get("activities", []) if a.get("date", "") >= retention_cutoff]
+        if present_activity_ids is None:
+            retained = cached_within
+        else:
+            retained = [a for a in cached_within if str(a.get("activity_id")) in present_activity_ids]
+            pruned = len(cached_within) - len(retained)
+            if pruned and self.debug:
+                print(f"    🧹 Pruned {pruned} stale cached interval/DFA entr{'y' if pruned == 1 else 'ies'} (activity no longer present)")
         all_entries = retained + new_entries
         
         # Build intervals.json
@@ -2477,7 +2716,11 @@ class IntervalsSync:
         # MUST run before _calculate_derived_metrics so self._intervals_data is
         # populated when _calculate_dfa_a1_profile reads it (v3.99 fix).
         print("Checking for interval data...")
-        interval_activity_ids = self._generate_intervals(activities_display)
+        # v3.113: pass the 28d extended set (not the 7d display set) so first-run backfill
+        # reaches the full 14d retention window, and supply the present-ID set for stale-entry
+        # pruning. Scan cutoff inside _generate_intervals still limits what actually gets fetched.
+        present_ids = {str(a.get("id")) for a in activities_extended if a.get("id")}
+        interval_activity_ids = self._generate_intervals(activities_extended, present_activity_ids=present_ids)
         if interval_activity_ids:
             print(f"  📊 {len(interval_activity_ids)} activit{'y' if len(interval_activity_ids) == 1 else 'ies'} with interval data")
         
@@ -2565,7 +2808,7 @@ class IntervalsSync:
                 "display_formatting": "For durations and sleep, always display the '_formatted' fields (e.g., sleep_formatted, duration_formatted, total_training_formatted) instead of converting decimal '_hours' values. The formatted fields are pre-calculated from raw seconds and avoid rounding errors.",
                 "data_period": f"Last {days_back} days (including today)",
                 "extended_data_note": f"ACWR and baselines calculated from {days_for_acwr} days of data",
-                "capability_metrics_note": "The 'capability' block in derived_metrics contains durability trend (aggregate decoupling 7d/28d), efficiency factor trend (aggregate EF 7d/28d), HRRc trend (heart rate recovery 7d/28d), TID comparison (7d vs 28d distribution drift), power curve delta (MMP shift at anchor durations across 28d windows — energy system adaptation direction), HR curve delta (max sustained HR shift at anchor durations — cardiac adaptation, cross-sport), sustainability profile (per-sport power/HR sustainability table for race estimation — 42d window, sport-filtered), and DFA a1 profile (per-session non-linear HRV index from AlphaHRV Connect IQ field — latest_session + trailing_by_sport with crossing-band LT1/LT2 estimates). These measure HOW the athlete expresses fitness, not just load. Use these for coaching context alongside traditional load metrics. Durability and EF trend direction matters more than absolute values. HRRc is display only — higher = better parasympathetic recovery. Power curve delta rotation_index reveals whether gains are sprint-biased (positive) or endurance-biased (negative). HR curve delta is ambiguous — rising max sustained HR may indicate fitness or fatigue; cross-reference with resting HRV/HR and RPE. Sustainability profile provides race estimation lookup: actual MMP, Coggan predicted (cycling only), CP/W' model (cycling only), model_divergence_pct (actual vs CP — divergence IS the coaching signal). CP/W' is primary for durations ≤20min; Coggan duration factors are the established reference for ≥60min. Source flag (observed_outdoor/observed_indoor) matters for cycling race estimation — indoor MMP is typically 3-5% lower. DFA a1 profile: thresholds (1.0 ≈ LT1, 0.5 ≈ LT2) cycling-validated only — non-cycling sports get rollups but validated=False. Crossing-band estimates: HR is pooled across all sessions; watts are split by environment for cycling (watts_outdoor, watts_indoor with per-environment n_sessions) — compare watts_outdoor against ftp, watts_indoor against ftp_indoor. Non-cycling sports keep pooled watts. Estimates are provisional at confidence='low' (suppressed for calibration delta surfacing) and usable at 'moderate' or 'high'. DFA a1 is a Tier-2 interpretive signal — does NOT enter readiness P0–P3 ladder, does NOT auto-update dossier zones; surfaces calibration deltas only. Quality gate: refuse to interpret when latest_session.sufficient=false or trailing confidence=null. See SECTION_11.md DFA a1 Protocol for full interpretation rules.",
+                "capability_metrics_note": "The 'capability' block in derived_metrics contains durability trend (aggregate decoupling 7d/28d), efficiency factor trend (aggregate EF 7d/28d), HRRc trend (heart rate recovery 7d/28d), TID comparison (7d vs 28d distribution drift), power curve delta (MMP shift at anchor durations across 28d windows — energy system adaptation direction), HR curve delta (max sustained HR shift at anchor durations — cardiac adaptation, cross-sport), sustainability profile (per-sport power/HR sustainability table for race estimation — 42d window, sport-filtered), and DFA a1 profile (per-session non-linear HRV index from AlphaHRV Connect IQ field — latest_session + trailing_by_sport with crossing-band easy_guard / LT1 / LT2 estimates). These measure HOW the athlete expresses fitness, not just load. Use these for coaching context alongside traditional load metrics. Durability and EF trend direction matters more than absolute values. HRRc is display only — higher = better parasympathetic recovery. Power curve delta rotation_index reveals whether gains are sprint-biased (positive) or endurance-biased (negative). HR curve delta is ambiguous — rising max sustained HR may indicate fitness or fatigue; cross-reference with resting HRV/HR and RPE. Sustainability profile provides race estimation lookup: actual MMP, Coggan predicted (cycling only), CP/W' model (cycling only), model_divergence_pct (actual vs CP — divergence IS the coaching signal). CP/W' is primary for durations ≤20min; Coggan duration factors are the established reference for ≥60min. Source flag (observed_outdoor/observed_indoor) matters for cycling race estimation — indoor MMP is typically 3-5% lower. DFA a1 profile: three self-describing markers (each estimate + crossing block carries marker_dfa_a1) — easy_guard (a1 1.0, a conservative easy-state guard, NOT a threshold), lt1 (a1 0.75, HRVT1 / aerobic threshold), lt2 (a1 0.5, HRVT2 / anaerobic threshold). The literature threshold markers (0.75 / 0.5) are cycling-validated only - non-cycling sports get rollups but validated=False. Every estimate requires a SUSTAINED contiguous crossing: each session's easy_guard_crossing / lt1_crossing / lt2_crossing carries a reason (ok / no_samples_in_band / insufficient_total_dwell / no_contiguous_dwell); scattered in-band time does not produce an estimate. HR is pooled across sessions; watts are split by environment for cycling (watts_outdoor, watts_indoor with per-environment n_sessions) - compare watts_outdoor against ftp, watts_indoor against ftp_indoor. Non-cycling sports keep pooled watts. easy_guard_estimate, lt1_estimate and lt2_estimate are each gated INDEPENDENTLY - null when that marker has fewer than 3 qualifying-crossing sessions; trailing_by_sport.{sport}.easy_guard_reason / lt1_reason / lt2_reason explains a null (insufficient_sessions, or a sub-threshold blocker such as no_contiguous_dwell). A null estimate means the athlete did not sustain that marker, NOT missing sensor data. IMPORTANT: easy_guard is a conservative easy-state compliance guard, NOT an LT1/aerobic-threshold estimate - never compare it to dossier zones and never treat it as a calibration or staleness signal; only lt1 (0.75) and lt2 (0.5) inform threshold calibration. lt1 (0.75) populates only on rides that sustain aerobic-threshold intensity, so it is often null on easy/deload riding - that is expected, not a data gap. Sport-level confidence is a coarse max across the THRESHOLD markers only (lt1, lt2; easy_guard excluded) - low is suppressed for calibration delta surfacing, usable at 'moderate' or 'high'; per-marker estimate presence + reason are authoritative. DFA a1 is a Tier-2 interpretive signal - does NOT enter readiness P0-P3 ladder, does NOT auto-update dossier zones; surfaces calibration deltas only (from lt1/lt2, never easy_guard). Quality gate: refuse to interpret any DFA output when latest_session.sufficient=false. Threshold (lt1/lt2) calibration additionally requires trailing confidence != null; when confidence is null, do NOT surface lt1/lt2 calibration deltas. easy_guard is NOT gated on confidence (it is excluded from it) - interpret easy_guard_estimate from its own reason / n_sessions / quality when present, but never as a calibration signal. See SECTION_11.md DFA a1 Protocol for full interpretation rules.",
                 "readiness_decision_note": "The 'readiness_decision' block contains a pre-computed go/modify/skip recommendation with priority level (P0=safety, P1=overload, P2=fatigue, P3=green), individual signal statuses, phase-adjusted thresholds, and structured modification guidance. Use this as the baseline for pre-workout recommendations. Override with explanation in the coach note if the AI's contextual judgment disagrees.",
                 "zone_preference": self.zone_preference if self.zone_preference else "default (power preferred, HR fallback)",
                 "wellness_field_scales": {
@@ -2676,7 +2919,15 @@ class IntervalsSync:
             "weekly_summary": self._compute_weekly_summary(activities_display, wellness),
             "race_calendar": race_calendar
         }
-        
+
+        # Body weight signal (v3.112) — gated W/kg + weekly weight trend.
+        # None when no field qualifies; AI omits the report section silently.
+        weight_signal = self._build_weight_signal(
+            wellness_extended, sport_settings, power_model, athlete_units
+        )
+        if weight_signal:
+            data["current_status"]["weight"] = weight_signal
+
         return data
 
     def _build_sport_thresholds(self, athlete: dict) -> dict:
@@ -2712,7 +2963,194 @@ class IntervalsSync:
                     candidates[family] = (entry, populated, sport_type)
 
         return {family: data for family, (data, _, _) in candidates.items()}
-    
+
+    def _build_weight_signal(self, wellness_extended: List[Dict],
+                              sport_settings: Dict, power_model: Dict,
+                              athlete_units: Optional[Dict[str, str]] = None) -> Optional[Dict]:
+        """
+        Build current_status.weight block — gated weight signals for block
+        (W/kg) and weekly (trend) reports. (v3.112)
+
+        Architecture: every metric below is computed here; the AI layer
+        interprets only. Failed-gate fields are ABSENT from the dict (not
+        null) so the AI can treat absence as the "omit section" signal —
+        no "insufficient data" boilerplate.
+
+        Display fields (per Display Unit Semantics): narrated weights ship
+        with a `display` sub-dict carrying {value, unit} pairs in the
+        athlete's preferred unit. W/kg stays unit-universal — no display
+        block on wkg_* fields. Slope display preserves 3dp precision and
+        emits a unit code suffixed with "/week".
+
+        Gates:
+          - weight_latest_kg / weight_latest_date:
+              latest weigh-in age <= 14 days
+          - wkg_current + wkg_ftp_source [+ ftp_setting_date]:
+              weight_latest present + FTP source available.
+              Tested cycling FTP from sportSettings preferred, eFTP fallback.
+              eFTP is not suppressed for stale tested FTP — staleness rides
+              on the source tag via ftp_setting_date. The date reflects the
+              FTP setting change recorded in ftp_history.json (Intervals
+              does not expose a formal test date).
+          - wkg_block_start / wkg_block_end / wkg_block_delta:
+              >=1 weigh-in within the FIRST 4 days of the trailing 28d
+              window (days [today-27, today-24]) AND >=1 weigh-in within
+              the LAST 4 days (days [today-3, today]). v1 block-window
+              proxy — Section 11 does not yet track explicit block
+              boundaries. Both endpoints use the current FTP, so the delta
+              reflects weight change across the window only.
+          - weight_7d_avg_kg:
+              >= 4 weigh-ins in trailing 7d
+          - weight_28d_slope_kg_per_week:
+              >= 14 weigh-ins in trailing 28d (linear slope)
+
+        Returns None when no field qualifies — caller omits the `weight`
+        key from current_status entirely.
+        """
+        BLOCK_WINDOW_DAYS = 28
+        BOUNDARY_WIDTH_DAYS = 4
+        today = datetime.now().date()
+        block: Dict = {}
+        display: Dict = {}
+
+        # --- Collect dated weight entries (newest-first) ---
+        entries: List[Tuple] = []
+        for w in (wellness_extended or []):
+            wt = w.get("weight")
+            if wt is None or wt == 0:
+                continue
+            date_str = w.get("id", "")
+            if not date_str:
+                continue
+            try:
+                d = datetime.strptime(date_str[:10], "%Y-%m-%d").date()
+            except Exception:
+                continue
+            entries.append((d, float(wt)))
+
+        if not entries:
+            return None
+
+        entries.sort(key=lambda x: x[0], reverse=True)
+
+        # --- weight_latest_kg / weight_latest_date (gate: <=14d age) ---
+        latest_date, latest_weight = entries[0]
+        latest_age_days = (today - latest_date).days
+        if 0 <= latest_age_days <= 14:
+            block["weight_latest_kg"] = round(latest_weight, 1)
+            block["weight_latest_date"] = latest_date.isoformat()
+            display["weight_latest"] = self._to_display(
+                latest_weight, "weight", athlete_units
+            )
+
+        # --- Resolve FTP source (tested preferred, eFTP fallback) ---
+        cycling = (sport_settings or {}).get("cycling", {})
+        tested_ftp = cycling.get("ftp")
+        eftp = (power_model or {}).get("eftp")
+
+        ftp_used: Optional[float] = None
+        ftp_source: Optional[str] = None
+        ftp_setting_date: Optional[str] = None
+
+        if tested_ftp:
+            ftp_used = float(tested_ftp)
+            ftp_source = "tested"
+            try:
+                ftp_history = self._load_ftp_history()
+                outdoor_dates = sorted(ftp_history.get("outdoor", {}).keys(), reverse=True)
+                indoor_dates = sorted(ftp_history.get("indoor", {}).keys(), reverse=True)
+                if outdoor_dates:
+                    ftp_setting_date = outdoor_dates[0]
+                elif indoor_dates:
+                    ftp_setting_date = indoor_dates[0]
+            except Exception:
+                ftp_setting_date = None
+        elif eftp:
+            ftp_used = float(eftp)
+            ftp_source = "eftp"
+
+        # --- wkg_current (depends on weight_latest_kg + FTP source) ---
+        if "weight_latest_kg" in block and ftp_used and block["weight_latest_kg"] > 0:
+            block["wkg_current"] = round(ftp_used / block["weight_latest_kg"], 2)
+            block["wkg_ftp_source"] = ftp_source
+            if ftp_setting_date:
+                block["ftp_setting_date"] = ftp_setting_date
+
+        # --- Block trajectory: first-4 / last-4 boundary windows ---
+        # First 4 days of trailing 28d window: [today-27, today-24]
+        # Last 4 days of trailing 28d window:  [today-3,  today]
+        first4_high = today - timedelta(days=BLOCK_WINDOW_DAYS - BOUNDARY_WIDTH_DAYS)  # today-24
+        first4_low = today - timedelta(days=BLOCK_WINDOW_DAYS - 1)                     # today-27
+        last4_low = today - timedelta(days=BOUNDARY_WIDTH_DAYS - 1)                    # today-3
+        last4_high = today                                                              # today
+
+        def _nearest_in_range(low, high, anchor):
+            """Pick the weigh-in within [low, high] closest to anchor."""
+            best = None
+            best_dist = None
+            for d, w in entries:
+                if low <= d <= high:
+                    dist = abs((d - anchor).days)
+                    if best_dist is None or dist < best_dist:
+                        best = w
+                        best_dist = dist
+            return best
+
+        block_start_anchor = first4_low                # day -27
+        block_end_anchor = today                       # day 0
+        weight_at_start = _nearest_in_range(first4_low, first4_high, block_start_anchor)
+        weight_at_end = _nearest_in_range(last4_low, last4_high, block_end_anchor)
+
+        if weight_at_start and weight_at_end and ftp_used:
+            block["wkg_block_start"] = round(ftp_used / weight_at_start, 2)
+            block["wkg_block_end"] = round(ftp_used / weight_at_end, 2)
+            block["wkg_block_delta"] = round(
+                block["wkg_block_end"] - block["wkg_block_start"], 2
+            )
+
+        # --- weight_7d_avg_kg (gate: >=4 entries in trailing 7d) ---
+        seven_d_cutoff = today - timedelta(days=6)
+        seven_d_weights = [w for d, w in entries if d >= seven_d_cutoff]
+        if len(seven_d_weights) >= 4:
+            avg_kg = sum(seven_d_weights) / len(seven_d_weights)
+            block["weight_7d_avg_kg"] = round(avg_kg, 1)
+            display["weight_7d_avg"] = self._to_display(avg_kg, "weight", athlete_units)
+
+        # --- weight_28d_slope_kg_per_week (gate: >=14 entries in trailing 28d) ---
+        twenty_eight_d_cutoff = today - timedelta(days=BLOCK_WINDOW_DAYS - 1)
+        slope_pairs = [(d, w) for d, w in entries if d >= twenty_eight_d_cutoff]
+        if len(slope_pairs) >= 14:
+            xs = [(d - twenty_eight_d_cutoff).days for d, _ in slope_pairs]
+            ys = [w for _, w in slope_pairs]
+            n = len(xs)
+            mean_x = sum(xs) / n
+            mean_y = sum(ys) / n
+            num = sum((xs[i] - mean_x) * (ys[i] - mean_y) for i in range(n))
+            den = sum((xs[i] - mean_x) ** 2 for i in range(n))
+            if den > 0:
+                slope_kg_per_week = (num / den) * 7
+                block["weight_28d_slope_kg_per_week"] = round(slope_kg_per_week, 3)
+                # Manual display build: preserves 3dp + appends "/week" to unit code.
+                # _to_display rounds to 1dp (correct for absolute weights, too coarse
+                # for slopes) — we mirror its conversion logic here instead.
+                weight_pref = (athlete_units or {}).get("weight")
+                if weight_pref == "lb":
+                    slope_display_value = round(slope_kg_per_week * 2.20462, 3)
+                    slope_display_unit = "lb/week"
+                else:
+                    slope_display_value = round(slope_kg_per_week, 3)
+                    slope_display_unit = "kg/week"
+                display["weight_28d_slope_per_week"] = {
+                    "value": slope_display_value,
+                    "unit": slope_display_unit,
+                }
+
+        if not block:
+            return None
+        if display:
+            block["display"] = display
+        return block
+
     def _calculate_derived_metrics(self, activities_7d: List[Dict], activities_28d: List[Dict],
                                     wellness_7d: List[Dict], wellness_extended: List[Dict],
                                     current_ctl: float, current_atl: float, current_tsb: float,
@@ -3287,15 +3725,13 @@ class IntervalsSync:
                 if date_str:
                     planned_dates.add(date_str)
         
-        # Get unique dates with completed activities (cycling only for fair comparison)
+        # Get unique dates with completed activities (any sport type)
         completed_dates = set()
-        cycling_types = {"Ride", "VirtualRide", "MountainBikeRide", "GravelRide"}
         
         for activity in activities:
-            if activity.get("type") in cycling_types:
-                date_str = activity.get("start_date_local", "")[:10]
-                if date_str:
-                    completed_dates.add(date_str)
+            date_str = (activity.get("date") or activity.get("start_date_local") or "")[:10]
+            if date_str:
+                completed_dates.add(date_str)
         
         # Calculate overlap
         matched_dates = planned_dates & completed_dates
@@ -3802,7 +4238,9 @@ class IntervalsSync:
             qualifying = []
             for act in activities:
                 # Raw API field names (before _format_activities)
-                dec = act.get("icu_hr_decoupling") or act.get("decoupling")
+                dec = act.get("icu_hr_decoupling")
+                if dec is None:
+                    dec = act.get("decoupling")
                 vi = act.get("icu_variability_index")
                 mt = act.get("moving_time", 0) or 0
 
@@ -3985,7 +4423,10 @@ class IntervalsSync:
                     continue
                 # API may return a dict (e.g. {"value": 34}) or a plain number
                 if isinstance(hrrc, dict):
-                    hrrc = hrrc.get("value") or hrrc.get("hrr")
+                    _v = hrrc.get("value")
+                    if _v is None:
+                        _v = hrrc.get("hrr")
+                    hrrc = _v
                 if isinstance(hrrc, (int, float)) and hrrc > 0:
                     qualifying.append(float(hrrc))
             return qualifying
@@ -4339,7 +4780,10 @@ class IntervalsSync:
         dfa_activities = [a for a in activities if a.get("dfa") is not None]
         if not dfa_activities:
             return None
-        dfa_activities.sort(key=lambda a: a.get("date", ""), reverse=True)
+        # v3.113: sort by full start_datetime (ISO strings sort chronologically) with day-only
+        # date as fallback, so two genuine same-day DFA rides (e.g. indoor AM + outdoor PM)
+        # resolve by actual time rather than arbitrary cache order for latest_session/window.
+        dfa_activities.sort(key=lambda a: (a.get("start_datetime") or a.get("date", "")), reverse=True)
 
         # --- latest_session: most recent SUFFICIENT session ---
         latest_session = None
@@ -4349,10 +4793,10 @@ class IntervalsSync:
             if quality.get("sufficient"):
                 tiz_split = {}
                 for key, label in [
-                    ("tiz_below_lt1", "below_lt1"),
-                    ("tiz_lt1_transition", "lt1_transition"),
-                    ("tiz_transition_lt2", "transition_lt2"),
-                    ("tiz_above_lt2", "above_lt2"),
+                    ("tiz_easy", "easy"),
+                    ("tiz_endurance", "endurance"),
+                    ("tiz_tempo", "tempo"),
+                    ("tiz_supra", "supra"),
                 ]:
                     band = block.get(key)
                     tiz_split[label] = band["pct"] if band else 0.0
@@ -4415,13 +4859,14 @@ class IntervalsSync:
             ]
             drift_mean = round(sum(drift_values) / len(drift_values), 3) if drift_values else None
 
-            # Threshold estimates from crossing bands — only sessions with sufficient dwell
+            # Threshold estimates from crossing bands — only sessions with a qualifying
+            # contiguous crossing (v3.113: reason=="ok"; secs_in_band alone no longer qualifies).
             def _avg_crossing(key, field, subset=None):
                 source = subset if subset is not None else window
                 vals = []
                 for a in source:
                     cb = a["dfa"].get(key)
-                    if cb and cb.get("secs_in_band", 0) >= self.DFA_MIN_CROSSING_DWELL_SECS:
+                    if cb and cb.get("reason") == "ok":
                         v = cb.get(field)
                         if v is not None:
                             vals.append(v)
@@ -4429,47 +4874,85 @@ class IntervalsSync:
                     return None, 0
                 return round(sum(vals) / len(vals)), len(vals)
 
-            # HR estimates — pooled across all sessions (physiology signal, not environment-dependent)
-            lt1_hr, lt1_n_hr = _avg_crossing("lt1_crossing", "avg_hr")
-            lt2_hr, lt2_n_hr = _avg_crossing("lt2_crossing", "avg_hr")
-
-            # Watts estimates — split by environment for cycling, pooled for other sports
+            # Watts subsets for cycling (environment split); HR is always pooled.
             is_cycling = (family == "cycling")
             if is_cycling:
                 indoor = [a for a in window if self._is_indoor_cycling(a.get("type", ""))]
                 outdoor = [a for a in window if not self._is_indoor_cycling(a.get("type", ""))]
-                lt1_watts_out, lt1_n_w_out = _avg_crossing("lt1_crossing", "avg_watts", outdoor)
-                lt1_watts_in, lt1_n_w_in = _avg_crossing("lt1_crossing", "avg_watts", indoor)
-                lt2_watts_out, lt2_n_w_out = _avg_crossing("lt2_crossing", "avg_watts", outdoor)
-                lt2_watts_in, lt2_n_w_in = _avg_crossing("lt2_crossing", "avg_watts", indoor)
-                lt1_n_w = lt1_n_w_out + lt1_n_w_in
-                lt2_n_w = lt2_n_w_out + lt2_n_w_in
-            else:
-                lt1_watts, lt1_n_w = _avg_crossing("lt1_crossing", "avg_watts")
-                lt2_watts, lt2_n_w = _avg_crossing("lt2_crossing", "avg_watts")
 
-            # Observability: how many sessions in window had ≥dwell threshold in each band.
-            # If confidence stays stuck at low/null with high n_sessions, these counts reveal
-            # whether the issue is "athlete rarely crosses this band" (count low) vs some
-            # other failure mode. Diagnostic only — not used in confidence logic itself.
-            lt1_crossing_sessions = sum(
-                1 for a in window
-                if (a["dfa"].get("lt1_crossing") or {}).get("secs_in_band", 0)
-                >= self.DFA_MIN_CROSSING_DWELL_SECS
-            )
-            lt2_crossing_sessions = sum(
-                1 for a in window
-                if (a["dfa"].get("lt2_crossing") or {}).get("secs_in_band", 0)
-                >= self.DFA_MIN_CROSSING_DWELL_SECS
-            )
+            def _threshold_reason(key, thr_n):
+                # 'ok' when the marker has enough qualifying-crossing sessions; else explain why.
+                if thr_n >= self.DFA_MIN_CROSSING_SESSIONS_N:
+                    return "ok"
+                if thr_n >= 1:
+                    return "insufficient_sessions"
+                # thr_n == 0: modal per-session blocker across the window, tiebreak toward the
+                # more-blocking reason (no_samples > insufficient_total > no_contiguous).
+                counts = {}
+                for a in window:
+                    r = (a["dfa"].get(key) or {}).get("reason")
+                    if r and r != "ok":
+                        counts[r] = counts.get(r, 0) + 1
+                if not counts:
+                    return "no_samples_in_band"
+                severity = {"no_samples_in_band": 0, "insufficient_total_dwell": 1, "no_contiguous_dwell": 2}
+                return sorted(counts.items(), key=lambda kv: (-kv[1], severity.get(kv[0], 99)))[0][0]
 
-            # Confidence based on n sessions contributing to crossing estimates
-            crossing_n = max(lt1_n_hr, lt1_n_w, lt2_n_hr, lt2_n_w)
+            # Per-marker estimate builder (v3.114): generalizes the v3.113 per-threshold
+            # gating/reason logic across all three markers (easy_guard 1.0, lt1 0.75, lt2 0.5).
+            # HR pooled; watts split by environment for cycling. Each estimate carries
+            # marker_dfa_a1 so the JSON is self-describing. Gated on its OWN qualifying count.
+            def _build_marker(key, marker_value):
+                hr, n_hr = _avg_crossing(key, "avg_hr")
+                if is_cycling:
+                    w_out, n_w_out = _avg_crossing(key, "avg_watts", outdoor)
+                    w_in, n_w_in = _avg_crossing(key, "avg_watts", indoor)
+                    n_w = n_w_out + n_w_in
+                else:
+                    watts, n_w = _avg_crossing(key, "avg_watts")
+                n_marker = max(n_hr, n_w)
+                crossing_sessions = sum(
+                    1 for a in window if (a["dfa"].get(key) or {}).get("reason") == "ok"
+                )
+                reason = _threshold_reason(key, n_marker)
+                if n_marker < self.DFA_MIN_CROSSING_SESSIONS_N:
+                    return None, reason, crossing_sessions, n_marker
+                if is_cycling:
+                    est = {
+                        "marker_dfa_a1": marker_value,
+                        "hr": hr,
+                        "watts_outdoor": w_out,
+                        "watts_indoor": w_in,
+                        "n_sessions": n_marker,
+                        "n_sessions_outdoor": n_w_out,
+                        "n_sessions_indoor": n_w_in,
+                    }
+                else:
+                    est = {
+                        "marker_dfa_a1": marker_value,
+                        "hr": hr,
+                        "watts": watts,
+                        "n_sessions": n_marker,
+                    }
+                return est, reason, crossing_sessions, n_marker
+
+            easy_guard_est, easy_guard_reason, easy_guard_crossing_sessions, easy_guard_n = \
+                _build_marker("easy_guard_crossing", self.DFA_EASY_GUARD)
+            lt1_est, lt1_reason, lt1_crossing_sessions, lt1_n = \
+                _build_marker("lt1_crossing", self.DFA_LT1)
+            lt2_est, lt2_reason, lt2_crossing_sessions, lt2_n = \
+                _build_marker("lt2_crossing", self.DFA_LT2)
+
+            # Sport-level confidence: coarse, max across THRESHOLD markers only (lt1, lt2).
+            # easy_guard is a compliance guard, deliberately EXCLUDED — it populates on easy
+            # rides and would inflate threshold-calibration confidence (v3.114). Consumed by the
+            # agent + BLOCK_REPORT gate; per-marker estimate presence + reason are authoritative.
+            crossing_n = max(lt1_n, lt2_n)
             if crossing_n >= 6:
                 confidence = "high"
             elif crossing_n >= 4:
                 confidence = "moderate"
-            elif crossing_n >= 3:
+            elif crossing_n >= self.DFA_MIN_CROSSING_SESSIONS_N:
                 confidence = "low"
             else:
                 confidence = None  # not enough sessions for any threshold estimate
@@ -4477,55 +4960,29 @@ class IntervalsSync:
             quality_avg = round(
                 sum(a["dfa"]["quality"]["valid_pct"] for a in window) / n, 1
             )
-
             validated = family in self.DFA_VALIDATED_SPORTS
-
-            # Build estimate blocks — cycling splits watts by environment, others keep pooled
-            if is_cycling:
-                lt1_est = {
-                    "hr": lt1_hr if confidence else None,
-                    "watts_outdoor": lt1_watts_out if confidence else None,
-                    "watts_indoor": lt1_watts_in if confidence else None,
-                    "n_sessions": max(lt1_n_hr, lt1_n_w),
-                    "n_sessions_outdoor": lt1_n_w_out,
-                    "n_sessions_indoor": lt1_n_w_in,
-                } if confidence else None
-                lt2_est = {
-                    "hr": lt2_hr if confidence else None,
-                    "watts_outdoor": lt2_watts_out if confidence else None,
-                    "watts_indoor": lt2_watts_in if confidence else None,
-                    "n_sessions": max(lt2_n_hr, lt2_n_w),
-                    "n_sessions_outdoor": lt2_n_w_out,
-                    "n_sessions_indoor": lt2_n_w_in,
-                } if confidence else None
-            else:
-                lt1_est = {
-                    "hr": lt1_hr if confidence else None,
-                    "watts": lt1_watts if confidence else None,
-                    "n_sessions": max(lt1_n_hr, lt1_n_w),
-                } if confidence else None
-                lt2_est = {
-                    "hr": lt2_hr if confidence else None,
-                    "watts": lt2_watts if confidence else None,
-                    "n_sessions": max(lt2_n_hr, lt2_n_w),
-                } if confidence else None
 
             sport_block = {
                 "n_sessions": n,
                 "date_range": [window[-1].get("date"), window[0].get("date")],
                 "avg_dfa_a1": avg_dfa,
                 "drift_delta_mean": drift_mean,
+                "easy_guard_crossing_sessions": easy_guard_crossing_sessions,
                 "lt1_crossing_sessions": lt1_crossing_sessions,
                 "lt2_crossing_sessions": lt2_crossing_sessions,
+                "easy_guard_estimate": easy_guard_est,
+                "easy_guard_reason": easy_guard_reason,
                 "lt1_estimate": lt1_est,
+                "lt1_reason": lt1_reason,
                 "lt2_estimate": lt2_est,
+                "lt2_reason": lt2_reason,
                 "quality_avg_pct": quality_avg,
                 "validated": validated,
                 "confidence": confidence,
             }
             if not validated:
                 sport_block["note"] = (
-                    f"DFA a1 threshold mapping (1.0/0.5) is cycling-validated. "
+                    f"DFA a1 threshold mapping (LT1 0.75 / LT2 0.5) is cycling-validated. "
                     f"{family} thresholds may differ — treat estimates as informational only."
                 )
             trailing_by_sport[family] = sport_block
@@ -6167,19 +6624,24 @@ class IntervalsSync:
         # --- P1: Acute overload ---
         p1_skip_reasons = []
         p1_modify_reasons = []
+        p1_alarm_refs = []
         
         if acwr is not None and acwr >= 1.5:
             p1_skip_reasons.append(f"ACWR {acwr} >= 1.5")
+            # acwr tier-2 alert object always exists here (fires >=1.35; skip >=1.5); ref only if present
+            p1_alarm_refs.extend(a["metric"] for a in alerts if a.get("metric") == "acwr")
         
         # Compound: deep TSB + HRV confirming
         if tsb is not None and tsb < -30 and hrv_delta_pct is not None and hrv_delta_pct < -10:
             p1_skip_reasons.append(f"TSB {tsb} < -30 with HRV {hrv_delta_pct}% below baseline")
+            # no discrete alert object for the TSB+HRV composite -> no alarm_ref (schema requires refs resolve to alerts[])
         
         # RI < 0.7 + persistent tier-1 alerts
-        tier1_persistent = [a for a in alerts if a.get("tier") == 1 and (a.get("persistence_days") or 0) >= 2]
+        tier1_persistent = [a for a in alerts if a.get("tier") == 1 and a.get("severity") in ("warning", "alarm") and a.get("persistence_days") is not None and a.get("persistence_days") >= 2]
         if ri is not None and ri < 0.7 and tier1_persistent:
             persistent_metrics = [a["metric"] for a in tier1_persistent]
             p1_skip_reasons.append(f"RI {ri} < 0.7 with persistent alerts: {', '.join(persistent_metrics)}")
+            p1_alarm_refs.extend(persistent_metrics)
         
         if p1_skip_reasons:
             return {
@@ -6196,7 +6658,7 @@ class IntervalsSync:
                 "race_week_defers": False,
                 "modification": None,
                 "reason": f"P1 acute overload. {'; '.join(p1_skip_reasons)}.",
-                "alarm_refs": [a["metric"] for a in tier1_persistent]
+                "alarm_refs": p1_alarm_refs
             }
         
         # P1 modify tier (sub-skip thresholds)
@@ -6604,7 +7066,7 @@ class IntervalsSync:
                 print(f"  Building {label} monthly tier...")
                 monthly_tiers[f"monthly_{label}"] = self._build_monthly_tier(
                     activities_by_date, wellness_by_date, days=days_back,
-                    athlete_units=athlete_units
+                    athlete_units=athlete_units, weekly_180d=weekly_180d
                 )
             else:
                 monthly_tiers[f"monthly_{label}"] = []
@@ -6865,7 +7327,61 @@ class IntervalsSync:
             
             week_primary_sport = max(sport_tss, key=sport_tss.get) if sport_tss else None
             week_primary_sport_tss = round(sport_tss[week_primary_sport], 0) if week_primary_sport else None
-            
+
+            # Weekly capability rollup (v3.110) — trajectory layer for Season Report v2.
+            # Mirrors gating rules from _calculate_durability / _calculate_efficiency_factor /
+            # _calculate_hrrc_trend but operates on the week's activities without the trend
+            # or alert layer. N>=1 is sufficient; qualifying count lets the report calibrate.
+            # Durability: explicit is not None check (avoids silent drop of 0.0 values).
+            _week_acts = [
+                a for d in range(7)
+                for a in activities_by_date.get(
+                    (current + timedelta(days=d)).strftime("%Y-%m-%d"), []
+                )
+                if (current + timedelta(days=d)) <= now
+            ]
+            _CYCLING_EF_TYPES = {"Ride", "VirtualRide", "MountainBikeRide", "GravelRide"}
+
+            # Durability (VI<=1.05, VI>0, mt>=5400, decoupling not None)
+            _dur_vals = []
+            for _a in _week_acts:
+                _dec = _a.get("icu_hr_decoupling")
+                if _dec is None:
+                    _dec = _a.get("decoupling")
+                _vi = _a.get("icu_variability_index")
+                _mt = _a.get("moving_time", 0) or 0
+                if (_dec is not None and _vi is not None
+                        and _vi > 0 and _vi <= 1.05 and _mt >= 5400):
+                    _dur_vals.append(_dec)
+            week_durability_mean = round(statistics.mean(_dur_vals), 2) if _dur_vals else None
+            week_durability_qualifying = len(_dur_vals)
+
+            # EF (cycling only, VI<=1.05, VI>0, mt>=1200, EF not None)
+            _ef_vals = []
+            for _a in _week_acts:
+                _ef = _a.get("icu_efficiency_factor")
+                _vi = _a.get("icu_variability_index")
+                _mt = _a.get("moving_time", 0) or 0
+                if (_ef is not None and _a.get("type", "") in _CYCLING_EF_TYPES
+                        and _vi is not None and _vi > 0 and _vi <= 1.05 and _mt >= 1200):
+                    _ef_vals.append(_ef)
+            week_ef_mean = round(statistics.mean(_ef_vals), 2) if _ef_vals else None
+            week_ef_qualifying = len(_ef_vals)
+
+            # HRRc (icu_hrr not None, >0)
+            _hrrc_vals = []
+            for _a in _week_acts:
+                _hrrc = _a.get("icu_hrr")
+                if isinstance(_hrrc, dict):
+                    _v = _hrrc.get("value")
+                    if _v is None:
+                        _v = _hrrc.get("hrr")
+                    _hrrc = _v
+                if isinstance(_hrrc, (int, float)) and _hrrc > 0:
+                    _hrrc_vals.append(float(_hrrc))
+            week_hrrc_mean = round(statistics.mean(_hrrc_vals), 1) if _hrrc_vals else None
+            week_hrrc_qualifying = len(_hrrc_vals)
+
             rows.append({
                 "week_start": current.strftime("%Y-%m-%d"),
                 "total_hours": round(week_seconds / 3600, 2),
@@ -6900,7 +7416,13 @@ class IntervalsSync:
                 "monotony": week_monotony,
                 "intensity_basis_breakdown": intensity_basis_counts if hard_days > 0 else None,
                 "acwr": None,  # computed in post-pass below
-                "phase_detected": None  # populated by _detect_phase_v2
+                "phase_detected": None,  # populated by _detect_phase_v2
+                "durability_mean": week_durability_mean,
+                "durability_qualifying": week_durability_qualifying,
+                "ef_mean": week_ef_mean,
+                "ef_qualifying": week_ef_qualifying,
+                "hrrc_mean": week_hrrc_mean,
+                "hrrc_qualifying": week_hrrc_qualifying,
             })
             
             current += timedelta(days=7)
@@ -6921,12 +7443,19 @@ class IntervalsSync:
     
     def _build_monthly_tier(self, activities_by_date: Dict, wellness_by_date: Dict,
                             days: int,
-                            athlete_units: Optional[Dict[str, str]] = None) -> List[Dict]:
+                            athlete_units: Optional[Dict[str, str]] = None,
+                            weekly_180d: Optional[List[Dict]] = None) -> List[Dict]:
         """Build monthly aggregate rows for 1/2/3-year tiers.
-        
+
         athlete_units (v3.109): when provided, each row gets a `display` block
         with avg_weight (display.avg_weight) alongside canonical avg_weight_kg.
         Aggregate naming preserved — point-in-time rows expose `display.weight`.
+
+        weekly_180d (v3.110): when provided, dominant_phase is derived via modal
+        aggregation of already-computed phase_detected values from weekly rows
+        whose span overlaps the month (overlap: week_start < next_month AND
+        week_end >= current_month). TSS-weighted tie-break. None when no
+        overlapping weekly rows exist (month outside 180d window).
         """
         rows = []
         now = datetime.now()
@@ -7022,20 +7551,37 @@ class IntervalsSync:
             # Calculate weeks in this month for per-week averages
             weeks_in_period = max(1, total_days_in_month / 7)
             
-            # Determine dominant phase (simplified: based on CTL trend and zone distribution)
-            dominant_phase = "Unknown"
-            if ctl_values and len(ctl_values) >= 2:
-                ctl_trend = ctl_values[-1] - ctl_values[0]
-                qi_pct = (z4_plus_time / total_zone_time * 100) if total_zone_time > 0 else 0
-                
-                if ctl_trend > 3 and qi_pct > 15:
-                    dominant_phase = "Build"
-                elif ctl_trend > 1:
-                    dominant_phase = "Base"
-                elif ctl_trend < -3:
-                    dominant_phase = "Recovery"
-                else:
-                    dominant_phase = "Maintenance"
+            # Determine dominant phase via modal aggregation of weekly_180d phase_detected
+            # values whose week span overlaps this month (v3.110). Overlap test:
+            #   week_start < next_month AND week_end >= current_month
+            # Catches boundary weeks that straddle month edges.
+            # Rule: most-frequent label wins. TSS is tie-break only (not primary weight).
+            # Falls back to None when no overlapping rows exist (month outside 180d window).
+            dominant_phase = None
+            if weekly_180d:
+                phase_counts: Dict[str, int] = {}
+                phase_tss_tb: Dict[str, float] = {}  # TSS tie-break accumulator
+                for wrow in weekly_180d:
+                    phase = wrow.get("phase_detected")
+                    if not phase:
+                        continue
+                    try:
+                        ws = datetime.strptime(wrow["week_start"], "%Y-%m-%d")
+                    except (KeyError, ValueError):
+                        continue
+                    we = ws + timedelta(days=6)
+                    if ws < next_month and we >= current_month:
+                        phase_counts[phase] = phase_counts.get(phase, 0) + 1
+                        phase_tss_tb[phase] = phase_tss_tb.get(phase, 0.0) + (wrow.get("total_tss") or 0.0)
+                if phase_counts:
+                    max_count = max(phase_counts.values())
+                    candidates = [p for p, c in phase_counts.items() if c == max_count]
+                    # Single winner — no tie-break needed
+                    if len(candidates) == 1:
+                        dominant_phase = candidates[0]
+                    else:
+                        # Tie: pick candidate with highest accumulated TSS
+                        dominant_phase = max(candidates, key=lambda p: phase_tss_tb.get(p, 0.0))
             
             rows.append({
                 "month": month_str,
@@ -7449,7 +7995,10 @@ class IntervalsSync:
             
             raw_hrrc = act.get("icu_hrr")
             if isinstance(raw_hrrc, dict):
-                raw_hrrc = raw_hrrc.get("value") or raw_hrrc.get("hrr")
+                _v = raw_hrrc.get("value")
+                if _v is None:
+                    _v = raw_hrrc.get("hrr")
+                raw_hrrc = _v
             
             distance_km = round((act.get("distance") or 0) / 1000, 2)
             elevation_m = act.get("total_elevation_gain")
@@ -7460,6 +8009,7 @@ class IntervalsSync:
                 "type": act.get("type", "Unknown"),
                 "name": activity_name,
                 "duration_hours": round((act.get("moving_time") or 0) / 3600, 2),
+                "duration_formatted": self._format_duration(int(act.get("moving_time") or 0)),
                 "distance_km": distance_km,
                 "tss": act.get("icu_training_load"),
                 "intensity_factor": act.get("icu_intensity"),
@@ -9498,6 +10048,23 @@ def main():
     
     print(f"\n🔄 Fetching {args.days} days of data (extended 28 days for ACWR)...")
     
+    # === AUTO HISTORY GENERATION (must precede collect_training_data so latest.json reads fresh history metadata) ===
+    if sync.should_generate_history():
+        try:
+            print("\n📊 Auto-generating history.json...")
+            history = sync.generate_history()
+            if args.output:
+                history_path = sync.data_dir / sync.HISTORY_FILE
+                with open(history_path, 'w') as f:
+                    json.dump(history, f, indent=2, default=str)
+                print(f"   ✅ history.json saved to {history_path}")
+            else:
+                sync.publish_to_github(history, filepath="history.json",
+                                       commit_message=f"Auto-generate history.json - {datetime.now().strftime('%Y-%m-%d')}")
+                print("   ✅ history.json auto-generated and pushed to GitHub")
+        except Exception as e:
+            print(f"   ⚠️ History generation failed (non-critical): {e}")
+    
     data = sync.collect_training_data(days_back=args.days)
     
     # Extract derived metrics for display
@@ -9569,18 +10136,6 @@ def main():
             with open(routes_path, 'w') as f:
                 json.dump(routes_data, f, indent=2, default=str)
             print(f"   🗺️  routes.json saved ({len(routes_data.get('events', []))} event(s))")
-        
-        # === AUTO HISTORY GENERATION (local mode) ===
-        if sync.should_generate_history():
-            try:
-                print("\n📊 Auto-generating history.json...")
-                history = sync.generate_history()
-                history_path = sync.data_dir / sync.HISTORY_FILE
-                with open(history_path, 'w') as f:
-                    json.dump(history, f, indent=2, default=str)
-                print(f"   ✅ history.json saved to {history_path}")
-            except Exception as e:
-                print(f"   ⚠️ History generation failed (non-critical): {e}")
     else:
         raw_url = sync.publish_to_github(data)
         
@@ -9619,17 +10174,6 @@ def main():
                 print(f"   🗺️  routes.json pushed ({len(routes_data.get('events', []))} event(s))")
             except Exception as e:
                 print(f"   ⚠️ routes.json push failed (non-critical): {e}")
-        
-        # === AUTO HISTORY GENERATION (Sundays/Mondays, first two runs after midnight) ===
-        if sync.should_generate_history():
-            try:
-                print("\n📊 Auto-generating history.json...")
-                history = sync.generate_history()
-                sync.publish_to_github(history, filepath="history.json",
-                                       commit_message=f"Auto-generate history.json - {datetime.now().strftime('%Y-%m-%d')}")
-                print("   ✅ history.json auto-generated and pushed to GitHub")
-            except Exception as e:
-                print(f"   ⚠️ History generation failed (non-critical): {e}")
         
         # === UPDATE NOTIFICATIONS ===
         try:
