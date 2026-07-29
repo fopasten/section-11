@@ -1,13 +1,14 @@
 {
-  "generated_at": "2026-07-28T23:55:56.192429",
-  "version": "3.109",
-  "script_hash": "f54c8dd00126",
+  "generated_at": "2026-07-29T01:13:07.754848",
+  "version": "3.118",
+  "script_hash": "1eed33a9dc1e",
   "scan_hours": 72,
   "retention_days": 14,
   "activities": [
     {
       "activity_id": "i169451244",
       "date": "2026-07-26",
+      "start_datetime": "2026-07-26T12:22:01",
       "type": "Ride",
       "name": "Cycling",
       "interval_summary": [
