@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T23:49:59.009466",
+  "generated_at": "2026-08-20T01:03:11.089347",
   "version": "3.118",
   "script_hash": "1eed33a9dc1e",
   "scan_hours": 72,
@@ -560,6 +560,28 @@
           "zone": 1,
           "training_load": 11.338177,
           "decoupling": 4.6107173
+        }
+      ]
+    },
+    {
+      "activity_id": "i177762476",
+      "date": "2026-08-19",
+      "start_datetime": "2026-08-19T20:16:13",
+      "type": "VirtualRide",
+      "name": "KICKR",
+      "interval_summary": null,
+      "intervals": [
+        {
+          "type": "RECOVERY",
+          "duration_secs": 3901,
+          "avg_power": 128,
+          "max_power": 240,
+          "avg_hr": 139,
+          "max_hr": 155,
+          "avg_cadence": 93.398926,
+          "zone": 2,
+          "training_load": 39.583004,
+          "decoupling": 2.1543245
         }
       ]
     }
