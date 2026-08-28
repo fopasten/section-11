@@ -1,32 +1,10 @@
 {
-  "generated_at": "2026-08-27T21:02:06.684957",
+  "generated_at": "2026-08-28T05:23:29.291846",
   "version": "3.118",
   "script_hash": "1eed33a9dc1e",
   "scan_hours": 72,
   "retention_days": 14,
   "activities": [
-    {
-      "activity_id": "i175607080",
-      "date": "2026-08-13",
-      "start_datetime": "2026-08-13T20:19:29",
-      "type": "VirtualRide",
-      "name": "KICKR",
-      "interval_summary": null,
-      "intervals": [
-        {
-          "type": "RECOVERY",
-          "duration_secs": 3949,
-          "avg_power": 114,
-          "max_power": 181,
-          "avg_hr": 126,
-          "max_hr": 141,
-          "avg_cadence": 86.037254,
-          "zone": 1,
-          "training_load": 33.64412,
-          "decoupling": -0.8287501
-        }
-      ]
-    },
     {
       "activity_id": "i176164643",
       "date": "2026-08-15",
@@ -672,6 +650,28 @@
           "zone": 1,
           "training_load": 1.8968073,
           "decoupling": 0.31143782
+        }
+      ]
+    },
+    {
+      "activity_id": "i180503441",
+      "date": "2026-08-27",
+      "start_datetime": "2026-08-27T17:23:41",
+      "type": "Ride",
+      "name": "Cycling",
+      "interval_summary": null,
+      "intervals": [
+        {
+          "type": "RECOVERY",
+          "duration_secs": 4129,
+          "avg_power": 125,
+          "max_power": 576,
+          "avg_hr": 150,
+          "max_hr": 181,
+          "avg_cadence": 85.19268,
+          "zone": 2,
+          "training_load": 45.950844,
+          "decoupling": 5.3793497
         }
       ]
     }
