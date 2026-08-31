@@ -1,43 +1,52 @@
 # ATHLETE DOSSIER: Section 11
 
 ## 1. PHYSIOLOGY & ZONES
-- **FTP:** 235W (Current, trending upward)
-- **Resting HR:** 49 bpm
+- **Weight:** 76.5 kg
+- **FTP:** 213W (eFTP currently tracking at 211.2W)
+- **Resting HR:** 46 bpm
 - **Max HR:** 194 bpm
-- **LTHR:** 172 bpm (Estimate)
+- **LTHR:** 176 bpm
 
-### POWER ZONES (Coggan-based)
-- Z1 (Recovery): <129W
-- Z2 (Endurance): 132–176W
-- Z3 (Tempo): 179–204W
-- Z4 (Threshold): 207–247W
-- Z5 (VO2 Max): 249–282W
-- Z6 (Anaerobic): >282W
+### POWER ZONES (Coggan-based off 213W)
 
-### HEART RATE ZONES (LTHR Model)
+- Z1 (Recovery): <117W
+- Z2 (Endurance): 118–159W (Targeting 125-145W for long indoor blocks)
+- Z3 (Tempo): 160–191W
+- Z4 (Threshold): 192–223W
+- Z5 (VO2 Max): 224–255W
+- Z6 (Anaerobic): >255W
+
+### HEART RATE ZONES (LTHR Model off 176 bpm)
+
 - Z1 (Recovery): <142 bpm
 - Z2 (Endurance): 143–156 bpm
-- Z3 (Tempo): 158–164 bpm
-- Z4 (Threshold): 165–174 bpm
-- Z5 (VO2 Max): 176+ bpm
+- Z3 (Tempo): 157–165 bpm
+- Z4 (Threshold): 166–176 bpm
+- Z5 (VO2 Max): 177+ bpm
 
 ## 2. TRAINING BACKGROUND
-- **Experience:** 7 years cycling (on/off); 6 months consistent rigorous training.
-- **Volume:** 8–10 hours cycling/week + 2–3 hours Bouldering/week.
-- **Typical Week:**
-  - Tue/Thu: Quality (Threshold/Tempo/VO2).
-  - Sat/Sun: Long rides (Volume focus).
-  - Other: Active recovery or Z2 volume.
+
+- **Experience:** 7+ years cycling; currently in a structured comeback phase rapidly rebuilding aerobic consistency.
+- **Volume:** ~7.5 hours cycling/week (recently 7h24m), supplemented by heavy Time on Feet (2–4 hours daily).
+
+- **Typical Week (Flexible Microcycle):**
+- **Mon/Wed:** Quality work (Threshold/Intervals) or hard outdoor climbs.
+- **Tue/Thu:** Hybrid days (Indoor Z2 flush + 20-30 min compound weightlifting).
+- **Sat/Sun:** Long endurance (90–105 min indoor or 2hr+ outdoor).
+- **Daily Base:** 1.5+ hours on the walking pad at mid-to-fast pace (~95 bpm) during work.
 
 ## 3. GOALS & OBJECTIVES
-- **Primary:** Consistent FTP growth and general fitness.
-- **Secondary:** Long-distance endurance capacity and body composition (getting leaner).
+
+- **Primary:** Fat loss (maintaining a strict 200–400 daily calorie deficit) while aggressively rebuilding the aerobic engine.
+- **Secondary:** Preserving lean muscle mass via strategic strength training and utilizing high non-exercise activity thermogenesis (NEAT) for metabolic health.
 
 ## 4. CONSTRAINTS & HEALTH
-- **Injury History:** Occasional knee discomfort on high-climbing days.
-- **Biomechanical:** Lower back pain when climbing hard in a seated position.
-- **Availability:** Flexible schedule, but moves sessions based on feel/RPE.
+
+- **Injury History:** Occasional knee discomfort on high-climbing days; lower back pain when climbing hard in a seated position.
+- **Biomechanical/Physiological:** High acute workload ratio (ACWR) sensitivity during volume ramp-ups. High susceptibility to temporary water retention masking fat loss on the scale due to inflammation and plasma expansion.
+- **Availability:** Flexible. Will manipulate the 7-day microcycle (Rest Day Swaps or Pre-Loads) to accommodate weekend trips, anniversaries, or family obligations without losing momentum.
 
 ## 5. PREFERENCES
-- **Style:** Hybrid. Structured plans with power ranges + HR caps, but flexible based on RPE and daily readiness.
-- **Environment:** Mostly outdoor training; indoor direct-drive trainer used for winter/off-season.ø
+
+- **Style:** Hybrid. Uses automated data parsing (Kiro CLI) to track recovery (HRV/RHR) and adjust daily readiness. Values fueling the work (guayaba bites for 1:1 glucose/fructose on the bike) and maintaining high protein (~145g+) for recovery.
+- **Environment:** Orbea road bike used for outdoor climbing (e.g., San Cristóbal) when weather permits; direct-drive Wahoo KICKR relied heavily upon for hyper-controlled steady-state Zone 2 and threshold intervals during rain or tight schedules. Weights and rack for free weight training. Orbea Terra Gravel for z2 outside available as well.
