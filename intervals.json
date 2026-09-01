@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01T01:17:31.980586",
+  "generated_at": "2026-09-01T02:10:08.522643",
   "version": "3.118",
   "script_hash": "1eed33a9dc1e",
   "scan_hours": 72,
@@ -683,6 +683,58 @@
           "avg_cadence": 65.51128,
           "zone": 1,
           "training_load": 1.1371844
+        }
+      ]
+    },
+    {
+      "activity_id": "i181910770",
+      "date": "2026-08-31",
+      "start_datetime": "2026-08-31T21:31:51",
+      "type": "VirtualRide",
+      "name": "AE-2 Endurance 95min - durability anchor",
+      "interval_summary": [
+        "2x 12m8s 122w",
+        "1x 1h11m 143w"
+      ],
+      "intervals": [
+        {
+          "type": "WORK",
+          "label": "728s@122w94rpm",
+          "duration_secs": 724,
+          "avg_power": 123,
+          "max_power": 131,
+          "avg_hr": 122,
+          "max_hr": 133,
+          "avg_cadence": 96.26316,
+          "zone": 2,
+          "training_load": 6.604471,
+          "decoupling": 4.332748
+        },
+        {
+          "type": "WORK",
+          "label": "4260s@143w94rpm",
+          "duration_secs": 4260,
+          "avg_power": 143,
+          "max_power": 202,
+          "avg_hr": 139,
+          "max_hr": 152,
+          "avg_cadence": 93.9115,
+          "zone": 2,
+          "training_load": 53.33594,
+          "decoupling": 2.7158475
+        },
+        {
+          "type": "WORK",
+          "label": "728s@122w94rpm",
+          "duration_secs": 732,
+          "avg_power": 120,
+          "max_power": 140,
+          "avg_hr": 136,
+          "max_hr": 143,
+          "avg_cadence": 92.51299,
+          "zone": 2,
+          "training_load": 6.5613084,
+          "decoupling": 3.7494497
         }
       ]
     }
