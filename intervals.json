@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T14:01:11.825168",
+  "generated_at": "2026-09-05T16:16:16.078291",
   "version": "3.118",
   "script_hash": "1eed33a9dc1e",
   "scan_hours": 72,
@@ -697,6 +697,119 @@
           "zone": 2,
           "training_load": 12.257669,
           "decoupling": 6.9574413
+        }
+      ]
+    },
+    {
+      "activity_id": "i183633898",
+      "date": "2026-09-05",
+      "start_datetime": "2026-09-05T12:55:47",
+      "type": "VirtualRide",
+      "name": "MyWhoosh - Toulouse Plains",
+      "interval_summary": [
+        "1x 9m53s 201w"
+      ],
+      "intervals": [
+        {
+          "type": "RECOVERY",
+          "duration_secs": 6,
+          "avg_power": 109,
+          "max_power": 220,
+          "avg_hr": 94,
+          "max_hr": 97,
+          "avg_cadence": 63.4,
+          "zone": 1,
+          "decoupling": -254.76549
+        },
+        {
+          "type": "WORK",
+          "label": "593s@201w94rpm",
+          "duration_secs": 593,
+          "avg_power": 201,
+          "max_power": 228,
+          "avg_hr": 167,
+          "max_hr": 176,
+          "avg_cadence": 93.94772,
+          "zone": 4,
+          "training_load": 14.522887,
+          "decoupling": 8.857279
+        },
+        {
+          "type": "RECOVERY",
+          "duration_secs": 1,
+          "avg_power": 205,
+          "max_power": 205,
+          "avg_hr": 175,
+          "max_hr": 175,
+          "avg_cadence": 94.0,
+          "zone": 4,
+          "training_load": 0.025230762
+        }
+      ]
+    },
+    {
+      "activity_id": "i183630477",
+      "date": "2026-09-05",
+      "start_datetime": "2026-09-05T12:52:25",
+      "type": "VirtualRide",
+      "name": "Indoor Cycling",
+      "interval_summary": null,
+      "intervals": [
+        {
+          "type": "RECOVERY",
+          "duration_secs": 93,
+          "avg_power": 178,
+          "max_power": 221,
+          "avg_hr": 133,
+          "max_hr": 153,
+          "avg_cadence": 89.19101,
+          "zone": 3,
+          "training_load": 1.8654276,
+          "decoupling": 10.734911
+        }
+      ]
+    },
+    {
+      "activity_id": "i183626654",
+      "date": "2026-09-05",
+      "start_datetime": "2026-09-05T12:28:36",
+      "type": "VirtualRide",
+      "name": "Cycling",
+      "interval_summary": null,
+      "intervals": [
+        {
+          "type": "RECOVERY",
+          "duration_secs": 604,
+          "avg_power": 102,
+          "max_power": 185,
+          "avg_hr": 123,
+          "max_hr": 135,
+          "avg_cadence": 81.00999,
+          "zone": 1,
+          "training_load": 4.4746656,
+          "decoupling": 8.929676
+        }
+      ]
+    },
+    {
+      "activity_id": "i183634547",
+      "date": "2026-09-05",
+      "start_datetime": "2026-09-05T11:29:09",
+      "type": "VirtualRide",
+      "name": "Lunch Virtual Ride",
+      "interval_summary": null,
+      "intervals": [
+        {
+          "type": "RECOVERY",
+          "duration_secs": 575,
+          "avg_power": 114,
+          "max_power": 186,
+          "avg_hr": 124,
+          "max_hr": 136,
+          "avg_cadence": 45.248695,
+          "zone": 1,
+          "training_load": 4.901964,
+          "decoupling": 3.9316752
         }
       ]
     }
