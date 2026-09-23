@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T12:52:48.754508",
+  "generated_at": "2026-09-23T13:51:32.123503",
   "version": "3.118",
   "script_hash": "1eed33a9dc1e",
   "scan_hours": 72,
@@ -868,6 +868,28 @@
           "zone": 1,
           "training_load": 2.4704852,
           "decoupling": -3.525752
+        }
+      ]
+    },
+    {
+      "activity_id": "i189560769",
+      "date": "2026-09-23",
+      "start_datetime": "2026-09-23T09:47:04",
+      "type": "VirtualRide",
+      "name": "Cycling",
+      "interval_summary": null,
+      "intervals": [
+        {
+          "type": "RECOVERY",
+          "duration_secs": 2736,
+          "avg_power": 128,
+          "max_power": 163,
+          "avg_hr": 138,
+          "max_hr": 148,
+          "avg_cadence": 95.55397,
+          "zone": 2,
+          "training_load": 27.276009,
+          "decoupling": 10.705137
         }
       ]
     }
