@@ -62,15 +62,15 @@
       "menstrual": "menstrual_phase and menstrual_phase_predicted are not on the 1-4 scale. Values: PERIOD, FOLLICULAR, OVULATION, LUTEAL, etc."
     },
     "quick_stats": {
-      "total_training_hours": 1.73,
-      "total_training_formatted": "1h44m",
-      "total_activities": 2,
+      "total_training_hours": 1.97,
+      "total_training_formatted": "1h58m",
+      "total_activities": 3,
       "total_tss": 146
     }
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-10-10T16:56:18.062656",
+    "last_updated": "2026-10-10T20:28:44.128202",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.118"
@@ -173,9 +173,21 @@
   "summary": {
     "period_description": "Last 7 days of training (including today)",
     "note": "Duration calculated from API moving_time field.",
-    "total_duration_decimal_hours": 1.73,
-    "total_activities": 2,
+    "total_duration_decimal_hours": 1.97,
+    "total_activities": 3,
     "by_activity_type": {
+      "Ride": {
+        "duration_decimal_hours": 0.23,
+        "count": 1,
+        "tss": 0,
+        "distance_km": 5.5,
+        "display": {
+          "distance": {
+            "value": 5.5,
+            "unit": "km"
+          }
+        }
+      },
       "VirtualRide": {
         "duration_decimal_hours": 1.73,
         "count": 2,
@@ -261,7 +273,7 @@
       "respiration": 14.0,
       "body_fat_pct": null,
       "abdomen_cm": null,
-      "steps": 898,
+      "steps": 1845,
       "hydration_volume_l": null,
       "kcal_consumed": null,
       "carbohydrates_g": null,
@@ -603,7 +615,7 @@
     "consistency_index": null,
     "consistency_details": {
       "planned_days": 0,
-      "completed_days": 2,
+      "completed_days": 3,
       "matched_days": 0,
       "note": "No planned workouts in period"
     },
@@ -663,12 +675,12 @@
     "p_max": 903,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-10-10T16:56:18.061565",
+    "calculation_timestamp": "2026-10-10T20:28:44.126918",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
-      "activities_7d": 2,
-      "activities_28d": 21,
+      "activities_7d": 3,
+      "activities_28d": 22,
       "planned_workouts_7d": 0,
       "ftp_history_days": {
         "indoor": 0,
@@ -677,6 +689,132 @@
     }
   },
   "recent_activities": [
+    {
+      "id": "i195852792",
+      "date": "2026-10-10T13:37:44",
+      "type": "Ride",
+      "name": "Cycling",
+      "duration_hours": 0.23,
+      "duration_formatted": "14m6s",
+      "distance_km": 5.52,
+      "tss": null,
+      "intensity_factor": null,
+      "avg_power": null,
+      "normalized_power": null,
+      "avg_hr": null,
+      "max_hr": null,
+      "avg_cadence": 76.9368,
+      "avg_speed": 22.5,
+      "avg_speed_unit": "KPH",
+      "max_speed": 51.2,
+      "max_speed_unit": "KPH",
+      "avg_pace": null,
+      "avg_temp": 20.32306,
+      "avg_temp_unit": "C",
+      "weather": null,
+      "humidity": null,
+      "wind_speed": null,
+      "wind_speed_unit": "KMH",
+      "work_kj": null,
+      "calories": null,
+      "carbs_used": null,
+      "carbs_ingested": null,
+      "variability_index": null,
+      "decoupling": null,
+      "efficiency_factor": null,
+      "hrrc": null,
+      "elevation_m": 4.0,
+      "display": {
+        "distance": {
+          "value": 5.52,
+          "unit": "km"
+        },
+        "elevation": {
+          "value": 4,
+          "unit": "m"
+        },
+        "avg_speed": {
+          "value": 22.5,
+          "unit": "km/h"
+        },
+        "max_speed": {
+          "value": 51.2,
+          "unit": "km/h"
+        }
+      },
+      "feel": null,
+      "rpe": null,
+      "effort_response": null,
+      "zone_distribution": null,
+      "has_intervals": false,
+      "has_dfa": false,
+      "terrain_summary": {
+        "source": "activity_streams",
+        "total_distance_km": 5.6,
+        "total_elevation_m": 616,
+        "elevation_per_km": 110.0,
+        "course_character": "mountain",
+        "max_grade_pct": 294.3,
+        "grade_distribution": {
+          "flat_pct": 78.2,
+          "gentle_pct": 18.2,
+          "moderate_pct": 0.0,
+          "steep_pct": 3.6
+        },
+        "start_coords": [
+          -33.44656,
+          -70.61131
+        ],
+        "climbs": [
+          {
+            "position_km": 0.2,
+            "distance_km": 2.0,
+            "elevation_m": 613,
+            "avg_gradient_pct": 30.0,
+            "start_coords": [
+              -33.44477,
+              -70.61189
+            ],
+            "end_coords": [
+              -33.42741,
+              -70.61814
+            ],
+            "display": {
+              "position": {
+                "value": 0.2,
+                "unit": "km"
+              },
+              "distance": {
+                "value": 2.0,
+                "unit": "km"
+              },
+              "elevation": {
+                "value": 613,
+                "unit": "m"
+              }
+            },
+            "max_gradient_pct": 296.6,
+            "category": "Cat 2"
+          }
+        ],
+        "descents": [],
+        "display": {
+          "total_distance": {
+            "value": 5.6,
+            "unit": "km"
+          },
+          "total_elevation": {
+            "value": 616,
+            "unit": "m"
+          },
+          "elevation_per_distance": {
+            "value": 110,
+            "unit": "m/km"
+          }
+        }
+      },
+      "weather_status": "unavailable"
+    },
     {
       "id": "i195145692",
       "date": "2026-10-08T12:50:25",
@@ -3723,7 +3861,7 @@
       "respiration": 14.0,
       "body_fat_pct": null,
       "abdomen_cm": null,
-      "steps": 898,
+      "steps": 1845,
       "hydration_volume_l": null,
       "kcal_consumed": null,
       "carbohydrates_g": null,
@@ -3744,10 +3882,10 @@
     "bail_no_match": 0
   },
   "weekly_summary": {
-    "total_training_hours": 1.73,
-    "total_training_formatted": "1h44m",
+    "total_training_hours": 1.97,
+    "total_training_formatted": "1h58m",
     "total_tss": 146,
-    "activities_count": 2,
+    "activities_count": 3,
     "avg_hrv": 48.1,
     "avg_resting_hr": 48.3
   },
