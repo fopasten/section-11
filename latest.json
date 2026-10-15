@@ -70,7 +70,7 @@
   },
   "metadata": {
     "athlete_id": "REDACTED",
-    "last_updated": "2026-10-15T11:53:21.844851",
+    "last_updated": "2026-10-15T16:16:43.894485",
     "data_range_days": 7,
     "extended_range_days": 28,
     "version": "3.118"
@@ -129,7 +129,7 @@
       },
       "sleep": {
         "status": "amber",
-        "hours": 5.66,
+        "hours": 5.65,
         "quality": 3
       },
       "acwr": {
@@ -254,7 +254,7 @@
       "resting_hr": 46,
       "hrv": 51.0,
       "sleep_quality": 3,
-      "sleep_hours": 5.66,
+      "sleep_hours": 5.65,
       "sleep_formatted": "5h39m",
       "sleep_score": 69.0,
       "fatigue": null,
@@ -271,9 +271,9 @@
       "baevsky_si": null,
       "lactate": null,
       "respiration": 13.375,
-      "body_fat_pct": null,
+      "body_fat_pct": 24.9,
       "abdomen_cm": null,
-      "steps": 12,
+      "steps": 1626,
       "hydration_volume_l": null,
       "kcal_consumed": null,
       "carbohydrates_g": null,
@@ -285,26 +285,26 @@
     },
     "weight": {
       "weight_latest_kg": 75.2,
-      "weight_latest_date": "2026-10-14",
+      "weight_latest_date": "2026-10-15",
       "wkg_current": 2.93,
       "wkg_ftp_source": "tested",
       "ftp_setting_date": "2026-10-15",
       "wkg_block_start": 2.84,
       "wkg_block_end": 2.93,
       "wkg_block_delta": 0.09,
-      "weight_7d_avg_kg": 76.0,
-      "weight_28d_slope_kg_per_week": -0.548,
+      "weight_7d_avg_kg": 75.9,
+      "weight_28d_slope_kg_per_week": -0.59,
       "display": {
         "weight_latest": {
           "value": 75.2,
           "unit": "kg"
         },
         "weight_7d_avg": {
-          "value": 76.0,
+          "value": 75.9,
           "unit": "kg"
         },
         "weight_28d_slope_per_week": {
-          "value": -0.548,
+          "value": -0.59,
           "unit": "kg/week"
         }
       }
@@ -675,7 +675,7 @@
     "p_max": 898,
     "power_model_source": "wellness.sportInfo",
     "vo2max": null,
-    "calculation_timestamp": "2026-10-15T11:53:21.843402",
+    "calculation_timestamp": "2026-10-15T16:16:43.893143",
     "data_quality": {
       "hrv_data_points": 7,
       "rhr_data_points": 7,
@@ -3274,14 +3274,17 @@
     },
     {
       "date": "2026-10-15",
-      "weight_kg": null,
+      "weight_kg": 75.2,
       "display": {
-        "weight": null
+        "weight": {
+          "value": 75.2,
+          "unit": "kg"
+        }
       },
       "resting_hr": 46,
       "hrv_rmssd": 51.0,
       "hrv_sdnn": null,
-      "sleep_hours": 5.66,
+      "sleep_hours": 5.65,
       "sleep_formatted": "5h39m",
       "sleep_quality": 3,
       "sleep_score": 69.0,
@@ -3302,9 +3305,9 @@
       "baevsky_si": null,
       "lactate": null,
       "respiration": 13.375,
-      "body_fat_pct": null,
+      "body_fat_pct": 24.9,
       "abdomen_cm": null,
-      "steps": 12,
+      "steps": 1626,
       "hydration_volume_l": null,
       "kcal_consumed": null,
       "carbohydrates_g": null,
